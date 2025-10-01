@@ -1,0 +1,119 @@
+{
+	"editor.fontFamily": "Fira Code, Noto Color Emoji",
+	"editor.fontLigatures": false,
+
+	"workbench.startupEditor": "newUntitledFile",
+	"extensions.experimental.deferredStartupFinishedActivation": true, // faster startup
+
+	"editor.wordWrap": "on",
+	"editor.acceptSuggestionOnEnter": "off",
+
+	"files.insertFinalNewline": true,
+	"editor.insertSpaces": false,
+	"editor.autoIndentOnPaste": true,
+
+	"editor.dragAndDrop": false,
+	"editor.selectionClipboard": false, // middle click paste
+	"editor.unicodeHighlight.ambiguousCharacters": false,
+
+	"telemetry.telemetryLevel": "off",
+	"telemetry.feedback.enabled": false,
+	"extensions.ignoreRecommendations": true,
+	"workbench.enableExperiments": false,
+	"chat.agent.enabled": false,
+	"chat.commandCenter.enabled": false,
+
+	"workbench.editor.wrapTabs": true,
+	"editor.minimap.enabled": false,
+	"window.commandCenter": false,
+	"window.density.editorTabHeight": "compact",
+	"workbench.activityBar.location": "bottom",
+	"editor.scrollbar.verticalScrollbarSize": 8,
+	"editor.scrollbar.horizontalScrollbarSize": 6,
+	"editor.glyphMargin": false,
+
+
+	"workbench.colorTheme": "Godot Theme VSCode Breeze Dark (Semantic Highlighting)",
+
+	"workbench.colorCustomizations": {
+		"terminal.ansiBrightBlack":"#666666",
+		"terminal.ansiBrightRed":"#E50000",
+		"terminal.ansiBrightGreen":"#00D900",
+		"terminal.ansiBrightYellow":"#E5E500",
+		"terminal.ansiBrightBlue":"#0000FF",
+		"terminal.ansiBrightMagenta":"#E500E5",
+		"terminal.ansiBrightCyan":"#00E5E5",
+		"terminal.ansiBrightWhite":"#E5E5E5",
+
+		"terminal.ansiBlack":"#000000",
+		"terminal.ansiRed":"#990000",
+		"terminal.ansiGreen":"#00A600",
+		"terminal.ansiYellow":"#999900",
+		"terminal.ansiBlue":"#0000B2",
+		"terminal.ansiMagenta":"#B200B2",
+		"terminal.ansiCyan":"#00A6B2",
+		"terminal.ansiWhite":"#BFBFBF",
+
+		"diffEditor.insertedLineBackground": "#e0ff0011",
+		"diffEditor.removedLineBackground": "#ff1e0011",
+
+		"diffEditor.insertedTextBackground": "#e0ff0044",
+		"diffEditor.removedTextBackground": "#ff1e0044",
+	},
+
+	"editor.semanticTokenColorCustomizations": {
+		"[*]": {
+			"rules": {
+				"property": "#a9c997",
+				"variable": "#e1e1e1",
+				"parameter": "#e1e1e1",
+				"method": "#5badff",
+				"function": "#5badff",
+				"function.declaration": "#88efff",
+			},
+		},
+	},
+
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				// async decorators
+				"scope": "storage.modifier",
+				"settings": {
+					"foreground": "#ffb373"
+				},
+			},
+			{
+				// basic keywords
+				"scope": "keyword.control",
+				"settings": {
+					"foreground": "#cc8fe3"
+				},
+			},
+			{
+				// json keys
+				"scope": "support.type.property-name",
+				"settings": {
+					"foreground": "#a9c997"
+				},
+			},
+			{
+				// json keys
+				"scope": "meta.function-call",
+				"settings": {
+					"foreground": "#97c97a"
+				},
+			},
+		]
+	},
+	
+
+	// plugin specific
+	
+	"git.autofetch": false,
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+	"git.openRepositoryInParentFolders": "never",
+
+	"godotTools.lsp.headless": true,
+}

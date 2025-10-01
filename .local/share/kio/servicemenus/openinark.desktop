@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/zip;
+Actions=OpenInArk
+X-KDE-Priority=TopLevel
+
+[Desktop Action OpenInArk]
+Name=Open with Ark
+Icon=utilities-file-archiver
+Exec=ark %f

@@ -1,0 +1,8 @@
+@theme "rounded"
+
+configuration {
+	drun-display-format: "{name}";
+
+	me-select-entry: "MousePrimary";
+	me-accept-entry: "!MousePrimary";
+}

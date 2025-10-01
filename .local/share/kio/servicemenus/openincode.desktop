@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;
+Actions=OpenInCode
+X-KDE-Priority=TopLevel
+
+[Desktop Action OpenInCode]
+Name=Open in Code
+Icon=com.visualstudio.code.oss
+Exec=code %f

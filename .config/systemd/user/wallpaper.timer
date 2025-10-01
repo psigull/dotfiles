@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically rotate wallpaper
+Requires=wallpaper.service
+
+[Timer]
+OnCalendar=*:0/15
+Unit=wallpaper.service
+
+[Install]
+WantedBy=timers.target

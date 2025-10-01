@@ -1,0 +1,9 @@
+[Unit]
+Description=Change wallpaper
+
+[Service]
+ExecStart=%h/.local/bin/changepaper.sh
+Type=oneshot
+
+[Install]
+WantedBy=default.target

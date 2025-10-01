@@ -1,0 +1,177 @@
+// -*- mode: jsonc -*-
+{
+	"position": "top",
+	"height": 34,
+	"spacing": 4, 
+
+	"modules-left": [
+		"pulseaudio",
+		"cava",
+		"mpris",
+	],
+	"modules-center": [
+		"hyprland/window"
+	],
+	"modules-right": [
+		"cpu",
+		"custom/gpuusage",
+		"memory",
+		"custom/gpuram",
+		"custom/cputemp",
+		"custom/gputemp",
+		"hyprland/workspaces",
+		"tray",
+		"network",
+		"privacy",
+		"custom/micmute",
+		"custom/dnd",
+		"clock"
+	],
+
+
+	// module settings
+	"pulseaudio": {
+		"scroll-step": 5,
+		"format": "{icon} {volume}%",
+		"format-muted": "",
+		"format-source": "",
+		"format-icons": {
+			"default": ["", "", ""]
+		},
+		"on-click": "pavucontrol",
+		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+	},
+	"mpris": {
+		"format": "{player_icon} {artist} - {title}",
+		"format-paused": "{status_icon} <i>{artist} - {title}</i>",
+		"tooltip-format": "{player} {status}\n{artist} - {title}\n{album}",
+		"tooltip": false,
+		"artist-len": 14,
+		"title-len": 28,
+		"player-icons": {
+			"default": "▶",
+			"mpv": "🎵"
+		},
+		"status-icons": {
+			"paused": "⏸"
+		},
+		"ignored-players": ["firefox"]
+	},
+	
+
+	"hyprland/window": {
+		"max-length": 100,
+		"rewrite": {
+			"(.*) - Code - OSS": " $1",
+			"(.*) — Mozilla Firefox": " $1",
+			"(.*) - zsh": " $1",
+		},
+		"separate-outputs": true
+	},
+
+	"cpu": {
+		"format": " c{usage}%",
+		"tooltip": false
+	},
+	"custom/gpuusage": {
+		"format": "g{}% ",
+		"exec": "cat /sys/class/drm/card1/device/gpu_busy_percent",
+		"interval": 2,
+		"tooltip": false
+	},
+
+	"memory": {
+		"format": " p{percentage}% s{swapPercentage}%",
+		"tooltip-format": "{used} / {total}\nswap {swapUsed} / {swapTotal}",
+		"tooltip": false
+	},
+	"custom/gpuram": {
+		"format": "v{}% ",
+		"exec": "cat /sys/class/drm/card1/device/mem_busy_percent",
+		"interval": 2,
+		"tooltip": false
+	},
+
+	"custom/cputemp": {
+		"format": " c{}C",
+		"exec": "sensors | grep 'Tctl:' | awk '{print int($2)}'",
+		"interval": 2,
+		"tooltip": false
+	},
+	"custom/gputemp": {
+		"format": "g{}C ",
+		"exec": "sensors | grep 'junction:' | awk '{print int($2)}'",
+		"interval": 2,
+		"tooltip": false
+	},
+
+	"tray": {
+		"spacing": 10,
+	},
+	"network": {
+		"format-wifi": "",
+		"format-ethernet": "",
+		"tooltip-format": "{ifname}:{essid} {ipaddr}/{cidr} via {gwaddr}",
+		"format-linked": "",
+		"format-disconnected": "⚠",
+	},
+
+	"privacy": {
+		"icon-spacing": 4,
+		"icon-size": 18,
+		"transition-duration": 250,
+		"modules": [
+			{
+				"type": "screenshare",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			},
+			// {
+			//     "type": "audio-out",
+			//     "tooltip": true,
+			//     "tooltip-icon-size": 24
+			// },
+			{
+				"type": "audio-in",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			}
+		],
+		"ignore-monitor": true,
+		"ignore": [
+			{
+				"type": "audio-in",
+				"name": "cava"
+			},
+		]
+	},
+	"custom/micmute": {
+		"exec": "~/.local/bin/micmute.sh",
+		"interval": "once",
+		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+		"exec-on-event": true,
+		"return-type": "json",
+		"format": "{}"
+	},
+
+	"custom/dnd": {
+		"exec": "~/.local/bin/dndstatus.sh",
+		"interval": "once",
+		"on-click": "makoctl mode -t dnd",
+		"exec-on-event": true,
+		"return-type": "json",
+		"format": "{}"
+	},
+
+	"clock": {
+		//"interval": 1,
+		"format": "<b>{:%H:%M}</b>", //:%S
+		"tooltip-format": "<tt>{calendar}</tt>",
+		"format-alt": "<b>{:%a %b %m/%d}</b>",
+		"calendar": {
+			"format": {
+				"today": "<span color='#75A8E5'><b>{}</b></span>"
+			}
+		}
+	},
+}

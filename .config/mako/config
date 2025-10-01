@@ -1,0 +1,12 @@
+font=Fira Code 10
+text-alignment=right
+default-timeout=5000
+
+background-color=#000000BB
+border-radius=7
+border-size=1
+border-color=#FFFFFF44
+progress-color=#3D447BBB
+
+[mode=dnd]
+invisible=1
