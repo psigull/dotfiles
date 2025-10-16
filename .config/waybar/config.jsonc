@@ -24,6 +24,7 @@
 		"network",
 		"privacy",
 		"custom/micmute",
+		"custom/vsync",
 		"custom/dnd",
 		"clock"
 	],
@@ -149,6 +150,15 @@
 		"exec": "~/.local/bin/micmute.sh",
 		"interval": "once",
 		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+		"exec-on-event": true,
+		"return-type": "json",
+		"format": "{}"
+	},
+
+	"custom/vsync": {
+		"exec": "~/.local/bin/vsyncstatus.sh",
+		"interval": "once",
+		"on-click": "~/.local/bin/vsynctoggle.sh",
 		"exec-on-event": true,
 		"return-type": "json",
 		"format": "{}"

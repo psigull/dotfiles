@@ -36,16 +36,8 @@ tooltip {
 	color: #ff5145;
 }
 
-#custom-micmute {
-	min-width: 20px;
-	box-shadow: none;
-	margin: 0;
-}
-
-#custom-micmute.closed {
-	box-shadow: inset 0 -3px #ff5145;
-}
-
+#custom-micmute,
+#custom-vsync,
 #custom-dnd {
 	min-width: 20px;
 	box-shadow: none;
@@ -53,8 +45,13 @@ tooltip {
 	margin-left: 5px;
 }
 
+#custom-micmute.closed,
 #custom-dnd.closed {
 	box-shadow: inset 0 -3px #ff5145;
+}
+
+#custom-vsync.closed {
+	box-shadow: inset 0 -3px #80ff45;
 }
 
 
