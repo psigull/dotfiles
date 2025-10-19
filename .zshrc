@@ -9,7 +9,7 @@ export GOPATH="$HOME/.go"
 alias ls="LC_COLLATE=C ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias diff='diff --color=auto'
-alias ip='ip -color=auto'
+alias ip='ip --color=auto'
 
 alias srm='/usr/bin/rm'
 alias trm='trash'
@@ -106,40 +106,41 @@ function fmatch() {
 
 # diff two folders
 function lsdiff() {
-	lsA=$(ls $1)
-	lsB=$(ls $2)
+	lsA=$(ls -r1 $1)
+	lsB=$(ls -r1 $2)
 	diff <(echo "$lsA") <(echo "$lsB")
 }
 
 
 # prompt stuff
+setopt prompt_subst transient_rprompt
+
 autoload -Uz vcs_info
-precmd() { vcs_info }
 zstyle ":vcs_info:git*" formats "%b "
-setopt prompt_subst
 
 function set_title() {
 	title=${1/\/home\/${USER}/\~}
 	title="$title - zsh"
 	echo -ne "\e]2;$title\007"
 }
+
 function preexec() {
 	set_title $1
 	timer=${timer:-$SECONDS}
 }
 
-setopt transient_rprompt
 function precmd() {
-	set_title $PWD
-
 	if [ $timer ]; then
 		timer_show=$(($SECONDS - $timer))
 		export RPROMPT="%(?..%F{yellow}[%?]%f  )%F{7}${timer_show}s%f"
 		unset timer
 	fi
+	
+	set_title $PWD
+	vcs_info
 }
 
-PROMPT="%F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}>%f  "
+PROMPT='%F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}>%f  '
 
 
 # settings
