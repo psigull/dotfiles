@@ -2,7 +2,7 @@
 
 ENABLED=$(hyprctl monitors | grep DP-1)
 if [[ $ENABLED ]]; then
-	echo '{"class":"open", "text":""}'
+	echo '{"class":"enabled", "text":""}'
 else
-	echo '{"class":"closed", "text":""}'
+	echo '{"class":"disabled", "text":""}'
 fi

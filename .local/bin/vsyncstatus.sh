@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ENABLED=$(hyprctl getoption general:allow_tearing | grep int)
-if [[ $ENABLED == "int: 1" ]]; then
-	echo '{"class":"open", "text":""}'
+TEARING=$(hyprctl getoption general:allow_tearing | grep int)
+if [[ $TEARING == "int: 1" ]]; then
+	echo '{"class":"disabled", "text":""}'
 else
-	echo '{"class":"closed", "text":""}'
+	echo '{"class":"enabled", "text":""}'
 fi

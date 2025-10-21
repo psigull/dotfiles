@@ -46,13 +46,13 @@ tooltip {
 	margin-left: 5px;
 }
 
-#custom-micmute.closed,
-#custom-dnd.closed {
+#custom-micmute.enabled,
+#custom-dnd.enabled {
 	box-shadow: inset 0 -3px #ff5145;
 }
 
-#custom-vsync.closed,
-#custom-monitors.open {
+#custom-vsync.enabled,
+#custom-monitors.enabled {
 	box-shadow: inset 0 -3px #80ff45;
 }
 

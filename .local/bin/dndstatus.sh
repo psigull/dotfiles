@@ -2,7 +2,7 @@
 
 DND=$(makoctl mode | grep dnd)
 if [[ $DND == "dnd" ]]; then
-	echo '{"class":"closed", "text":""}'
+	echo '{"class":"enabled", "text":""}'
 else
-	echo '{"class":"open", "text":""}'
+	echo '{"class":"disabled", "text":""}'
 fi
