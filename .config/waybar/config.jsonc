@@ -24,6 +24,7 @@
 		"network",
 		"privacy",
 		"custom/micmute",
+		"custom/monitors",
 		"custom/vsync",
 		"custom/dnd",
 		"clock"
@@ -150,6 +151,15 @@
 		"exec": "~/.local/bin/micmute.sh",
 		"interval": "once",
 		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+		"exec-on-event": true,
+		"return-type": "json",
+		"format": "{}"
+	},
+
+	"custom/monitors": {
+		"exec": "~/.local/bin/monitorstatus.sh",
+		"interval": "once",
+		"on-click": "~/.local/bin/monitortoggle.sh",
 		"exec-on-event": true,
 		"return-type": "json",
 		"format": "{}"
