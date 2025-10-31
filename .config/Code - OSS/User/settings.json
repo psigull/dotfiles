@@ -22,6 +22,7 @@
 	"workbench.enableExperiments": false,
 	"chat.agent.enabled": false,
 	"chat.commandCenter.enabled": false,
+	"workbench.secondarySideBar.defaultVisibility": "hidden",
 
 	"workbench.editor.wrapTabs": true,
 	"editor.minimap.enabled": false,
@@ -116,4 +117,5 @@
 	"git.openRepositoryInParentFolders": "never",
 
 	"godotTools.lsp.headless": true,
+	"terminal.integrated.gpuAcceleration": "off",
 }
