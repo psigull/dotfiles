@@ -6,7 +6,6 @@
 
 	"modules-left": [
 		"pulseaudio",
-		"cava",
 		"mpris",
 	],
 	"modules-center": [
@@ -129,11 +128,6 @@
 				"tooltip": true,
 				"tooltip-icon-size": 24
 			},
-			// {
-			//     "type": "audio-out",
-			//     "tooltip": true,
-			//     "tooltip-icon-size": 24
-			// },
 			{
 				"type": "audio-in",
 				"tooltip": true,
@@ -141,12 +135,6 @@
 			}
 		],
 		"ignore-monitor": true,
-		"ignore": [
-			{
-				"type": "audio-in",
-				"name": "cava"
-			},
-		]
 	},
 	"custom/micmute": {
 		"exec": "~/.local/bin/micmute.sh",
@@ -185,8 +173,7 @@
 	},
 
 	"clock": {
-		//"interval": 1,
-		"format": "<b>{:%H:%M}</b>", //:%S
+		"format": "<b>{:%H:%M}</b>",
 		"tooltip-format": "<tt>{calendar}</tt>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
 		"calendar": {

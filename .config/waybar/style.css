@@ -1,6 +1,12 @@
 * {
 	font-family: FontAwesome, Fira Code, sans-serif;
 	font-size: 13px;
+
+	/* workaround for cjk characters */
+	/* https://github.com/Alexays/Waybar/issues/2026 */
+	min-height: 0px;
+	margin-top: -50px;
+	margin-bottom: -50px;
 }
 
 window#waybar {
