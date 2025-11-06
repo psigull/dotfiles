@@ -174,12 +174,6 @@
 
 	"clock": {
 		"format": "<b>{:%H:%M}</b>",
-		"tooltip-format": "<tt>{calendar}</tt>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
-		"calendar": {
-			"format": {
-				"today": "<span color='#75A8E5'><b>{}</b></span>"
-			}
-		}
 	},
 }
