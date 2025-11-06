@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ENABLED=$(hyprctl monitors | grep DP-1)
+ENABLED=$(hyprctl monitors | grep DP-2)
 if [[ $ENABLED ]]; then
 	echo '{"class":"enabled", "text":""}'
 else

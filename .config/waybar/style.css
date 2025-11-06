@@ -31,6 +31,10 @@ button {
 	margin-right: 5px;
 }
 
+#network {
+	margin-right: 15px;
+}
+
 #pulseaudio {
 	margin-left: 10px;
 }
