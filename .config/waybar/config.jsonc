@@ -22,9 +22,9 @@
 		"tray",
 		"network",
 		"privacy",
-		"custom/micmute",
 		"custom/monitors",
 		"custom/vsync",
+		"custom/micmute",
 		"custom/dnd",
 		"clock"
 	],

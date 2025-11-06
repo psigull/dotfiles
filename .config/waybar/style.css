@@ -18,6 +18,12 @@ tooltip {
 	background: rgba(0, 0, 0, 0.7);
 }
 
+button {
+	padding: 5px;
+	color: #ffffff;
+}
+
+
 
 /* modules */
 .module,
@@ -39,7 +45,7 @@ tooltip {
 }
 
 #privacy {
-	color: #ff5145;
+	color: #ffa845;
 }
 
 #custom-micmute,
@@ -52,18 +58,11 @@ tooltip {
 }
 
 #custom-micmute.enabled,
-#custom-dnd.enabled {
+#custom-dnd.enabled,
+#custom-vsync.disabled {
 	color: #ff5145;
 }
 
-#custom-vsync.enabled,
 #custom-monitors.enabled {
 	color: #80ff45;
-}
-
-
-/* workspace buttons */
-button {
-	padding: 5px;
-	color: #ffffff;
 }
