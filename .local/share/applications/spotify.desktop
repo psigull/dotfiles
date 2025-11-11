@@ -1,8 +1,7 @@
 [Desktop Entry]                                                                              
 Version=1.0
-Name=Private Tab
-Exec=/usr/lib/firefox/firefox -private-window
+Name=Spotify (flatpak)
+Exec=/var/lib/flatpak/exports/bin/com.spotify.Client
 Terminal=false
-Icon=firefox
+Icon=spotify
 Type=Application
-Categories=Network;WebBrowser;

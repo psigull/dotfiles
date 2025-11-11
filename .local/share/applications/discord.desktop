@@ -1,8 +1,7 @@
 [Desktop Entry]                                                                              
 Version=1.0
-Name=Private Tab
-Exec=/usr/lib/firefox/firefox -private-window
+Name=Discord  (flatpak)
+Exec=/var/lib/flatpak/exports/bin/com.discordapp.Discord
 Terminal=false
-Icon=firefox
+Icon=discord
 Type=Application
-Categories=Network;WebBrowser;
