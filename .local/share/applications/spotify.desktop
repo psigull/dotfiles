@@ -1,7 +1,0 @@
-[Desktop Entry]                                                                              
-Version=1.0
-Name=Spotify (flatpak)
-Exec=/var/lib/flatpak/exports/bin/com.spotify.Client
-Terminal=false
-Icon=spotify
-Type=Application

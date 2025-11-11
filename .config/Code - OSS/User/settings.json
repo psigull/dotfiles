@@ -117,5 +117,4 @@
 	"git.openRepositoryInParentFolders": "never",
 
 	"godotTools.lsp.headless": true,
-	"terminal.integrated.gpuAcceleration": "off",
 }
