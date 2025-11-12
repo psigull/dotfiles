@@ -2,10 +2,10 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
 MimeType=inode/directory;
-Actions=openFootHere
+Actions=openKittyHere
 X-KDE-Priority=TopLevel
 
-[Desktop Action openFootHere]
-Name=Open Foot Here
+[Desktop Action openKittyHere]
+Name=Open Kitty Here
 Icon=utilities-terminal
-Exec=foot --working-directory %f
+Exec=kitty --working-directory %f
