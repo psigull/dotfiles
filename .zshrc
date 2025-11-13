@@ -41,7 +41,9 @@ alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=firefox man --html" # open manual entry in browser
 
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '
+
 alias mpvseq='mpv --merge-files=yes --mf-fps=24 "mf://*.png"'
+alias ffseq='ffmpeg -framerate 24 -pattern_type glob -i "*.png" -c:v libx264 out.mp4'
 
 # `helpf grep v` => shows `grep --help` for 'v' flag
 function helpf() {
