@@ -1,0 +1,5 @@
+[Context]
+shared=!ipc;
+sockets=!x11;
+devices=!all;dri;
+filesystems=!~/.steam;!xdg-download;xdg-download:ro;!xdg-pictures;!xdg-videos;!xdg-run/speech-dispatcher;xdg-run/.flatpak/dev.vencord.Vesktop:create;xdg-run/discord-ipc-0;
