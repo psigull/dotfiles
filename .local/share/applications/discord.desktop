@@ -1,7 +1,0 @@
-[Desktop Entry]                                                                              
-Version=1.0
-Name=Discord  (flatpak)
-Exec=/var/lib/flatpak/exports/bin/com.discordapp.Discord
-Terminal=false
-Icon=discord
-Type=Application

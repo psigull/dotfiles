@@ -41,6 +41,7 @@ alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=firefox man --html" # open manual entry in browser
 
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '
+alias nonet='sg nonet "$@"'
 
 alias mpvseq='mpv --merge-files=yes --mf-fps=24 "mf://*.png"'
 alias ffseq='ffmpeg -framerate 24 -pattern_type glob -i "*.png" -c:v libx264 out.mp4'
@@ -78,8 +79,9 @@ HEADPHONES="Soundcore"
 CONTROLLER="DualSense"
 HP_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$HEADPHONES.+/\1/pi")
 CT_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$CONTROLLER.+/\1/pi")
-function btconn() { bluetoothctl connect "$1" }
-function btdisc() { bluetoothctl disconnect "$1" }
+alias btconn='bluetoothctl connect "$1"'
+alias btdisc='bluetoothctl disconnect "$1"'
+
 alias btbatt="bluetoothctl info | grep Battery"
 alias hpconn="btconn $HP_DEV"
 alias hpdisc="btdisc $HP_DEV"
@@ -117,6 +119,10 @@ function lsdiff() {
 
 
 # prompt stuff
+if [[ ! -o interactive ]]; then
+	return
+fi
+
 setopt prompt_subst transient_rprompt
 
 autoload -Uz vcs_info
