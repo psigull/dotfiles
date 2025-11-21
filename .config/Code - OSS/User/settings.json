@@ -1,5 +1,7 @@
 {
-	"editor.fontFamily": "Fira Code, Noto Color Emoji",
+	"editor.fontFamily": "'Fira Code', 'Noto Color Emoji'",
+	"editor.fontWeight": "400",
+	"editor.fontSize": 16,
 	"editor.fontLigatures": false,
 
 	"workbench.startupEditor": "newUntitledFile",
@@ -115,6 +117,4 @@
 	"git.enableSmartCommit": true,
 	"git.confirmSync": false,
 	"git.openRepositoryInParentFolders": "never",
-
-	"godotTools.lsp.headless": true,
 }

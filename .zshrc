@@ -79,8 +79,8 @@ HEADPHONES="Soundcore"
 CONTROLLER="DualSense"
 HP_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$HEADPHONES.+/\1/pi")
 CT_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$CONTROLLER.+/\1/pi")
-alias btconn='bluetoothctl connect "$1"'
-alias btdisc='bluetoothctl disconnect "$1"'
+alias btconn="bluetoothctl connect $1"
+alias btdisc="bluetoothctl disconnect $1"
 
 alias btbatt="bluetoothctl info | grep Battery"
 alias hpconn="btconn $HP_DEV"
