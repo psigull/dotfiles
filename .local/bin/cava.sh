@@ -28,7 +28,7 @@ lower_cutoff_freq = 20
 higher_cutoff_freq = 20000
 
 autosens = 1
-sensitivity = 256
+sensitivity = 150
 
 [output]
 method = raw

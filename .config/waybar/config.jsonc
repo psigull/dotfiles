@@ -68,7 +68,7 @@
 		"format": " {}",
 		"rewrite": {
 			"(.*) - Code - OSS": "$1",
-			"(.*) — Mozilla Firefox": "$1",
+			"(.*) — Mozilla Firefox(?: Private Browsing)?": "$1",
 		},
 		"icon": true,
 		"icon-size": 16,

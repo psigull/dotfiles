@@ -312,12 +312,12 @@
             "equalizer#1"
         ],
         "reverb#0": {
-            "amount": 0.0,
+            "amount": -6.0,
             "bass-cut": 90.0,
             "bypass": false,
             "decay-time": 0.83,
             "diffusion": 0.07,
-            "dry": -6.0,
+            "dry": 0.0,
             "hf-damp": 20000.0,
             "input-gain": 0.0,
             "output-gain": 0.0,
