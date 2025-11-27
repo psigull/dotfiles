@@ -1,8 +1,8 @@
 {
 	"editor.fontFamily": "'Fira Code', 'Noto Color Emoji'",
-	"editor.fontWeight": "400",
-	"editor.fontSize": 16,
-	"editor.fontLigatures": false,
+	"editor.fontWeight": "600",
+	"editor.fontSize": 14,
+	"editor.fontLigatures": true,
 
 	"workbench.startupEditor": "newUntitledFile",
 	"extensions.experimental.deferredStartupFinishedActivation": true, // faster startup

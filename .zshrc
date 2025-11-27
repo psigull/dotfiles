@@ -130,7 +130,6 @@ zstyle ":vcs_info:git*" formats "%b "
 
 function set_title() {
 	title=${1/\/home\/${USER}/\~}
-	title="$title - zsh"
 	echo -ne "\e]2;$title\007"
 }
 
