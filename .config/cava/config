@@ -21,7 +21,7 @@ foreground = '#33ffff'
 [smoothing]
 # how many ms to average
 # 16.67 = 1000 / 60fps
-noise_reduction = 17
+noise_reduction = 16
 
 #[eq]
 # 1	=	 3.6

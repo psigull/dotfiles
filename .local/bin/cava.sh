@@ -24,11 +24,11 @@ bars = 256
 framerate = 60
 sleep_timer = 15
 
-lower_cutoff_freq = 20
-higher_cutoff_freq = 20000
+lower_cutoff_freq = 50
+higher_cutoff_freq = 18000
 
 autosens = 1
-sensitivity = 150
+sensitivity = 180
 
 [output]
 method = raw
@@ -40,7 +40,7 @@ channels = stereo
 reverse = 0
 
 [smoothing]
-noise_reduction = 17
+noise_reduction = 16
 
 " > $config_file
 
