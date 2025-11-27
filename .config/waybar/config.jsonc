@@ -75,36 +75,36 @@
 	},
 
 	"cpu": {
-		"format": " c{usage}%",
+		"format": " {usage}",
 		"tooltip": false
 	},
 	"custom/gpuusage": {
-		"format": "g{}% ",
+		"format": "/{}",
 		"exec": "cat /sys/class/drm/card1/device/gpu_busy_percent",
 		"interval": 2,
 		"tooltip": false
 	},
 
 	"memory": {
-		"format": " p{percentage}% s{swapPercentage}%",
+		"format": " {percentage}/{swapPercentage}",
 		"tooltip-format": "{used} / {total}\nswap {swapUsed} / {swapTotal}",
 		"tooltip": false
 	},
 	"custom/gpuram": {
-		"format": "v{}% ",
+		"format": "/{}",
 		"exec": "cat /sys/class/drm/card1/device/mem_busy_percent",
 		"interval": 2,
 		"tooltip": false
 	},
 
 	"custom/cputemp": {
-		"format": " c{}C",
+		"format": " {}",
 		"exec": "sensors | grep 'Tctl:' | awk '{print int($2)}'",
 		"interval": 2,
 		"tooltip": false
 	},
 	"custom/gputemp": {
-		"format": "g{}C ",
+		"format": "/{}",
 		"exec": "sensors | grep 'junction:' | awk '{print int($2)}'",
 		"interval": 2,
 		"tooltip": false
