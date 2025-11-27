@@ -1,5 +1,5 @@
 * {
-	font-family: FontAwesome, Fira Code, sans-serif;
+	font-family: GraphBars, FontAwesome, Fira Code, sans-serif;
 	font-size: 13px;
 
 	/* workaround for cjk characters */
@@ -7,6 +7,7 @@
 	min-height: 0px;
 	margin-top: -50px;
 	margin-bottom: -50px;
+	opacity: 0.96;
 }
 
 window#waybar {
@@ -41,6 +42,7 @@ button {
 
 #mpris {
 	margin-left: 15px;
+	margin-right: 100px;
 }
 
 #clock {
@@ -69,4 +71,10 @@ button {
 
 #custom-monitors.enabled {
 	color: #80ff45;
+}
+
+#custom-cava {
+	color: #33ffff;
+	font-size: 24px;
+	opacity: 0.5;
 }

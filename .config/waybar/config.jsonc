@@ -3,13 +3,15 @@
 	"position": "top",
 	"height": 34,
 	"spacing": 4, 
+	"layer": "top",
 
 	"modules-left": [
 		"pulseaudio",
 		"mpris",
+		"hyprland/window"
 	],
 	"modules-center": [
-		"hyprland/window"
+		"custom/cava",
 	],
 	"modules-right": [
 		"cpu",
@@ -62,12 +64,10 @@
 	
 
 	"hyprland/window": {
-		"max-length": 100,
-		"rewrite": {
-			"(.*) - Code - OSS": " $1",
-			"(.*) — Mozilla Firefox": " $1",
-			"(.*) - zsh": " $1",
-		},
+		"max-length": 50,
+		"format": " {}",
+		"icon": true,
+		"icon-size": 16,
 		"separate-outputs": true
 	},
 
@@ -175,5 +175,10 @@
 	"clock": {
 		"format": "<b>{:%H:%M}</b>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
+	},
+
+	"custom/cava": {
+		"format": " {} ",
+		"exec": "~/.local/bin/cava.sh",
 	},
 }
