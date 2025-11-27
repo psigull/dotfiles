@@ -50,8 +50,8 @@
 		"format-paused": "{status_icon} <i>{artist} - {title}</i>",
 		"tooltip-format": "{player} {status}\n{artist} - {title}\n{album}",
 		"tooltip": false,
-		"artist-len": 14,
-		"title-len": 28,
+		"artist-len": 8,
+		"title-len": 14,
 		"player-icons": {
 			"default": "▶",
 			"mpv": "🎵"
@@ -64,8 +64,12 @@
 	
 
 	"hyprland/window": {
-		"max-length": 50,
+		"max-length": 40,
 		"format": " {}",
+		"rewrite": {
+			"(.*) - Code - OSS": "$1",
+			"(.*) — Mozilla Firefox": "$1",
+		},
 		"icon": true,
 		"icon-size": 16,
 		"separate-outputs": true

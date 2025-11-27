@@ -7,7 +7,6 @@
 	min-height: 0px;
 	margin-top: -50px;
 	margin-bottom: -50px;
-	opacity: 0.96;
 }
 
 window#waybar {
@@ -42,7 +41,10 @@ button {
 
 #mpris {
 	margin-left: 15px;
-	margin-right: 100px;
+}
+
+#window {
+	margin-left: 30px;
 }
 
 #clock {
@@ -76,5 +78,5 @@ button {
 #custom-cava {
 	color: #33ffff;
 	font-size: 24px;
-	opacity: 0.5;
+	opacity: 0.9;
 }
