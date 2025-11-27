@@ -3,7 +3,6 @@
 	"position": "top",
 	"height": 34,
 	"spacing": 4, 
-	"layer": "top",
 
 	"modules-left": [
 		"pulseaudio",
