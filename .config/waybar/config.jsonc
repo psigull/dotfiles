@@ -79,7 +79,7 @@
 		"tooltip": false
 	},
 	"custom/gpuusage": {
-		"format": "/{}",
+		"format": "/{} ",
 		"exec": "cat /sys/class/drm/card1/device/gpu_busy_percent",
 		"interval": 2,
 		"tooltip": false
@@ -91,7 +91,7 @@
 		"tooltip": false
 	},
 	"custom/gpuram": {
-		"format": "/{}",
+		"format": "/{} ",
 		"exec": "cat /sys/class/drm/card1/device/mem_busy_percent",
 		"interval": 2,
 		"tooltip": false
