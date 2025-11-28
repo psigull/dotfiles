@@ -80,15 +80,3 @@ button {
 	font-size: 24px;
 	opacity: 0.9;
 }
-
-#cpu,
-#memory,
-#custom-cputemp {
-	margin-right: 0;
-}
-
-#custom-gpuusage,
-#custom-gpuram,
-#custom-gputemp {
-	margin-left: -5px;
-}

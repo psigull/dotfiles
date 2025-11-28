@@ -13,12 +13,7 @@
 		"custom/cava",
 	],
 	"modules-right": [
-		"cpu",
-		"custom/gpuusage",
-		"memory",
-		"custom/gpuram",
-		"custom/cputemp",
-		"custom/gputemp",
+		"custom/usage",
 		"hyprland/workspaces",
 		"tray",
 		"privacy",
@@ -44,6 +39,7 @@
 		"on-click": "pavucontrol",
 		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 	},
+
 	"mpris": {
 		"format": "{player_icon} {artist} - {title}",
 		"format-paused": "{status_icon} <i>{artist} - {title}</i>",
@@ -61,7 +57,6 @@
 		"ignored-players": ["firefox"]
 	},
 	
-
 	"hyprland/window": {
 		"max-length": 45,
 		"format": " {}",
@@ -74,45 +69,24 @@
 		"separate-outputs": true
 	},
 
-	"cpu": {
-		"format": " {usage}",
-		"tooltip": false
-	},
-	"custom/gpuusage": {
-		"format": "/{} ",
-		"exec": "cat /sys/class/drm/card1/device/gpu_busy_percent",
-		"interval": 2,
-		"tooltip": false
+
+	"custom/cava": {
+		"format": " {} ",
+		"exec": "~/.local/bin/cava.sh",
 	},
 
-	"memory": {
-		"format": " {percentage}/{swapPercentage}",
-		"tooltip-format": "{used} / {total}\nswap {swapUsed} / {swapTotal}",
-		"tooltip": false
-	},
-	"custom/gpuram": {
-		"format": "/{} ",
-		"exec": "cat /sys/class/drm/card1/device/mem_busy_percent",
-		"interval": 2,
-		"tooltip": false
-	},
 
-	"custom/cputemp": {
-		"format": " {}",
-		"exec": "sensors | grep 'Tctl:' | awk '{print int($2)}'",
-		"interval": 2,
-		"tooltip": false
-	},
-	"custom/gputemp": {
-		"format": "/{}",
-		"exec": "sensors | grep 'junction:' | awk '{print int($2)}'",
-		"interval": 2,
+	"custom/usage": {
+		"format": "{}",
+		"exec": "~/.local/bin/stats.sh",
+		"interval": 3,
 		"tooltip": false
 	},
 
 	"tray": {
 		"spacing": 10,
 	},
+
 	"network": {
 		"format-wifi": "",
 		"format-ethernet": "",
@@ -139,6 +113,7 @@
 		],
 		"ignore-monitor": true,
 	},
+
 	"custom/micmute": {
 		"exec": "~/.local/bin/micmute.sh",
 		"interval": "once",
@@ -179,9 +154,5 @@
 		"format": "<b>{:%H:%M}</b>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
 	},
-
-	"custom/cava": {
-		"format": " {} ",
-		"exec": "~/.local/bin/cava.sh",
-	},
 }
+	
