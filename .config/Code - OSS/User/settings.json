@@ -22,8 +22,14 @@
 	"telemetry.feedback.enabled": false,
 	"extensions.ignoreRecommendations": true,
 	"workbench.enableExperiments": false,
+
+	"chat.disableAIFeatures": true,
 	"chat.agent.enabled": false,
 	"chat.commandCenter.enabled": false,
+
+	"window.customTitleBarVisibility": "never",
+	"window.titleBarStyle": "native",
+	"window.menuBarVisibility": "toggle",
 	"workbench.secondarySideBar.defaultVisibility": "hidden",
 
 	"workbench.editor.wrapTabs": true,
@@ -117,4 +123,6 @@
 	"git.enableSmartCommit": true,
 	"git.confirmSync": false,
 	"git.openRepositoryInParentFolders": "never",
+	"workbench.settings.showAISearchToggle": false,
+	"chat.tools.todos.showWidget": false,
 }
