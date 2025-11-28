@@ -10,8 +10,12 @@
 }
 
 window#waybar {
-	background-color: rgba(0, 0, 0, 0.87);
+	background-color: rgba(0, 0, 0, 0);
 	color: #ffffff;
+}
+
+window#waybar.overlay {
+	background-color: rgba(0, 0, 0, 0.87);
 }
 
 tooltip {
@@ -40,7 +44,9 @@ button {
 }
 
 #mpris {
-	margin-left: 15px;
+	color: grey;
+	font-size: 10px;
+	padding-top: 20px;
 }
 
 #window {

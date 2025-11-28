@@ -1,16 +1,16 @@
 // -*- mode: jsonc -*-
-{
+[{
 	"position": "top",
+	"layer": "top",
 	"height": 34,
 	"spacing": 4, 
 
 	"modules-left": [
 		"pulseaudio",
-		"mpris",
 		"hyprland/window"
 	],
 	"modules-center": [
-		"custom/cava",
+		"mpris",
 	],
 	"modules-right": [
 		"custom/usage",
@@ -45,11 +45,10 @@
 		"format-paused": "{status_icon} <i>{artist} - {title}</i>",
 		"tooltip-format": "{player} {status}\n{artist} - {title}\n{album}",
 		"tooltip": false,
-		"artist-len": 7,
-		"title-len": 16,
+		"artist-len": 14,
+		"title-len": 28,
 		"player-icons": {
-			"default": "▶",
-			"mpv": "🎵"
+			"default": "▶"
 		},
 		"status-icons": {
 			"paused": "⏸"
@@ -58,7 +57,7 @@
 	},
 	
 	"hyprland/window": {
-		"max-length": 45,
+		"max-length": 50,
 		"format": " {}",
 		"rewrite": {
 			"(.*) - Code - OSS": "$1",
@@ -67,12 +66,6 @@
 		"icon": true,
 		"icon-size": 16,
 		"separate-outputs": true
-	},
-
-
-	"custom/cava": {
-		"format": " {} ",
-		"exec": "~/.local/bin/cava.sh",
 	},
 
 
@@ -112,6 +105,12 @@
 			}
 		],
 		"ignore-monitor": true,
+		"ignore": [
+			{
+				"type": "audio-in",
+				"name": "cava"
+			},
+		],
 	},
 
 	"custom/micmute": {
@@ -154,5 +153,24 @@
 		"format": "<b>{:%H:%M}</b>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
 	},
-}
-	
+},
+{
+	"name": "overlay",
+	"layer": "bottom",
+	"exclusive": false,
+	"passtrough": true,
+
+	"position": "top",
+	"height": 34,
+	"margin-top": -34,
+	"spacing": 4, 
+
+	"modules-center": [
+		"custom/cava",
+	],
+
+	"custom/cava": {
+		"format": " {} ",
+		"exec": "~/.local/bin/cava.sh",
+	},
+}]
