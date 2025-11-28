@@ -28,7 +28,7 @@ lower_cutoff_freq = 50
 higher_cutoff_freq = 18000
 
 autosens = 1
-sensitivity = 180
+sensitivity = 200
 
 [output]
 method = raw
@@ -45,6 +45,10 @@ noise_reduction = 16
 " > $config_file
 
 # read stdout from cava
+c1="#33ffff"
+c2="#fc33ff"
 cava -p $config_file | while read -r line; do
-    echo $line | sed $dict
+    v=$(echo $line | sed $dict)
+    c=$(python ~/.local/bin/colramp.py "$v" "$c1" "$c2" "$c1")
+    echo $c
 done
