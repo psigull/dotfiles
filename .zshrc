@@ -44,6 +44,7 @@ alias manb="BROWSER=firefox man --html" # open manual entry in browser
 
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '
 alias nonet='sg nonet "$@"' # iptables -I OUTPUT -m owner --gid-owner nonet -j REJECT
+alias fixwaybar='touch -m .config/waybar/config.jsonc'
 
 alias mpvseq='mpv --merge-files=yes --mf-fps=24 "mf://*.png"'
 alias ffseq='ffmpeg -framerate 24 -pattern_type glob -i "*.png" -c:v libx264 out.mp4'
