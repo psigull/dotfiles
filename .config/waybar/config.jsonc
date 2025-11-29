@@ -1,7 +1,26 @@
 // -*- mode: jsonc -*-
 [{
+	"name": "overlay",
+	"layer": "bottom",
+	"exclusive": false,
+	"passtrough": true,
+
 	"position": "top",
-	"layer": "top",
+	"height": 34,
+	"margin-top": -34,
+	"spacing": 4,
+
+	"modules-center": [
+		"custom/cava",
+	],
+
+	"custom/cava": {
+		"format": " {} ",
+		"exec": "~/.local/bin/cava.sh",
+	},
+},
+{
+	"position": "top",
 	"height": 34,
 	"spacing": 4, 
 
@@ -152,25 +171,5 @@
 	"clock": {
 		"format": "<b>{:%H:%M}</b>",
 		"format-alt": "<b>{:%a %b %m/%d}</b>",
-	},
-},
-{
-	"name": "overlay",
-	"layer": "bottom",
-	"exclusive": false,
-	"passtrough": true,
-
-	"position": "top",
-	"height": 34,
-	"margin-top": -34,
-	"spacing": 4, 
-
-	"modules-center": [
-		"custom/cava",
-	],
-
-	"custom/cava": {
-		"format": " {} ",
-		"exec": "~/.local/bin/cava.sh",
 	},
 }]
