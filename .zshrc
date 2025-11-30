@@ -7,11 +7,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
 
-if [[ ! -o interactive ]]; then
-	return
-fi
-
-
 # helpers and aliases
 alias ls="LC_COLLATE=C ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
@@ -128,6 +123,10 @@ function lsdiff() {
 
 
 # prompt stuff
+if [[ ! -o interactive ]]; then
+	return
+fi
+
 setopt prompt_subst transient_rprompt
 
 autoload -Uz vcs_info
