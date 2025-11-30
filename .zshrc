@@ -7,6 +7,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
 
+if [[ ! -o interactive ]]; then
+	return
+fi
+
+
 # helpers and aliases
 alias ls="LC_COLLATE=C ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
@@ -14,8 +19,7 @@ alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
 alias srm='/usr/bin/rm'
-alias trm='trash'
-alias rm='echo "use trash/trm or srm instead"'
+alias rm='trash'
 
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
@@ -30,8 +34,9 @@ alias gcm="git commit -m"
 alias gbp="git branch -M master && git push -u origin master"
 alias gp="git push"
 
-alias gres="git checkout HEAD -- "
-alias gresall="git reset --hard HEAD"
+alias gres='git restore --staged'
+alias grev="git checkout HEAD -- "
+alias grevall="git reset --hard HEAD"
 alias greb="git rebase -i "
 
 function calc() {
@@ -42,6 +47,7 @@ alias calc='noglob calc'
 alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=firefox man --html" # open manual entry in browser
 
+alias amdtop='amdgpu_top'
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '
 alias nonet='sg nonet "$@"' # iptables -I OUTPUT -m owner --gid-owner nonet -j REJECT
 alias fixwaybar='touch -m .config/waybar/config.jsonc'
@@ -122,10 +128,6 @@ function lsdiff() {
 
 
 # prompt stuff
-if [[ ! -o interactive ]]; then
-	return
-fi
-
 setopt prompt_subst transient_rprompt
 
 autoload -Uz vcs_info
@@ -276,3 +278,6 @@ bindkey "^[[1;5B" backward-kill-line
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(completion)
+
+# this needs to go last
+compdef _rm trash
