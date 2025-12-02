@@ -8,7 +8,8 @@ export GOPATH="$HOME/.go"
 
 
 # helpers and aliases
-alias ls="LC_COLLATE=C ls --color=auto --group-directories-first"
+alias ls="sed 's/^/-I \"/' .hidden 2>/dev/null | sed 's/$/\"/' | tr '\n' ' ' | LC_COLLATE=C xargs ls --color=auto --group-directories-first"
+
 alias grep="grep --color=auto"
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
