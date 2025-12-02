@@ -43,9 +43,11 @@ alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=firefox man --html" # open manual entry in browser
 
 alias amdtop='amdgpu_top'
+alias fixwaybar='touch -m .config/waybar/config.jsonc'
+alias emptytrash='trash-empty -f'
+
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '
 alias nonet='sg nonet "$@"' # iptables -I OUTPUT -m owner --gid-owner nonet -j REJECT
-alias fixwaybar='touch -m .config/waybar/config.jsonc'
 
 alias mpvseq='mpv --merge-files=yes --mf-fps=24 "mf://*.png"'
 alias ffseq='ffmpeg -framerate 24 -pattern_type glob -i "*.png" -c:v libx264 out.mp4'
@@ -53,6 +55,13 @@ alias ffseq='ffmpeg -framerate 24 -pattern_type glob -i "*.png" -c:v libx264 out
 # `helpf grep v` => shows `grep --help` for 'v' flag
 function helpf() {
 	($1 "--help") | grep -A 7 -E "^\s+?-$2"
+}
+
+source ~/.fd_excludes # stored separately
+alias fdc="fd -t f -E '{$fd_excludes}'"
+function fde() {
+	excludes="$fd_excludes,$@[-1]"
+	fdc -t f -E "{$excludes}" "$@[1,-2]"
 }
 
 # exclude csv of file ext from `fd`
@@ -79,7 +88,7 @@ alias hibernate='systemctl hibernate'
 
 
 # bluetooth helpers
-HEADPHONES="Soundcore"
+HEADPHONES="Nothing"
 CONTROLLER="DualSense"
 HP_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$HEADPHONES.+/\1/pi")
 CT_DEV=$(bluetoothctl devices | sed -nE "s/Device\s+(.+)\s+$CONTROLLER.+/\1/pi")
