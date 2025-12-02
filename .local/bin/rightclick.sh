@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# TODO: needs testing and fixing
 if ! pidof -q 'ydotoold'; then
 	ydotoold &
 	sleep 1

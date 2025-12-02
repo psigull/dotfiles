@@ -19,7 +19,7 @@ alias srm='/usr/bin/rm'
 alias rm='trash'
 
 alias v='nvim'
-alias e='yazi'
+alias ex='yazi'
 alias gg='gitui'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
@@ -43,6 +43,7 @@ function calc() {
 	echo $* | bc -l
 }
 alias calc='noglob calc'
+alias ca='calc'
 
 alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=firefox man --html" # open manual entry in browser
@@ -129,6 +130,7 @@ function fmatch() {
 }
 
 # diff two folders
+# TODO: recursively diff sha hashes
 function lsdiff() {
 	lsA=$(ls -r1 $1)
 	lsB=$(ls -r1 $2)
@@ -294,3 +296,4 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 # this needs to go last
 compdef _rm trash
+
