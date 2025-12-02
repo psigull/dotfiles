@@ -1,4 +1,5 @@
-export EDITOR="nano"
+export EDITOR="vim"
+export VISUAL="vim"
 export PAGER="less"
 export LESS='--mouse --wheel-lines=3'
 # git config --global core.pager "less -+X -R"
@@ -17,6 +18,8 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
+alias v='nvim'
+alias gg='gitui'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
 
