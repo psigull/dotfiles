@@ -20,9 +20,10 @@ alias rm='trash'
 
 alias v='nvim'
 alias ex='yazi'
-alias gg='gitui'
+alias gg='lazygit'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
+alias todo='grep -rni TODO'
 
 alias glo="git log --oneline"
 alias gs="git status"
