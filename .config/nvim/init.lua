@@ -119,6 +119,21 @@ if ok then
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
 	require('lualine').setup()
 
+	-- noice gui
+	add({source='folke/noice.nvim', depends={'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify'}})
+	require("noice").setup({
+	  lsp = {
+		override = {
+		  ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+		  ["vim.lsp.util.stylize_markdown"] = true,
+		  ["cmp.entry.get_documentation"] = true,
+		},
+	  },
+	})
+	require("notify").setup({
+		background_colour = "#000000",
+	})
+
 	-- multi caret editing
 	vim.g.VM_maps = {
 		["Find Under"] = "<C-d>",
@@ -159,6 +174,8 @@ if ok then
 	
 	-- language stuff
 	vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+	vim.opt.signcolumn = "no"
+
 	add({source='nvim-treesitter/nvim-treesitter'})
 	add({source='neovim/nvim-lspconfig'})
 	add({source='hrsh7th/cmp-nvim-lsp'})

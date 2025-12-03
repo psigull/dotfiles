@@ -1,4 +1,7 @@
 -- config
+-- treesitter language -> lsp server
+-- prefix language with _ to ignore syntax
+-- empty server string to ignore lsp server
 local lsp_map = {
 	c 		= 'clangd',
 	cpp 	= 'clangd',
@@ -7,33 +10,49 @@ local lsp_map = {
 	lua 	= 'lua_ls',
 	python 	= 'pyright',
 	rust 	= 'rust_analyzer',
-	typescript = 'typescript-language-server',
-	javascript = 'typescript-language-server',
+	typescript = 'ts_ls',
+	javascript = 'ts_ls',
 	html 	= 'html',
 	css  	= 'cssls',
+	json	= 'jsonls',
+	jsonc	= 'jsonls',
+	yaml	= 'yamlls',
+	markdown = 'marksman',
+	toml	= 'taplo',
 }
 
 local languages = {}
 local servers = {}
 for lang, server in pairs(lsp_map) do
-	table.insert(languages, lang)
-	table.insert(servers, server)
+	if string.sub(lang, 1, 1) ~= '_' then
+		table.insert(languages, lang)
+	end
+	if #server > 0 then 
+		table.insert(servers, server)
+	end
 end
 
 -- completion
 local cmp = require('cmp')
+
+local cmp_mapping = {
+	['<Up>'] = cmp.mapping(function(fb)
+		if cmp.visible() then cmp.select_prev_item()
+		else fb() end end, { 'i', 'c' }),
+	['<Down>'] = cmp.mapping(function(fb)
+		if cmp.visible() then cmp.select_next_item()
+		else fb() end end, { 'i', 'c' }),
+	['<C-Space>'] = cmp.mapping.complete(),
+	['<Esc>'] = cmp.mapping.abort(),
+	['<Tab>'] = cmp.mapping.confirm({ select = true }),
+
+}
 cmp.setup({
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	mapping = cmp.mapping.preset.insert({
-		['<Up>'] = cmp.mapping.select_next_item(),
-		['<Down>'] = cmp.mapping.select_prev_item(),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<Esc>'] = cmp.mapping.abort(),
-		['<Tab>'] = cmp.mapping.confirm({ select = true }),
-	}),
+	mapping = cmp.mapping.preset.insert(cmp_mapping),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 	}, {
@@ -44,14 +63,14 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
 	sources = {
 		{ name = 'buffer' }
 	}
 })
 
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
@@ -105,27 +124,7 @@ if mason_ok then
 					settings = {},
 				}
 			end,
-			-- ['gopls'] = function()
-				--	vim.lsp.config['gopls'] = {}
-				-- end,
 		}
 	})
 end
 
--- vim.lsp.config['gopls'] = {
--- 	cmd = {'gopls'},
--- 	capabilities = capabilities,
--- 	settings = {
--- 		gopls = {
--- 			experimentalPostfixCompletions = true,
--- 			analyses = {
--- 				unusedparams = true,
--- 				shadow = true,
--- 			},
--- 			staticcheck = true,
--- 		},
--- 	},
--- 	init_options = {
--- 		usePlaceholders = true,
--- 	}
--- }
