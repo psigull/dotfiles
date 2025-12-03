@@ -156,7 +156,19 @@ if ok then
 	-- fuzzy search open tabs
 	add({source='LukasPietzschmann/telescope-tabs'})
 	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
+	
+	-- language stuff
+	vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+	add({source='nvim-treesitter/nvim-treesitter'})
+	add({source='neovim/nvim-lspconfig'})
+	add({source='hrsh7th/cmp-nvim-lsp'})
+	add({source='hrsh7th/cmp-buffer'})
+	add({source='hrsh7th/cmp-path'})
+	add({source='hrsh7th/cmp-cmdline'})
+	add({source='hrsh7th/nvim-cmp'})
 
-
+	add({source='mason-org/mason.nvim'})
+	add({source='mason-org/mason-lspconfig.nvim'})
+	require('lspsetup')
 end
 
