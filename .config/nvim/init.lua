@@ -23,6 +23,7 @@ vim.opt.smartcase = true
 -- disable auto commenting on newline
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end })
 
+
 -- key mappings
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -45,7 +46,6 @@ map({'v','i'}, '<C-q>', '<Esc>:q<CR>', opts)
 map('n', '<C-S-q>', ':qa<CR>', opts)
 map({'v','i'}, '<C-S-q>', '<Esc>:qa<CR>', opts)
 
-
 -- copy/cut/paste
 map('n', '<C-c>', 'yy', oCpts)
 map('v', '<C-c>', 'ya', opts)
@@ -67,11 +67,6 @@ map('n', '<C-S-z>', '<C-r>', opts)
 map('v', '<C-S-z>', '<C-r>gv', opts)
 map('i', '<C-S-z>', '<C-o><C-r>', opts)
 
--- down arrow creates new line if there isn't one
-local expropts = vim.tbl_extend("force", opts, { expr = true })
-map('n', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and 'o' or 'j' end, expropts)
-map('i', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and '<End><CR>' or '<C-O>j' end, expropts)
-
 -- tabs
 map({'n','v','i'}, '<C-t>', '<Esc>:tabnew<CR>i', opts)
 map({'n','v','i'}, '<C-S-t>', '<Esc>:vnew<CR>i', opts)
@@ -81,6 +76,11 @@ map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>i', opts)
 -- black hole delete
 map({'n','v'}, '<Del>', '"_x', opts)
 map({'n','v','i'}, '<S-Del>', '<Esc>"_dd', opts)
+
+-- down arrow creates new line if there isn't one
+local expropts = vim.tbl_extend("force", opts, { expr = true })
+map('n', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and 'o' or 'j' end, expropts)
+map('i', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and '<End><CR>' or '<C-O>j' end, expropts)
 
 
 -- colour scheme
@@ -92,15 +92,12 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
 
 -- plugins
 local ok, minideps = pcall(require, 'mini.deps')
-if not ok then
-	print("mini.deps not found")
-else
+if ok then
 	minideps.setup({})
 	local add = minideps.add
 
 	vim.opt.showmode = false
 	vim.opt.cmdheight = 0
-
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
 	require('lualine').setup()
 
