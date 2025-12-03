@@ -16,6 +16,10 @@ vim.opt.shiftwidth = 4
 vim.opt.whichwrap:append('<,>,[,]') -- arrow key line wrapping
 vim.opt.clipboard:append('unnamedplus') -- use system clipboard
 
+-- case insensitive search unless \C or capital in search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 -- disable auto commenting on newline
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end })
 
@@ -52,7 +56,7 @@ map('n', '<C-x>', 'dd', opts)
 map('v', '<C-x>', 'da', opts)
 map('i', '<C-x>', '<Esc>dda', opts)
 
-map({'n', 'v'}, '<C-v>', 'P=`]', opts) -- reindent
+map({'n','v'}, '<C-v>', 'P=`]', opts) -- reindent
 map('i', '<C-v>', '<Esc>p=`]a', opts)
 
 -- undo/redo
@@ -76,8 +80,8 @@ map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>i', opts)
 map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>i', opts)
 
 -- black hole delete
-map({'n', 'v'}, '<Del>', '"_x', opts)
-map({'n', 'v'}, '<BS>', '"_x', opts)
+map({'n','v'}, '<Del>', '"_x', opts)
+
 
 -- colour scheme
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
@@ -93,10 +97,9 @@ else
 	minideps.setup({})
 	local add = minideps.add
 
-	--vim.g.loaded_netrw       = 1
-	--vim.g.loaded_netrwPlugin = 1
-
 	vim.opt.showmode = false
+	vim.opt.cmdheight = 0
+
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
 	require('lualine').setup()
 
@@ -108,5 +111,10 @@ else
 	}
 	vim.g.VM_mouse_mappings = 1
 	add({source='mg979/vim-visual-multi'})
+	
+	--add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})
+	--add({source='LukasPietzschmann/telescope-tabs', depends={'nvim-telescope/telescope.nvim'}})
+	add({source='LukasPietzschmann/telescope-tabs', checkout='vim_ui_select'})
+	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
 end
 
