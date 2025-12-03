@@ -18,7 +18,7 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
-alias v='nvim'
+alias nv='nvim'
 alias ex='yazi'
 alias gg='lazygit'
 alias pn='pnpm'
