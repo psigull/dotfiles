@@ -19,6 +19,7 @@ local lsp_map = {
 	yaml	= 'yamlls',
 	markdown = 'marksman',
 	toml	= 'taplo',
+	bash	= 'bashls',
 }
 
 local languages = {}
