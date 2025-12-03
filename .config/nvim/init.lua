@@ -36,11 +36,11 @@ map('n', '<C-s>', ':w<CR>', opts)
 map('v', '<C-s>', '<C-C>:w<CR>', opts)
 map('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
-map('n', '<C-w>', ':q<CR>', opts)
-map({'v','i'}, '<C-w>', '<Esc>:q<CR>', opts)
+map('n', '<C-q>', ':q<CR>', opts)
+map({'v','i'}, '<C-q>', '<Esc>:q<CR>', opts)
 
-map('n', '<C-q>', ':qa<CR>', opts)
-map({'v','i'}, '<C-q>', '<Esc>:qa<CR>', opts)
+map('n', '<C-S-q>', ':qa<CR>', opts)
+map({'v','i'}, '<C-S-q>', '<Esc>:qa<CR>', opts)
 
 
 -- copy/cut/paste
@@ -70,9 +70,14 @@ map('n', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and v
 map('i', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and '<End><CR>' or '<C-O>j' end, expropts)
 
 -- tabs
-map({'n','v','i'}, '<C-t>', '<Esc>:tabnew<CR>', opts)
-map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>', opts)
-map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>', opts)
+map({'n','v','i'}, '<C-t>', '<Esc>:tabnew<CR>i', opts)
+map({'n','v','i'}, '<C-S-t>', '<Esc>:vnew<CR>i', opts)
+map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>i', opts)
+map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>i', opts)
+
+-- black hole delete
+map({'n', 'v'}, '<Del>', '"_x', opts)
+map({'n', 'v'}, '<BS>', '"_x', opts)
 
 -- colour scheme
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
@@ -91,11 +96,17 @@ else
 	--vim.g.loaded_netrw       = 1
 	--vim.g.loaded_netrwPlugin = 1
 
-	add({source='akinsho/bufferline.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
-	require('bufferline').setup({})
-
 	vim.opt.showmode = false
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
 	require('lualine').setup()
+
+	vim.g.VM_maps = {
+		["Find Under"] = "<C-d>",
+		["Find Subword Under"] = "<C-d>",
+		["Undo"] = '<C-z>',
+		["Redo"] = '<C-S-z>',
+	}
+	vim.g.VM_mouse_mappings = 1
+	add({source='mg979/vim-visual-multi'})
 end
 
