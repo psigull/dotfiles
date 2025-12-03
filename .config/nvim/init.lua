@@ -81,6 +81,10 @@ map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>i', opts)
 map({'n','v'}, '<Del>', '"_x', opts)
 map({'n','v','i'}, '<S-Del>', '<Esc>"_dd', opts) -- whole line
 
+-- keep selection on < > indent shifts
+map('v', '<', '<gv', opts)
+map('v', '>', '>gv', opts)
+
 -- down arrow creates new line if there isn't one
 local exprOpts = vim.tbl_extend("force", opts, { expr = true })
 map('n', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and 'o' or 'j' end, exprOpts )
@@ -104,7 +108,9 @@ if ok then
 	local add = minideps.add
 
 	-- file explorer
+	vim.g.loaded_netrwPlugin = 1
 	add({source='mikavilpas/yazi.nvim', depends={'nvim-lua/plenary.nvim'}})
+	require('yazi').setup({open_for_directories=true})
 	map({'n','v','i'}, '<C-e>', function() require('yazi').yazi() end, opts) 
 
 	-- statusbar
