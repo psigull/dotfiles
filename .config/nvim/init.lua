@@ -188,5 +188,8 @@ if ok then
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
 	require('lspsetup')
+
+	-- start pipe if launched in godot project dir
+	require('pipe_godot')
 end
 
