@@ -108,9 +108,10 @@ if ok then
 	local add = minideps.add
 
 	-- file explorer
+	vim.g.loaded_netrw = 1 
 	vim.g.loaded_netrwPlugin = 1
 	add({source='mikavilpas/yazi.nvim', depends={'nvim-lua/plenary.nvim'}})
-	require('yazi').setup({open_for_directories=true})
+	require('yazi').setup({open_for_directories=false})
 	map({'n','v','i'}, '<C-e>', function() require('yazi').yazi() end, opts) 
 
 	-- statusbar
@@ -137,7 +138,7 @@ if ok then
 	-- multi caret editing
 	vim.g.VM_maps = {
 		["Find Under"] = "<C-d>",
-		["Find Subword Under"] = "<C-d>",
+		--["Find Subword Under"] = "<C-d>",
 		["Undo"] = '<C-z>',
 		["Redo"] = '<C-S-z>',
 	}
