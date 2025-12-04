@@ -90,7 +90,7 @@ local cmp_mapping = {
 		else fb() end end, { 'i', 'c' }),
 	['<C-Space>'] = cmp.mapping.complete(),
 	['<Esc>'] = cmp.mapping.abort(),
-	['<Tab>'] = cmp.mapping.confirm({ select = true }),
+	['<Tab>'] = cmp.mapping.confirm({ select = false }),
 }
 
 cmp.setup({
