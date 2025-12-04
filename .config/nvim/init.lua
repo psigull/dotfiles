@@ -1,6 +1,6 @@
 local vim = vim
-vim.cmd('startinsert') -- 9/10 dentists hate this
 
+vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wrap = true
 vim.opt.mouse = 'a'
@@ -13,6 +13,7 @@ vim.opt.breakindentopt = "shift:2"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
+vim.opt.virtualedit:append('onemore') -- cursor pos on mouse click
 vim.opt.whichwrap:append('<,>,[,]') -- arrow key line wrapping
 vim.opt.clipboard:append('unnamedplus') -- use system clipboard
 
@@ -33,8 +34,9 @@ local opts = { noremap = true, silent = true }
 map('n', 'p', 'P', opts) 
 map('n', 'P', 'p', opts) 
 
--- inSert
-map('n', 's', 'i', opts) 
+-- swap insert keys
+map('n', 's', 'a', opts) -- suffixed
+map('n', 'a', 'i', opts) -- AAAt the front
 
 -- save
 map('n', '<C-s>', ':w<CR>', opts) 
@@ -51,16 +53,17 @@ map({'v','i'}, '<C-S-q>', '<Esc>:conf qa<CR>', opts)
 
 -- copy/cut/paste
 map('n', '<C-c>', 'yy', opts) 
-map('v', '<C-c>', 'ya', opts) 
+map('v', '<C-c>', 'y', opts) 
 map('i', '<C-c>', '<Esc>yya', opts) 
 
 map('n', '<C-x>', 'dd', opts) 
-map('v', '<C-x>', 'da', opts) 
+map('v', '<C-x>', 'd', opts) 
 map('i', '<C-x>', '<Esc>dda', opts) 
 
 map({'n','v'}, '<C-v>', 'P=`]', opts) -- reindent
 map('i', '<C-v>', '<Esc>p=`]a', opts) 
 -- TODO: function to trim whitespace, reindent, and place cursor at end
+-- TODO: remove stray newlines at beginning and end if pasted in insert mode
 
 -- undo/redo
 map('n', '<C-z>', 'u', opts) 
@@ -69,22 +72,30 @@ map('i', '<C-z>', '<Esc>u', opts)
 
 map('n', '<C-S-z>', '<C-r>', opts) 
 map('v', '<C-S-z>', '<C-r>gv', opts) 
-map('i', '<C-S-z>', '<C-o><C-r>', opts) 
+map('i', '<C-S-z>', '<C-o><C-r>', opts)
+
+-- map space to create undo point per word
+map('i', '<Space>', '<Space><C-g>u', opts)
 
 -- tab management
 map({'n','v','i'}, '<C-t>', '<Esc>:tabnew<CR>', opts) 
 map({'n','v','i'}, '<C-S-t>', '<Esc>:vnew<CR>', opts) -- split
 -- overwritten below if plugins are available:
-map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>i', opts) 
-map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>i', opts) 
+map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>', opts)
+map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>', opts)
 
 -- black hole delete to void register, not clipboard
 map({'n','v'}, '<Del>', '"_x', opts)
 map({'n','v','i'}, '<S-Del>', '<Esc>"_dd', opts) -- whole line
+map({'n','v'}, '<C-S-x>', '"_x', opts)
 
 -- keep selection on < > indent shifts
 map('v', '<', '<gv', opts)
 map('v', '>', '>gv', opts)
+
+-- home/end ignore whitespace
+map({'n','v','i'}, '<Home>', '<C-o>^', opts)
+map({'n','v','i'}, '<End>', '<C-o>$', opts)
 
 -- down arrow creates new line if there isn't one
 local exprOpts = vim.tbl_extend("force", opts, { expr = true })
@@ -106,7 +117,7 @@ local ok, minideps = pcall(require, 'mini.deps')
 if ok then
 	minideps.setup({})
 	local add = minideps.add
-
+	
 	-- file explorer
 	vim.g.loaded_netrw = 1 
 	vim.g.loaded_netrwPlugin = 1
@@ -118,10 +129,25 @@ if ok then
 	vim.opt.showmode = false
 	vim.opt.cmdheight = 0
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
-	require('lualine').setup()
+
+	-- lsp breadcrumb
+	add({source='SmiteshP/nvim-navic'})
+	local navic = require("nvim-navic")
+	navic.setup({
+		lsp = { auto_attach = true },
+	})
+
+	require('lualine').setup({
+		sections = {
+			lualine_c = {
+				"filename",
+				"navic",
+			}
+		}
+	})
 
 	-- noice gui
-	add({source='folke/noice.nvim', depends={'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify'}})
+	add({source='folke/noice.nvim', depends={'MunifTanjim/nui.nvim'}})
 	require("noice").setup({
 	  lsp = {
 		override = {
@@ -131,27 +157,25 @@ if ok then
 		},
 	  },
 	})
-	require("notify").setup({
-		background_colour = "#000000",
-	})
 
-	-- multi caret editing
-	vim.g.VM_maps = {
-		["Find Under"] = "<C-d>",
-		--["Find Subword Under"] = "<C-d>",
-		["Undo"] = '<C-z>',
-		["Redo"] = '<C-S-z>',
-	}
-	vim.g.VM_mouse_mappings = 1
-	add({source='mg979/vim-visual-multi'})
+	add({source='rcarriga/nvim-notify'})
+	require("notify").setup({
+		background_colour = "#111111",
+		top_down = false,
+	})
 
 	-- quote, bracket, parenthesis pairs
 	add({source='windwp/nvim-autopairs'})
 	require('nvim-autopairs').setup({})
 
-	-- comment selection w/ 'gc' in normal
-	add({source='numToStr/Comment.nvim'})
-	require('Comment').setup({})
+	-- pop up that shows keymappings
+	add({source='folke/which-key.nvim'})
+	require('which-key').setup({
+		win = { height = { min = 2, max = 5 },
+				padding = { 0, 0 } },
+		layout = { width = { min = 25, max = 25 },
+				spacing = 0 }
+	})	
 
 	-- snazzy reorderable tabs
 	add({source='romgrk/barbar.nvim'})
@@ -168,11 +192,11 @@ if ok then
 	-- TODO: telescope git_files, help_tags
 	-- TODO: difference between find_files, grep_string, live_grep?
 	-- TODO: function to find in files, but specify a directory/filter first!
-	
+
 	-- fuzzy search open tabs
 	add({source='LukasPietzschmann/telescope-tabs'})
 	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
-	
+
 	-- language stuff
 	vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 	vim.opt.signcolumn = "no"
@@ -188,6 +212,10 @@ if ok then
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
 	require('lspsetup')
+
+	add({source='hedyhli/outline.nvim'})
+	require('outline').setup({})
+	map('n', "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
 
 	-- start pipe if launched in godot project dir
 	require('pipe_godot')

@@ -91,7 +91,6 @@ local cmp_mapping = {
 	['<C-Space>'] = cmp.mapping.complete(),
 	['<Esc>'] = cmp.mapping.abort(),
 	['<Tab>'] = cmp.mapping.confirm({ select = true }),
-
 }
 
 cmp.setup({
@@ -101,27 +100,28 @@ cmp.setup({
 	},
 	mapping = cmp.mapping.preset.insert(cmp_mapping),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
+		{ name = 'nvim_lsp'},
 	}, {
 		{ name = 'buffer' },
 	}, {
 		{ name = 'path' },
-	})
+	}),
+	completion = { keyword_length = 3 },
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
 	sources = {
-		{ name = 'buffer' }
+		{ name = 'buffer', keyword_length = 1 }
 	}
 })
 
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
 	sources = cmp.config.sources({
-		{ name = 'path' }
+		{ name = 'path', keyword_length = 1 }
 	}, {
-		{ name = 'cmdline' }
+		{ name = 'cmdline', keyword_length = 1 }
 	}),
 	matching = { disallow_symbol_nonprefix_matching = false }
 })
