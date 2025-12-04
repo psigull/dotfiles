@@ -21,6 +21,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- disable auto commenting on newline
+-- TODO: doesn't work on paste
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end })
 
 
@@ -95,11 +96,10 @@ map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('kitty --detac
 
 
 -- colour scheme
-require('godot')
-vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
-vim.api.nvim_set_hl(0, "NonText", { bg = "NONE", ctermbg = "NONE" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
-
+require('theme_godot')
+local bg='#111111'
+vim.api.nvim_set_hl(0, 'Normal', { bg = bg })
+vim.api.nvim_set_hl(0, 'NonText', { bg = bg })
 
 -- plugins
 local ok, minideps = pcall(require, 'mini.deps')
