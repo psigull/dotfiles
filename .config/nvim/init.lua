@@ -9,6 +9,7 @@ vim.opt.termguicolors = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2"
+vim.opt.fillchars = { eob = ' ' }
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -74,7 +75,7 @@ map('n', '<C-S-z>', '<C-r>', opts)
 map('v', '<C-S-z>', '<C-r>gv', opts) 
 map('i', '<C-S-z>', '<C-o><C-r>', opts)
 
--- map space to create undo point per word
+-- create undo points every space
 map('i', '<Space>', '<Space><C-g>u', opts)
 
 -- tab management
@@ -97,10 +98,13 @@ map('v', '>', '>gv', opts)
 map({'n','v','i'}, '<Home>', '<C-o>^', opts)
 map({'n','v','i'}, '<End>', '<C-o>$', opts)
 
+-- go down a line on enter
+map('n', '<CR>', 'j', opts)
+
 -- down arrow creates new line if there isn't one
 local exprOpts = vim.tbl_extend("force", opts, { expr = true })
-map('n', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and 'o' or 'j' end, exprOpts )
-map('i', '<Down>', function() return (vim.fn.line('.') == vim.fn.line('$') and vim.fn.getline('$') ~= '') and '<End><CR>' or '<C-O>j' end, exprOpts )
+map('n', '<Down>', function() return vim.fn.line('.') == vim.fn.line('$') and 'o<Esc>' or 'j' end, exprOpts )
+map('i', '<Down>', function() return vim.fn.line('.') == vim.fn.line('$') and '<End><CR>' or '<C-O>j' end, exprOpts )
 
 -- open terminal to active buffer cwd
 map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('kitty --detach --directory %s', vim.fn.expand('%:p:h'))) end, opts) 
