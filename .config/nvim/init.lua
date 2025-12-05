@@ -1,6 +1,6 @@
 local vim = vim
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true, nowait = true }
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -57,12 +57,12 @@ map('v', '<C-s>', '<C-C>:w<CR>', opts)
 map('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
 -- close tab/buffer
-map('n', '<C-q>', ':conf bd<CR>', opts)
-map({'v','i'}, '<C-q>', '<Esc>:conf bd<CR>', opts)
+map('n', '<C-w>', ':conf bd<CR>', opts)
+map({'v','i'}, '<C-w>', '<Esc>:conf bd<CR>', opts)
 
 -- close nvim
-map('n', '<C-S-q>', ':conf qa<CR>', opts)
-map({'v','i'}, '<C-S-q>', '<Esc>:conf qa<CR>', opts)
+map('n', '<C-q>', ':conf qa<CR>', opts)
+map({'v','i'}, '<C-q>', '<Esc>:conf qa<CR>', opts)
 
 -- copy/cut/paste
 map('n', '<C-c>', 'yy', opts)
@@ -125,6 +125,9 @@ map('i', '<Down>', function() return vim.fn.line('.') == vim.fn.line('$') and '<
 -- open terminal to active buffer cwd
 map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('alacritty --working-directory %s', vim.fn.expand('%:p:h'))) end, opts)
 
+-- macro helpers
+map('n', '<C-d>', '*', opts)
+map('n', '<C-S-d>', '*Ncgn', opts)
 
 -- colour scheme
 require('theme_godot')

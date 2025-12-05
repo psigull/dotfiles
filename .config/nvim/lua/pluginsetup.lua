@@ -28,7 +28,14 @@ if ok then
 	require('lualine').setup({
 		sections = {},
 		winbar = {
-			lualine_a = { "mode" },
+			lualine_a = { "mode",
+				function()
+					local macro = vim.fn.reg_recording()
+					if macro ~= '' then
+						return '@' .. macro
+					end
+					return ''
+				end},
 			lualine_b = { "branch", "diff", "diagnostics" },
 			lualine_c = { "filename", "navic" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
