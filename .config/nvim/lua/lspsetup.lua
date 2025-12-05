@@ -1,3 +1,5 @@
+local vim = vim
+
 -- treesitter language -> lsp server
 -- prefix language with _ to ignore syntax
 -- empty server string to ignore lsp server
@@ -30,14 +32,13 @@ local lsp_map = {
 	markdown = '',
 }
 
--- TODO: lsp keybinds
+-- lsp buffer-local keybinds
 local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'gh', vim.lsp.buf.declaration, bufopts) -- header
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts) -- efinition
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- view popup
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
@@ -78,9 +79,9 @@ vim.lsp.config['godot'] = {
 	filetypes = { 'gdscript' },
 }
 
--- setup completion
-local cmp = require('cmp')
 
+-- completion hotkeys
+local cmp = require('cmp')
 local cmp_mapping = {
 	['<Up>'] = cmp.mapping(function(fb)
 		if cmp.visible() then cmp.select_prev_item()
@@ -93,6 +94,7 @@ local cmp_mapping = {
 	['<Tab>'] = cmp.mapping.confirm({ select = false }),
 }
 
+
 cmp.setup({
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -101,6 +103,7 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert(cmp_mapping),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp'},
+		{ name = 'nvim_lsp_signature_help' },
 	}, {
 		{ name = 'buffer' },
 	}, {
@@ -133,7 +136,7 @@ for lang, server in pairs(lsp_map) do
 	if string.sub(lang, 1, 1) ~= '_' then
 		table.insert(languages, lang)
 	end
-	if #server > 0 then 
+	if #server > 0 then
 		table.insert(servers, server)
 	end
 end

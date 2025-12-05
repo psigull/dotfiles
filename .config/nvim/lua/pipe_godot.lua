@@ -1,4 +1,5 @@
-local cwd = vim.fn.expand('%:p:h') --vim.uv.getcwd()
+local vim = vim
+local cwd = vim.fn.expand('%:p:h')
 local pipe = cwd .. '/nvim.pipe'
 if vim.uv.fs_stat(cwd .. '/project.godot') then
 	if not vim.uv.fs_stat(pipe) then

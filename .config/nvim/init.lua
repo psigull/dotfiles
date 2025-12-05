@@ -1,4 +1,5 @@
 local vim = vim
+local map = vim.keymap.set
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -34,7 +35,6 @@ end })
 
 
 -- key mappings
-local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- swap paste before/after cursor
@@ -203,6 +203,8 @@ if ok then
 	map('n', '<leader><space>', require('telescope.builtin').buffers, opts)
 	map('n', '<leader>?', require('telescope.builtin').oldfiles, opts)
 	map('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, opts)
+	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
+	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
 	-- TODO: telescope git_files, help_tags
 	-- TODO: difference between find_files, grep_string, live_grep?
 	-- TODO: function to find in files, but specify a directory/filter first!
@@ -221,6 +223,7 @@ if ok then
 	add({source='hrsh7th/cmp-buffer'})
 	add({source='hrsh7th/cmp-path'})
 	add({source='hrsh7th/cmp-cmdline'})
+	add({source='hrsh7th/cmp-nvim-lsp-signature-help'})
 	add({source='hrsh7th/nvim-cmp'})
 
 	add({source='mason-org/mason.nvim'})
