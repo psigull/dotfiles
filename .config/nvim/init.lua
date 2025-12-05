@@ -130,7 +130,9 @@ map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('alacritty --w
 
 -- macro helpers
 map('n', '<C-d>', '*', opts)
+map('x', '<C-d>', 'y/\\V<C-R>"<CR>', opts)
 map('n', '<C-S-d>', '*Ncgn', opts)
+map('x', '<C-S-d>', 'y/\\V<C-R>"<CR>Ncgn', opts)
 
 -- colour scheme
 require('theme_godot')
