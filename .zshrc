@@ -65,6 +65,8 @@ function helpf() {
 }
 
 source ~/.fd_excludes # stored separately
+fd_excludes=${fd_excludes//\\/}
+fd_excludes=${fd_excludes//$'\n'/}
 alias fdc="fd -t f -E '{$fd_excludes}'"
 function fde() {
 	excludes="$fd_excludes,$@[-1]"
@@ -165,7 +167,7 @@ function precmd() {
 		export RPROMPT="%(?..%F{yellow}[%?]%f  )%F{7}${timer_show}s%f"
 		unset timer
 	fi
-	
+
 	set_title $PWD
 	vcs_info
 }
@@ -297,4 +299,3 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 # this needs to go last
 compdef _rm trash
-
