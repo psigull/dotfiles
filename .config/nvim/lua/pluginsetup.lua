@@ -97,7 +97,7 @@ if ok then
 	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
 
 	-- language stuff
-	vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+	vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
 	vim.opt.signcolumn = "no"
 
 	add({source='nvim-treesitter/nvim-treesitter'})

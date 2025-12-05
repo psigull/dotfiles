@@ -91,7 +91,7 @@ local cmp_mapping = {
 		else fb() end end, { 'i', 'c' }),
 	['<C-Space>'] = cmp.mapping.complete(),
 	['<Esc>'] = cmp.mapping.abort(),
-	['<Tab>'] = cmp.mapping.confirm({ select = false }),
+	['<Tab>'] = cmp.mapping.confirm({ select = true }),
 }
 
 
@@ -109,7 +109,7 @@ cmp.setup({
 	}, {
 		{ name = 'path' },
 	}),
-	completion = { keyword_length = 3 },
+	completion = { insert = false, keyword_length = 3 },
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
