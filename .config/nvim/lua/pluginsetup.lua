@@ -1,5 +1,6 @@
 local vim = vim
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 local ok, minideps = pcall(require, 'mini.deps')
 if ok then
@@ -16,23 +17,31 @@ if ok then
 	-- statusbar
 	vim.opt.showmode = false
 	vim.opt.cmdheight = 0
+	vim.opt.ruler = false
 	add({source='nvim-lualine/lualine.nvim', depends={ 'nvim-tree/nvim-web-devicons' }})
-
-	-- lsp breadcrumb
 	add({source='SmiteshP/nvim-navic'})
 	local navic = require("nvim-navic")
 	navic.setup({
 		lsp = { auto_attach = true },
 	})
-
+	require('patcher') -- fix laststatus being reset
 	require('lualine').setup({
-		sections = {
-			lualine_c = {
-				"filename",
-				"navic",
-			}
-		}
+		sections = {},
+		winbar = {
+			lualine_a = { "mode" },
+			lualine_b = { "branch", "diff", "diagnostics" },
+			lualine_c = { "filename", "navic" },
+			lualine_x = { "encoding", "fileformat", "filetype" },
+			lualine_y = { "progress" },
+			lualine_z = { "location" }
+		},
 	})
+
+	-- hide statusbar when lualine is on top
+	vim.opt.laststatus=0
+	local bg_color = vim.api.nvim_get_hl_by_name("Normal", true).background
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_color, fg = bg_color })
+	vim.api.nvim_set_hl(0, "StatusLineNC", { bg = bg_color, fg = bg_color })
 
 	-- noice gui
 	add({source='folke/noice.nvim', depends={'MunifTanjim/nui.nvim'}})
@@ -45,7 +54,6 @@ if ok then
 			},
 		},
 	})
-
 	add({source='rcarriga/nvim-notify'})
 	require("notify").setup({
 		background_colour = "#111111",
@@ -77,6 +85,7 @@ if ok then
 	map('n', '<leader><space>', require('telescope.builtin').buffers, opts)
 	map('n', '<leader>?', require('telescope.builtin').oldfiles, opts)
 	map('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, opts)
+	map('n', '<leader>r', require('telescope.builtin').resume, opts)
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
 	-- TODO: telescope git_files, help_tags
@@ -102,8 +111,9 @@ if ok then
 
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
-	require('lspsetup')
+	require('lspsetup') -- setup lsp configs
 
+	-- outliner
 	add({source='hedyhli/outline.nvim'})
 	require('outline').setup({})
 	map('n', "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle outliner" })

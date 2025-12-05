@@ -1,5 +1,6 @@
 local vim = vim
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -35,8 +36,6 @@ end })
 
 
 -- key mappings
-local opts = { noremap = true, silent = true }
-
 -- swap paste before/after cursor
 map('n', 'p', 'P', opts)
 map('n', 'P', 'p', opts)
