@@ -20,7 +20,7 @@ alias rm='trash'
 
 alias nv='nvim'
 alias ex='yazi'
-alias gg='lazygit'
+alias gg='gitui'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
 alias todo='grep -rni TODO'
