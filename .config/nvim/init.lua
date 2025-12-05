@@ -109,8 +109,10 @@ map('v', '<', '<gv', opts)
 map('v', '>', '>gv', opts)
 
 -- home/end ignore whitespace
-map({'n','v','i'}, '<Home>', '<C-o>^', opts)
-map({'n','v','i'}, '<End>', '<C-o>$', opts)
+map({'n','v'}, '<Home>', '^', opts)
+map({'n','v'}, '<End>', '$', opts)
+map('i', '<Home>', '<C-o>^', opts)
+map('i', '<End>', '<C-o>$', opts)
 
 -- go down a line on enter
 map('n', '<CR>', 'j', opts)
