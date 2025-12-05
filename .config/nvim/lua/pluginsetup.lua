@@ -147,8 +147,8 @@ if ok then
 
 	-- outliner
 	add({source='hedyhli/outline.nvim'})
-	require('outline').setup({})
-	map('n', "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
+	require('outline').setup({outline_window={ focus_on_open = false }})
+	map('n', "<C-b>", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
 
 	-- start pipe if launched in godot project dir
 	require('pipe_godot')
