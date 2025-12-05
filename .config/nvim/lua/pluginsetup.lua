@@ -88,9 +88,6 @@ if ok then
 	map('n', '<leader>r', require('telescope.builtin').resume, opts)
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
-	-- TODO: telescope git_files, help_tags
-	-- TODO: difference between find_files, grep_string, live_grep?
-	-- TODO: function to find in files, but specify a directory/filter first!
 
 	-- fuzzy search open tabs
 	add({source='LukasPietzschmann/telescope-tabs'})
@@ -121,6 +118,3 @@ if ok then
 	-- start pipe if launched in godot project dir
 	require('pipe_godot')
 end
-
-
-
