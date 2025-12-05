@@ -6,6 +6,34 @@ local ok, minideps = pcall(require, 'mini.deps')
 if ok then
 	minideps.setup({})
 	local add = minideps.add
+	local now = minideps.now
+
+	-- dashboard
+	add({source='nvimdev/dashboard-nvim'})
+	vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#6c00ee" })
+	vim.api.nvim_set_hl(0, "DashboardFooter", { fg = "#1b3857" })
+	now(function()
+		require('dashboard').setup({
+			theme = 'hyper',
+			config = {
+				footer = {'', '👽 stay weird'},
+				shortcut = {},
+				packages = { enable = false },
+				header = { 	' _._     _,-\'""`-._            ',
+							"(,-.`._,'(       |\\`-/|        ",
+							"    `-.-' \\ )-`( , o o)        ",
+							"          `-    \\`_`\"'-   meow", },
+				center = {
+					{
+						action = 'Telescope oldfiles',
+						desc = '  Recent Files',
+						icon = ' ',
+						key = 'r',
+					},
+				}
+			}
+		})
+	end)
 
 	-- file explorer
 	vim.g.loaded_netrw = 1
