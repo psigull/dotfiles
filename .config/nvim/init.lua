@@ -30,7 +30,8 @@ vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() v
 -- trim trailing whitespace on save
 vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function()
 	local view = vim.fn.winsaveview()
-	pcall(function() vim.cmd [[keeppatterns :%s/\s\+$//e]] end)
+	vim.cmd [[keepjumps keeppatterns silent! :%s/\s\+$//e]] -- lines
+	vim.cmd [[keepjumps keeppatterns silent! :%s/\($\n\s*\)\+\%$//e]] -- eof
 	vim.fn.winrestview(view)
 end })
 
