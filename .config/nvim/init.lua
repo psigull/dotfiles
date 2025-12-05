@@ -8,6 +8,8 @@ vim.opt.wrap = true
 vim.opt.mouse = 'a'
 vim.opt.termguicolors = true
 
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2"
@@ -98,11 +100,12 @@ map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>', opts)
 map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>', opts)
 
 -- black hole delete to void register, not clipboard
-map({'n','v'}, '<Del>', '"_x', opts)
-map({'n','v'}, '<C-S-x>', '"_x', opts) -- convenience
+map('v', '<Del>', '"_x', opts)
+map('v', '<C-S-x>', '"_x', opts) -- convenience
 map('v', '<BS>', '"_d', opts) -- consistency
-map({'n','v'}, '<S-Del>', '<Esc>"_dd', opts) -- whole line
-map('i', '<S-Del>', '<C-o>"_dd', opts) -- whole line
+-- whole line
+map({'n','v'}, '<S-Del>', '<Esc>"_dd', opts)
+map('i', '<S-Del>', '<C-o>"_dd', opts)
 
 -- keep selection on < > indent shifts
 map('v', '<', '<gv', opts)
@@ -133,6 +136,14 @@ map('n', '<C-d>', '*', opts)
 map('x', '<C-d>', 'y/\\V<C-R>"<CR>', opts)
 map('n', '<C-S-d>', '*Ncgn', opts)
 map('x', '<C-S-d>', 'y/\\V<C-R>"<CR>Ncgn', opts)
+
+-- indent helper
+map('i', '<Tab>', function()
+	local line = vim.api.nvim_get_current_line()
+	if line:match("^%s*$") then return '<C-o>S'
+	else return '<Tab>' end
+end, exprOpts)
+
 
 -- colour scheme
 require('theme_godot')

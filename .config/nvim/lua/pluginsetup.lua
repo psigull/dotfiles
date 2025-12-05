@@ -34,6 +34,10 @@ if ok then
 			}
 		})
 	end)
+	vim.api.nvim_create_autocmd('TabNewEntered', {
+		callback = function() if vim.bo.filetype == "" then vim.cmd("Dashboard") end end
+	})
+
 
 	-- file explorer
 	vim.g.loaded_netrw = 1
