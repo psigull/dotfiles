@@ -132,6 +132,10 @@ if ok then
 	add({source='LukasPietzschmann/telescope-tabs'})
 	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
 
+	-- csv viewer
+	add({source='hat0uma/csvview.nvim'})
+	require('csvview').setup()
+
 	-- language stuff
 	vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
 	vim.opt.signcolumn = "no"
