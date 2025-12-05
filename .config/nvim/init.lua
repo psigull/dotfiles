@@ -41,8 +41,8 @@ map('n', 'p', 'P', opts)
 map('n', 'P', 'p', opts)
 
 -- swap insert keys
-map({'n','v'}, 's', 'a', opts) -- suffixed
-map({'n','v'}, 'a', 'i', opts) -- AAAt the front
+map('n', 's', 'a', opts) -- suffixed
+map('n', 'a', 'i', opts) -- AAAt the front
 
 -- save
 map('n', '<C-s>', ':w<CR>', opts)
