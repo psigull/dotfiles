@@ -1,6 +1,6 @@
 local vim = vim
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true, nowait = true }
+local opts = { noremap = true, silent = true }
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -57,8 +57,9 @@ map('v', '<C-s>', '<C-C>:w<CR>', opts)
 map('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
 -- close tab/buffer
-map('n', '<C-w>', ':conf bd<CR>', opts)
-map({'v','i'}, '<C-w>', '<Esc>:conf bd<CR>', opts)
+local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
+map('n', '<C-w>', ':conf bd<CR>', nowOpts)
+map({'v','i'}, '<C-w>', '<Esc>:conf bd<CR>', nowOpts)
 
 -- close nvim
 map('n', '<C-q>', ':conf qa<CR>', opts)
