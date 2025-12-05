@@ -19,10 +19,10 @@ if ok then
 				footer = {'', '👽 stay weird'},
 				shortcut = {},
 				packages = { enable = false },
-				header = { 	' _._     _,-\'""`-._            ',
-							"(,-.`._,'(       |\\`-/|        ",
-							"    `-.-' \\ )-`( , o o)        ",
-							"          `-    \\`_`\"'-   meow", },
+				header = {	"      |\\      _,,,---,,_     ",
+							"ZZZzz /,`.-'`'    -.  ;-;;,_ ",
+							"     |,4-  ) )-,_. ,\\ (  `'-'",
+							"    '---''(_/--'  `-'\\_)     ", },
 				center = {
 					{
 						action = 'Telescope oldfiles',
