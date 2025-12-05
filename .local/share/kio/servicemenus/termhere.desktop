@@ -2,10 +2,10 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
 MimeType=inode/directory;
-Actions=openKittyHere
+Actions=openMyTermHere
 X-KDE-Priority=TopLevel
 
-[Desktop Action openKittyHere]
-Name=Open Kitty Here
+[Desktop Action openMyTermHere]
+Name=Open Alacritty Here
 Icon=utilities-terminal
-Exec=kitty --working-directory %f
+Exec=alacritty --working-directory %f

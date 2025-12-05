@@ -123,7 +123,7 @@ map('n', '<Down>', function() return vim.fn.line('.') == vim.fn.line('$') and 'o
 map('i', '<Down>', function() return vim.fn.line('.') == vim.fn.line('$') and '<End><CR>' or '<C-O>j' end, exprOpts )
 
 -- open terminal to active buffer cwd
-map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('kitty --detach --directory %s', vim.fn.expand('%:p:h'))) end, opts)
+map({'n','v','i'}, '<F2>', function() vim.fn.system(string.format('alacritty --working-directory %s', vim.fn.expand('%:p:h'))) end, opts)
 
 
 -- colour scheme
