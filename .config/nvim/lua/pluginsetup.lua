@@ -103,6 +103,11 @@ if ok then
 	-- snazzy reorderable tabs
 	add({source='romgrk/barbar.nvim'})
 	require('barbar').setup({auto_hide=true})
+	map({'n','v','i'}, '<C-Tab>', '<Esc>:BufferNext<CR>', opts)
+	map({'n','v','i'}, '<C-S-Tab>', '<Esc>:BufferPrevious<CR>', opts)
+	local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
+	map('n', '<C-w>', ':conf BufferClose<CR>', nowOpts)
+	map({'v','i'}, '<C-w>', '<Esc>:conf BufferClose<CR>', nowOpts)
 
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})

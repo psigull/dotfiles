@@ -66,6 +66,11 @@ map('n', '<C-s>', ':w<CR>', opts)
 map('v', '<C-s>', '<C-C>:w<CR>', opts)
 map('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*",
+	command = "silent! normal! g`\"zv",
+})
+
 -- close tab/buffer
 local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
 map('n', '<C-w>', ':conf bd<CR>', nowOpts)
@@ -100,12 +105,11 @@ map('i', '<C-S-z>', '<C-o><C-r>', opts)
 -- create undo points every space
 map('i', '<Space>', '<Space><C-g>u', opts)
 
--- tab management
-map({'n','v','i'}, '<C-t>', '<Esc>:tabnew<CR>', opts)
+-- 'tab' management
+map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', opts)
 map({'n','v','i'}, '<C-S-t>', '<Esc>:vsplit<CR>', opts)
--- overwritten below if plugins are available:
-map({'n','v','i'}, '<C-Tab>', '<Esc>:tabnext<CR>', opts)
-map({'n','v','i'}, '<C-S-Tab>', '<Esc>:tabprev<CR>', opts)
+map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', opts)
+map({'n','v','i'}, '<C-S-Tab>', '<Esc>:bprev<CR>', opts)
 
 -- black hole delete to void register, not clipboard
 map('v', '<Del>', '"_x', opts)
