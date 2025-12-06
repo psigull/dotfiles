@@ -137,6 +137,16 @@ if ok then
 		completion = { documentation = { auto_show = true } },
 	})
 
+	add({source='rachartier/tiny-inline-diagnostic.nvim'})
+	vim.diagnostic.config({ virtual_text = false })
+	require("tiny-inline-diagnostic").setup({
+		options = {
+			multilines = {
+				enabled = true,
+			},
+		},
+	})
+
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
 	require('lspsetup') -- setup lsp configs
