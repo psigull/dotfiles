@@ -26,6 +26,8 @@ vim.opt.clipboard:append('unnamedplus') -- use system clipboard
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.diagnostic.config({ virtual_lines = true })
+
 -- disable auto commenting on newline
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end })
 
