@@ -136,12 +136,13 @@ if ok then
 
 	add({source='nvim-treesitter/nvim-treesitter'})
 	add({source='neovim/nvim-lspconfig'})
-	add({source='hrsh7th/cmp-nvim-lsp'})
-	add({source='hrsh7th/cmp-buffer'})
-	add({source='hrsh7th/cmp-path'})
-	add({source='hrsh7th/cmp-cmdline'})
-	add({source='hrsh7th/cmp-nvim-lsp-signature-help'})
-	add({source='hrsh7th/nvim-cmp'})
+	add({source = "saghen/blink.cmp",
+		depends = { "rafamadriz/friendly-snippets" },
+		checkout = 'v1.8.0'})
+	require('blink.cmp').setup({
+		keymap = { preset = 'super-tab' },
+		completion = { documentation = { auto_show = true } },
+	})
 
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})

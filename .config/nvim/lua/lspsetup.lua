@@ -80,55 +80,6 @@ vim.lsp.config['godot'] = {
 }
 
 
--- completion hotkeys
-local cmp = require('cmp')
-local cmp_mapping = {
-	['<Up>'] = cmp.mapping(function(fb)
-		if cmp.visible() then cmp.select_prev_item()
-		else fb() end end, { 'i', 'c' }),
-	['<Down>'] = cmp.mapping(function(fb)
-		if cmp.visible() then cmp.select_next_item()
-		else fb() end end, { 'i', 'c' }),
-	['<C-Space>'] = cmp.mapping.complete(),
-	['<Esc>'] = cmp.mapping.abort(),
-	['<Tab>'] = cmp.mapping.confirm({ select = true }),
-}
-
-
-cmp.setup({
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	mapping = cmp.mapping.preset.insert(cmp_mapping),
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp'},
-		{ name = 'nvim_lsp_signature_help' },
-	}, {
-		{ name = 'buffer' },
-	}, {
-		{ name = 'path' },
-	}),
-	completion = { insert = false, keyword_length = 3 },
-})
-
-cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
-	sources = {
-		{ name = 'buffer', keyword_length = 1 }
-	}
-})
-
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(cmp_mapping),
-	sources = cmp.config.sources({
-		{ name = 'path', keyword_length = 1 }
-	}, {
-		{ name = 'cmdline', keyword_length = 1 }
-	}),
-	matching = { disallow_symbol_nonprefix_matching = false }
-})
-
 -- parse config
 local languages = {}
 local servers = {}
@@ -149,7 +100,7 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- install default servers w/ mason
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 local mason_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 if mason_ok then
 	require("mason").setup({ PATH = "append" })
@@ -167,4 +118,3 @@ for _, server_name in ipairs(servers) do
 		default_server, vim.lsp.config[server_name])
 	vim.lsp.enable(server_name)
 end
-
