@@ -22,22 +22,13 @@ if ok then
 				header = {	"      |\\      _,,,---,,_     ",
 							"ZZZzz /,`.-'`'    -.  ;-;;,_ ",
 							"     |,4-  ) )-,_. ,\\ (  `'-'",
-							"    '---''(_/--'  `-'\\_)     ", },
-				center = {
-					{
-						action = 'Telescope oldfiles',
-						desc = '  Recent Files',
-						icon = ' ',
-						key = 'r',
-					},
-				}
+							"    '---''(_/--'  `-'\\_)     ", }
 			}
 		})
 	end)
 	vim.api.nvim_create_autocmd('TabNewEntered', {
 		callback = function() if vim.bo.filetype == "" then vim.cmd("Dashboard") end end
 	})
-
 
 	-- file explorer
 	vim.g.loaded_netrw = 1
@@ -82,6 +73,11 @@ if ok then
 	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_color, fg = bg_color })
 	vim.api.nvim_set_hl(0, "StatusLineNC", { bg = bg_color, fg = bg_color })
 
+	-- minimap
+	add({source='Isrothy/neominimap.nvim'})
+	now(function() require('neominimap.api').disable() end)
+	map('n', '<C-m>', ':Neominimap Toggle<CR>', opts)
+
 	-- noice gui
 	add({source='folke/noice.nvim', depends={'MunifTanjim/nui.nvim'}})
 	require("noice").setup({
@@ -115,8 +111,6 @@ if ok then
 	-- snazzy reorderable tabs
 	add({source='romgrk/barbar.nvim'})
 	require('barbar').setup({auto_hide=true})
-	map({'n','v','i'}, '<C-Tab>', '<Esc>:BufferNext<CR>', opts)
-	map({'n','v','i'}, '<C-S-Tab>', '<Esc>:BufferPrevious<CR>', opts)
 
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})
