@@ -85,8 +85,8 @@ map('v', '<C-x>', 'd', opts)
 map('i', '<C-x>', '<Esc>dda', opts)
 
 -- reindent and place cursor at the end
-map({'n','v'}, '<C-v>', 'P=`]g`]', opts)
-map('i', '<C-v>', '<Esc>p=`]g`]a', opts)
+map({'n','v'}, '<C-v>', '"+P`[=`]`]l', opts)
+map('i', '<C-v>', '<Esc>"+p`[=`]`]a', opts)
 
 -- undo/redo
 map('n', '<C-z>', 'u', opts)
