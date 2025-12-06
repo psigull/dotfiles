@@ -48,18 +48,19 @@ if ok then
 		lsp = { auto_attach = true },
 	})
 	require('patcher') -- fix laststatus being reset
+
+	local function recording()
+		local macro = vim.fn.reg_recording()
+		if macro ~= '' then
+			return '@' .. macro
+		end
+		return ''
+	end
 	require('lualine').setup({
 		sections = {},
 		winbar = {
-			lualine_a = { "mode",
-				function()
-					local macro = vim.fn.reg_recording()
-					if macro ~= '' then
-						return '@' .. macro
-					end
-					return ''
-				end},
-			lualine_b = { "branch", "diff", "diagnostics" },
+			lualine_a = { "mode", recording },
+			lualine_b = { "branch", "diagnostics" },
 			lualine_c = { "filename", "navic" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },
@@ -99,15 +100,6 @@ if ok then
 	add({source='windwp/nvim-autopairs'})
 	require('nvim-autopairs').setup({})
 
-	-- pop up that shows keymappings
-	add({source='folke/which-key.nvim'})
-	require('which-key').setup({
-		win = { height = { min = 2, max = 5 },
-			padding = { 0, 0 } },
-		layout = { width = { min = 25, max = 25 },
-			spacing = 0 }
-	})
-
 	-- snazzy reorderable tabs
 	add({source='romgrk/barbar.nvim'})
 	require('barbar').setup({auto_hide=true})
@@ -136,6 +128,7 @@ if ok then
 
 	add({source='nvim-treesitter/nvim-treesitter'})
 	add({source='neovim/nvim-lspconfig'})
+
 	add({source = "saghen/blink.cmp",
 		depends = { "rafamadriz/friendly-snippets" },
 		checkout = 'v1.8.0'})
@@ -152,6 +145,10 @@ if ok then
 	add({source='hedyhli/outline.nvim'})
 	require('outline').setup({outline_window={ focus_on_open = false }})
 	map('n', "<C-b>", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
+
+	-- highlight colours
+	add({source='catgoose/nvim-colorizer.lua'})
+	require("colorizer").setup()
 
 	-- start pipe if launched in godot project dir
 	require('pipe_godot')
