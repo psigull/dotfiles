@@ -86,7 +86,6 @@ if ok then
 			override = {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 				["vim.lsp.util.stylize_markdown"] = true,
-				["cmp.entry.get_documentation"] = true,
 			},
 		},
 	})
@@ -100,14 +99,30 @@ if ok then
 	add({source='windwp/nvim-autopairs'})
 	require('nvim-autopairs').setup({})
 
-	-- snazzy reorderable tabs
-	add({source='romgrk/barbar.nvim'})
-	require('barbar').setup({auto_hide=true})
-	map({'n','v','i'}, '<C-Tab>', '<Esc>:BufferNext<CR>', opts)
-	map({'n','v','i'}, '<C-S-Tab>', '<Esc>:BufferPrevious<CR>', opts)
+	-- buffer sticks
+	add({source='ahkohd/buffer-sticks.nvim'})
+	local sticks = require('buffer-sticks')
+	sticks.setup({
+		--label = { show = "always" },
+		list = { show = { "filename", "space" } },
+		preview = { enabled = false },
+		highlights = {
+			active = 			{ fg = "#eeeeee", italic = true },
+			active_modified = 	{ fg = "#eeeeee", italic = true, bold = true },
+			alternate = 			{ fg = "#666666" },
+			alternate_modified = 	{ fg = "#666666", bold = true },
+			inactive = 			{ fg = "#333333" },
+			inactive_modified = { fg = "#333333", bold = true },
+		}
+	})
+	sticks.show()
+	require('buffer-sticks.state').list_mode = true
+
+	-- delete buffers without losing window layout
+	add({source='moll/vim-bbye'})
 	local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
-	map('n', '<C-w>', ':conf BufferClose<CR>', nowOpts)
-	map({'v','i'}, '<C-w>', '<Esc>:conf BufferClose<CR>', nowOpts)
+	map('n', '<C-w>', ':conf Bdelete<CR>', nowOpts)
+	map({'v','i'}, '<C-w>', '<Esc>:conf Bdelete<CR>', nowOpts)
 
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})
@@ -115,7 +130,7 @@ if ok then
 	map('n', '<C-`>', require('telescope.builtin').buffers, opts)
 	map('n', '<leader>?', require('telescope.builtin').oldfiles, opts)
 	map('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, opts)
-	map('n', '<leader>r', require('telescope.builtin').resume, opts)
+	map('n', '<leader>r', require('telescope.builtin').resume, nowOpts)
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
 
@@ -138,6 +153,7 @@ if ok then
 		completion = { documentation = { auto_show = true } },
 	})
 
+	-- better inline diagnostics
 	add({source='rachartier/tiny-inline-diagnostic.nvim'})
 	vim.diagnostic.config({ virtual_text = false })
 	require("tiny-inline-diagnostic").setup({
@@ -148,6 +164,7 @@ if ok then
 		},
 	})
 
+	-- lsp
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
 	require('lspsetup') -- setup lsp configs

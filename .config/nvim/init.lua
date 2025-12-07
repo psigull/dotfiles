@@ -57,13 +57,14 @@ end })
 -- key mappings
 vim.g.mapleader = " "
 map('n', '<leader><leader>', '<c-^>', opts)
+map('n', 'b', '<c-o>', opts)
 
 -- swap paste before/after cursor
 map('n', 'p', 'P', opts)
 map('n', 'P', 'p', opts)
 
 -- swap insert keys
-map('n', 's', 'a', opts) -- suffixed
+map('n', 's', 'a', opts) -- *S*uffixed
 map('n', 'a', 'i', opts) -- AAAt the front
 
 -- save
@@ -71,6 +72,7 @@ map('n', '<C-s>', ':w<CR>', opts)
 map('v', '<C-s>', '<C-C>:w<CR>', opts)
 map('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
+-- jump to last change in file
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
 	command = "silent! normal! g`\"zv",
@@ -113,12 +115,12 @@ map('i', '<Space>', '<Space><C-g>u', opts)
 -- 'tab' management
 map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', opts)
 map({'n','v','i'}, '<C-S-t>', '<Esc>:vsplit<CR>', opts)
+map({'n','v','i'}, '<A-S-t>', '<Esc>:close<CR>', opts)
 map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', opts)
 map({'n','v','i'}, '<C-S-Tab>', '<Esc>:bprev<CR>', opts)
 
 -- black hole delete to void register, not clipboard
 map('v', '<Del>', '"_x', opts)
-map('v', '<C-S-x>', '"_x', opts) -- convenience
 map('v', '<BS>', '"_d', opts) -- consistency
 -- whole line
 map({'n','v'}, '<S-Del>', '<Esc>"_dd', opts)

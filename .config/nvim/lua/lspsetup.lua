@@ -14,6 +14,7 @@ local lsp_map = {
 	rust 	= 'rust_analyzer',
 	typescript = 'vtsls',
 	javascript = 'vtsls',
+	tsx		= 'vtsls',
 	vue		= 'vue_ls', -- config below
 	html 	= 'html',
 	css  	= 'cssls',
@@ -77,6 +78,19 @@ vim.lsp.config['vtsls'] = {
 vim.lsp.config['godot'] = {
 	cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
 	filetypes = { 'gdscript' },
+}
+
+vim.lsp.config['rust-analyzer'] = {
+	settings = {
+		cargo = { features = 'all' },
+		procMacro = { enable = true },
+		inlayHints = {
+			enable = true,
+			showParameterNames = true,
+			parameterHintsPrefix = "<- ",
+			otherHintsPrefix = "=> ",
+		},
+	}
 }
 
 
