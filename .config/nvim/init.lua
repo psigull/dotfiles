@@ -39,6 +39,8 @@ vim.api.nvim_create_autocmd({'WinEnter','TabEnter','BufEnter'}, { pattern = "*",
 
 -- trim trailing whitespace on save
 vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function()
+	local lc = vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
+	if lc > 10000 then return end -- skip large files
 	local view = vim.fn.winsaveview()
 	vim.cmd [[keepjumps keeppatterns silent! :%s/\s\+$//e]] -- lines
 	vim.cmd [[keepjumps keeppatterns silent! :%s/\($\n\s*\)\+\%$//e]] -- eof
