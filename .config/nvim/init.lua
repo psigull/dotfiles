@@ -55,6 +55,9 @@ vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function(
 end })
 
 -- key mappings
+vim.g.mapleader = " "
+map('n', '<leader><leader>', '<c-^>', opts)
+
 -- swap paste before/after cursor
 map('n', 'p', 'P', opts)
 map('n', 'P', 'p', opts)

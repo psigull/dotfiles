@@ -112,16 +112,12 @@ if ok then
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})
 	require('telescope').setup({defaults={preview=false}})
-	map('n', '<leader><space>', require('telescope.builtin').buffers, opts)
+	map('n', '<C-`>', require('telescope.builtin').buffers, opts)
 	map('n', '<leader>?', require('telescope.builtin').oldfiles, opts)
 	map('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, opts)
 	map('n', '<leader>r', require('telescope.builtin').resume, opts)
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
-
-	-- fuzzy search open tabs
-	add({source='LukasPietzschmann/telescope-tabs'})
-	map({'n','v','i'}, "<C-`>", function() require('telescope-tabs').list_tabs() end, opts)
 
 	-- csv viewer
 	add({source='hat0uma/csvview.nvim'})
