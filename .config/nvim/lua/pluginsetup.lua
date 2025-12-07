@@ -15,7 +15,7 @@ if ok then
 		vim.cmd('mksession! ' .. sessfile)
 	end})
 	vim.api.nvim_create_autocmd('VimEnter', { callback = function()
-		if vim.fn.filereadable(sessfile) then
+		if vim.fn.filereadable(sessfile) == 1 then
 			local bufname = vim.api.nvim_buf_get_name(0)
 			local buf = vim.api.nvim_get_current_buf()
 				vim.cmd('source ' .. sessfile)
@@ -36,7 +36,10 @@ if ok then
 	now(function()
 		require('dashboard').setup({
 			theme = 'hyper',
+			letter_list = 'bcdefghilmnopqrstuvwxyz',
 			config = {
+				mru = { limit = 8 },
+				project ={ limit = 2 },
 				footer = {'', '👽 stay weird'},
 				shortcut = {},
 				packages = { enable = false },
@@ -47,6 +50,9 @@ if ok then
 			}
 		})
 	end)
+	vim.api.nvim_create_autocmd("FileType", { pattern = "dashboard", callback = function()
+		vim.keymap.set('n', 'a', ':enew<CR>', { buffer = true })
+	end})
 	vim.api.nvim_create_autocmd('TabNewEntered', {
 		callback = function() if vim.bo.filetype == "" then vim.cmd("Dashboard") end end
 	})
@@ -89,6 +95,15 @@ if ok then
 			lualine_z = { "location" }
 		},
 	})
+
+	-- disable winbar in diff views
+	local function checkdiff()
+		if vim.wo.diff then require('lualine').hide()
+		else require('lualine').hide({ unhide = true }) end
+	end
+	vim.api.nvim_create_autocmd('OptionSet', { pattern = "diff", callback = checkdiff })
+	vim.api.nvim_create_autocmd({'WinEnter','TabEnter','BufEnter'}, { pattern = "*", callback = checkdiff })
+
 
 	-- hide statusbar when lualine is on top
 	vim.opt.laststatus=0
@@ -136,8 +151,16 @@ if ok then
 			inactive_modified = { fg = "#333333", bold = true },
 		}
 	})
-	sticks.show()
+	sticks.show() -- show in list mode by default (full names)
 	require('buffer-sticks.state').list_mode = true
+
+	-- hide sticks in dashboards
+	vim.api.nvim_create_autocmd("FileType", { pattern = "dashboard", callback = function()
+		require('buffer-sticks').hide()
+	end})
+	vim.api.nvim_create_autocmd("BufLeave", { callback = function()
+		if vim.bo.filetype == "dashboard" then require('buffer-sticks').show() end
+	end})
 
 	-- delete buffers without losing window layout
 	add({source='moll/vim-bbye'})

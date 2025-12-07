@@ -29,14 +29,6 @@ vim.opt.smartcase = true
 -- disable auto commenting on newline
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end })
 
--- disable winbar in diff views
-local function checkdiff()
-	if vim.wo.diff then require('lualine').hide()
-	else require('lualine').hide({ unhide = true }) end
-end
-vim.api.nvim_create_autocmd('OptionSet', { pattern = "diff", callback = checkdiff })
-vim.api.nvim_create_autocmd({'WinEnter','TabEnter','BufEnter'}, { pattern = "*", callback = checkdiff })
-
 -- trim trailing whitespace on save
 vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function()
 	local lc = vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
