@@ -12,7 +12,13 @@ if ok then
 	vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,globals,localoptions'
 	local sessfile = vim.fn.expand('~/.nvimsession')
 	vim.api.nvim_create_autocmd('VimLeavePre', { callback = function()
-		vim.cmd('mksession! ' .. sessfile)
+		-- only save if there's something worth saving
+		for buf = 1, vim.fn.bufnr('$') do
+			if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' and vim.bo[buf].filetype ~= 'dashboard' then
+				vim.cmd('mksession! ' .. sessfile)
+				return
+			end
+		end
 	end})
 	vim.api.nvim_create_autocmd('VimEnter', { callback = function()
 		if vim.fn.filereadable(sessfile) == 1 then
@@ -51,11 +57,23 @@ if ok then
 		})
 	end)
 	vim.api.nvim_create_autocmd("FileType", { pattern = "dashboard", callback = function()
-		vim.keymap.set('n', 'a', ':enew<CR>', { buffer = true })
+		vim.keymap.set('n', 'a', ':enew<CR>', { buffer = true }) -- 'a' on dashboard for new file
 	end})
-	vim.api.nvim_create_autocmd('TabNewEntered', {
+	vim.api.nvim_create_autocmd('TabNewEntered', { -- open on new tab
 		callback = function() if vim.bo.filetype == "" then vim.cmd("Dashboard") end end
 	})
+	vim.api.nvim_create_autocmd('BufDelete', { callback = function(event)
+		for buf = 1, vim.fn.bufnr('$') do
+			if buf ~= event.buf and vim.fn.buflisted(buf) == 1 then
+				if vim.api.nvim_buf_get_name(buf) ~= '' and vim.bo[buf].filetype ~= 'dashboard' then
+					return
+				end
+			end
+		end
+		-- open dashboard if last buffer is closed
+		vim.cmd('Dashboard')
+	end})
+
 	map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR><Esc>:Dashboard<CR>', opts)
 
 	-- file explorer
