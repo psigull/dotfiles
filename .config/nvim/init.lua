@@ -57,7 +57,6 @@ end })
 -- key mappings
 vim.g.mapleader = " "
 map('n', '<leader><leader>', '<c-^>', opts)
-map('n', 'b', '<c-o>', opts)
 
 -- swap paste before/after cursor
 map('n', 'p', 'P', opts)

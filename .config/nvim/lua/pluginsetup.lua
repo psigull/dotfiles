@@ -29,6 +29,7 @@ if ok then
 	vim.api.nvim_create_autocmd('TabNewEntered', {
 		callback = function() if vim.bo.filetype == "" then vim.cmd("Dashboard") end end
 	})
+	map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR><Esc>:Dashboard<CR>', opts)
 
 	-- file explorer
 	vim.g.loaded_netrw = 1
@@ -127,12 +128,16 @@ if ok then
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})
 	require('telescope').setup({defaults={preview=false}})
-	map('n', '<C-`>', require('telescope.builtin').buffers, opts)
 	map('n', '<leader>?', require('telescope.builtin').oldfiles, opts)
 	map('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, opts)
 	map('n', '<leader>r', require('telescope.builtin').resume, nowOpts)
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
+
+	-- buffer list
+	add({source='EL-MASTOR/bufferlist.nvim', depends={"nvim-tree/nvim-web-devicons"}})
+	require('bufferlist').setup()
+	map({'n','v','i'}, '<C-`>', '<Esc>:BufferList<CR>', opts)
 
 	-- csv viewer
 	add({source='hat0uma/csvview.nvim'})
@@ -173,6 +178,12 @@ if ok then
 	add({source='hedyhli/outline.nvim'})
 	require('outline').setup({outline_window={ focus_on_open = false }})
 	map('n', "<C-b>", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
+
+	-- light up selected word
+	add({source='RRethy/vim-illuminate'})
+	require('illuminate').configure({
+		providers = { 'lsp', 'treesitter', 'regex' }
+	})
 
 	-- highlight colours
 	add({source='catgoose/nvim-colorizer.lua'})
