@@ -50,18 +50,16 @@ end })
 vim.g.mapleader = " "
 map('n', '<leader><leader>', '<c-^>', opts)
 
--- swap paste before/after cursor
-map('n', 'p', 'P', opts)
-map('n', 'P', 'p', opts)
-
 -- swap insert keys
 map('n', 's', 'a', opts) -- *S*uffixed
 map('n', 'a', 'i', opts) -- AAAt the front
+map('x', 's', 'A', opts)
+map('x', 'a', 'I', opts)
 
 -- save
 map('n', '<C-s>', ':w<CR>', opts)
 map('v', '<C-s>', '<C-C>:w<CR>', opts)
-map('i', '<C-s>', '<Esc>:w<CR>a', opts)
+map('i', '<C-s>', '<C-o>:w<CR>', opts)
 
 -- jump to last change in file
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -88,8 +86,14 @@ map('v', '<C-x>', 'd', opts)
 map('i', '<C-x>', '<Esc>dda', opts)
 
 -- reindent and place cursor at the end
-map({'n','v'}, '<C-v>', 'P`[=`]`]l', opts)
-map('i', '<C-v>', '<Esc>p`[=`]`]a', opts)
+map({'n','v'}, '<C-v>', 'p', opts)
+map('i', '<C-v>', "<C-o>P", opts)
+map({'n','v'}, '<C-r>', '`[=`]`]$')
+map('i', '<C-r>', '<Esc>`[=`]`]$a')
+
+-- swap paste before/after cursor
+map('n', 'p', 'P', opts)
+map('n', 'P', 'p', opts)
 
 -- undo/redo
 map('n', '<C-z>', 'u', opts)

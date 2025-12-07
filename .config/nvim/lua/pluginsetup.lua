@@ -161,8 +161,8 @@ if ok then
 		list = { show = { "filename", "space" } },
 		preview = { enabled = false },
 		highlights = {
-			active = 			{ fg = "#eeeeee", italic = true },
-			active_modified = 	{ fg = "#eeeeee", italic = true, bold = true },
+			active = 			{ fg = "#a7c1aa", italic = true },
+			active_modified = 	{ fg = "#a7c1aa", italic = true, bold = true },
 			alternate = 			{ fg = "#666666" },
 			alternate_modified = 	{ fg = "#666666", bold = true },
 			inactive = 			{ fg = "#333333" },
