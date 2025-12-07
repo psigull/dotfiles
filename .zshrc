@@ -67,11 +67,7 @@ function helpf() {
 source ~/.fd_excludes # stored separately
 fd_excludes=${fd_excludes//\\/}
 fd_excludes=${fd_excludes//$'\n'/}
-alias fdc="fd -t f -E '{$fd_excludes}'"
-function fde() {
-	excludes="$fd_excludes,$@[-1]"
-	fdc -t f -E "{$excludes}" "$@[1,-2]"
-}
+alias fdex="fd -t f -E '{$fd_excludes}'"
 
 # exclude csv of file ext from `fd`
 function xfiles() {
