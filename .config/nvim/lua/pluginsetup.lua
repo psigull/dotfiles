@@ -8,6 +8,27 @@ if ok then
 	local add = minideps.add
 	local now = minideps.now
 
+	-- restore last session
+	vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,globals,localoptions'
+	local sessfile = vim.fn.expand('~/.nvimsession')
+	vim.api.nvim_create_autocmd('VimLeavePre', { callback = function()
+		vim.cmd('mksession! ' .. sessfile)
+	end})
+	vim.api.nvim_create_autocmd('VimEnter', { callback = function()
+		if vim.fn.filereadable(sessfile) then
+			local bufname = vim.api.nvim_buf_get_name(0)
+			local buf = vim.api.nvim_get_current_buf()
+				vim.cmd('source ' .. sessfile)
+				vim.fn.delete(sessfile)
+			if vim.api.nvim_buf_is_valid(buf) then
+				vim.api.nvim_set_current_buf(buf)
+			end
+			if bufname == "" then
+				vim.cmd('Dashboard')
+			end
+		end
+	end})
+
 	-- dashboard
 	add({source='nvimdev/dashboard-nvim'})
 	vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#6c00ee" })
@@ -104,7 +125,6 @@ if ok then
 	add({source='ahkohd/buffer-sticks.nvim'})
 	local sticks = require('buffer-sticks')
 	sticks.setup({
-		--label = { show = "always" },
 		list = { show = { "filename", "space" } },
 		preview = { enabled = false },
 		highlights = {
