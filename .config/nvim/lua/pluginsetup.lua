@@ -1,6 +1,7 @@
 local vim = vim
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
 
 local ok, minideps = pcall(require, 'mini.deps')
 if ok then
@@ -181,10 +182,10 @@ if ok then
 	end})
 
 	-- delete buffers without losing window layout
-	add({source='moll/vim-bbye'})
-	local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
-	map('n', '<C-w>', ':conf Bdelete<CR>', nowOpts)
-	map({'v','i'}, '<C-w>', '<Esc>:conf Bdelete<CR>', nowOpts)
+	add({source='ojroques/nvim-bufdel'})
+	require('bufdel').setup({ next = 'alternate', quit = false })
+	map('n', '<C-w>', ':conf BufDel<CR>', nowOpts)
+	map({'v','i'}, '<C-w>', '<Esc>:conf BufDel<CR>', nowOpts)
 
 	-- multipurpose fuzzy search popup
 	add({source='nvim-telescope/telescope.nvim', depends={'nvim-lua/plenary.nvim'}})

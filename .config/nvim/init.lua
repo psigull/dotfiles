@@ -1,6 +1,7 @@
 local vim = vim
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -54,7 +55,7 @@ map('n', '<leader><leader>', '<c-^>', opts)
 map('n', 's', 'a', opts) -- *S*uffixed
 map('n', 'a', 'i', opts) -- AAAt the front
 map('x', 's', 'A', opts)
-map('x', 'a', 'I', opts)
+map('x', 'a', 'ov', opts) -- TODO: fix delay
 
 -- save
 map('n', '<C-s>', ':w<CR>', opts)
@@ -68,7 +69,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- close tab/buffer
-local nowOpts = vim.tbl_extend("force", opts, { nowait = true })
 map('n', '<C-w>', ':conf bd<CR>', nowOpts)
 map({'v','i'}, '<C-w>', '<Esc>:conf bd<CR>', nowOpts)
 
@@ -115,7 +115,7 @@ map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', opts)
 map({'n','v','i'}, '<C-S-Tab>', '<Esc>:bprev<CR>', opts)
 
 -- black hole delete to void register, not clipboard
-map('v', '<Del>', '"_x', opts)
+map({'n','v'}, '<Del>', '"_x', opts)
 map('v', '<BS>', '"_d', opts) -- consistency
 -- whole line
 map({'n','v'}, '<S-Del>', '<Esc>"_dd', opts)
@@ -155,7 +155,7 @@ map('n', '<C-S-d>', '*Ncgn', opts)
 map('x', '<C-S-d>', 'y/\\V<C-R>"<CR>Ncgn', opts)
 
 -- indent helper
-map('i', '<Tab>', function()
+map('i', '<S-Tab>', function()
 	local line = vim.api.nvim_get_current_line()
 	if line:match("^%s*$") then return '<C-o>S'
 	else return '<Tab>' end
