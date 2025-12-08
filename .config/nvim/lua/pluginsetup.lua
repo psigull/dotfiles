@@ -25,7 +25,7 @@ if ok then
 		if vim.fn.filereadable(sessfile) == 1 then
 			local bufname = vim.api.nvim_buf_get_name(0)
 			local buf = vim.api.nvim_get_current_buf()
-				vim.cmd('source ' .. sessfile)
+				pcall(vim.cmd('source ' .. sessfile))
 				vim.fn.delete(sessfile)
 			if vim.api.nvim_buf_is_valid(buf) then
 				vim.api.nvim_set_current_buf(buf)
@@ -180,6 +180,7 @@ if ok then
 	vim.api.nvim_create_autocmd("BufLeave", { callback = function()
 		if vim.bo.filetype == "dashboard" then require('buffer-sticks').show() end
 	end})
+	map({'n','v','i'}, '<C-h>', function() require('buffer-sticks').toggle() end, opts)
 
 	-- delete buffers without losing window layout
 	add({source='ojroques/nvim-bufdel'})
@@ -239,7 +240,10 @@ if ok then
 	-- outliner
 	add({source='hedyhli/outline.nvim'})
 	require('outline').setup({outline_window={ focus_on_open = false }})
-	map('n', "<C-b>", "<cmd>Outline<CR>", { desc = "Toggle outliner" })
+	map('n', "<C-b>", function()
+		vim.cmd("Outline")
+		require('buffer-sticks').toggle()
+	end)
 
 	-- light up selected word
 	add({source='RRethy/vim-illuminate'})

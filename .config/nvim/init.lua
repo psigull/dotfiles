@@ -22,6 +22,7 @@ vim.opt.shiftwidth = 4
 vim.opt.virtualedit:append('onemore') -- cursor pos on mouse click
 vim.opt.whichwrap:append('<,>,[,]') -- arrow key line wrapping
 vim.opt.clipboard:append('unnamedplus') -- use system clipboard
+vim.opt.shortmess:append('A') -- hide swap file warnings
 
 -- case insensitive search unless \C or capital in search
 vim.opt.ignorecase = true

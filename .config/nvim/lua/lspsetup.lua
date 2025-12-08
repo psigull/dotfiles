@@ -84,12 +84,6 @@ vim.lsp.config['rust-analyzer'] = {
 	settings = {
 		cargo = { features = 'all' },
 		procMacro = { enable = true },
-		inlayHints = {
-			enable = true,
-			showParameterNames = true,
-			parameterHintsPrefix = "<- ",
-			otherHintsPrefix = "=> ",
-		},
 	}
 }
 
