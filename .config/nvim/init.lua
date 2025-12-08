@@ -108,10 +108,13 @@ map('i', '<C-S-z>', '<C-o><C-r>', opts)
 -- create undo points every space
 map('i', '<Space>', '<Space><C-g>u', opts)
 
+-- turn off search highlighting
+map('n', '<C-f>', ':noh', opts)
+
 -- 'tab' management
 map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', opts)
 map({'n','v','i'}, '<C-S-t>', '<Esc>:vsplit<CR>', opts)
-map({'n','v','i'}, '<A-S-t>', '<Esc>:close<CR>', opts)
+map({'n','v','i'}, '<C-S-w>', '<Esc>:close<CR>', opts)
 map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', opts)
 map({'n','v','i'}, '<C-S-Tab>', '<Esc>:bprev<CR>', opts)
 
