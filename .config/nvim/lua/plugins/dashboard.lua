@@ -10,7 +10,7 @@ return {
 			config = {
 				shortcut = {},
 				packages = { enable = false },
-				project ={ limit = 2, action = 'Yazi cwd' },
+				project ={ limit = 2, action = 'Yazi cwd ' },
 				mru = { limit = 8 },
 				footer = {'', '👽 stay weird'},
 				header = {	"      |\\      _,,,---,,_     ",
