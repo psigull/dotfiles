@@ -25,11 +25,18 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
-vim.opt.signcolumn = 'number'
 vim.opt.foldlevelstart = 99
+vim.opt.signcolumn = 'number'
 
 vim.diagnostic.config({
 	virtual_text = false,
 	underline = false,
-	signs = false,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = '',
+			[vim.diagnostic.severity.WARN] = '',
+			[vim.diagnostic.severity.INFO] = '',
+			[vim.diagnostic.severity.HINT] = '',
+		}
+	}
 })
