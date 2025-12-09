@@ -34,7 +34,9 @@ local Color9 = '#3E4246'
 local bg = '#111111' -- terminal bg
 highlight('Normal', bg, Color10, nil)
 highlight('NonText', bg, Color1, nil)
+highlight('SignColumn', bg, nil, nil)
 
+--highlight('SignColumn', Color11, nil, nil)
 --highlight('Normal', Color11, Color10, nil)
 highlight('Error', nil, Color0, nil)
 highlight('Comment', nil, Color1, nil)

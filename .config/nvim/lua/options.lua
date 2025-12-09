@@ -25,4 +25,11 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
-vim.opt.signcolumn = "no"
+vim.opt.signcolumn = 'number'
+vim.opt.foldlevelstart = 99
+
+vim.diagnostic.config({
+	virtual_text = false,
+	underline = false,
+	signs = false,
+})
