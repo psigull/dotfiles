@@ -1,21 +1,28 @@
 local vim = vim
 
--- treesitter language -> lsp server
--- prefix language with _ to ignore syntax
--- empty server string to ignore lsp server
+-- language -> lsp server
+-- prefix language with _ to skip treesitter
+-- prefix server with ! to initialize only (skip mason)
+-- empty server for highlighting only
+
 local lsp_map = {
+	rust 	 = '!rust_analyzer', -- use rustup
+	gdscript = '!godot', -- configured below
+		gdshader = 'glsl_analyzer',
+		glsl 	 = 'glsl_analyzer',
+		godot_resource = '',
+	vue		= 'vue_ls',
+	go 		= 'gopls',
+		gomod = '',
+
 	c 		= 'clangd',
 	cpp 	= 'clangd',
 	c_sharp = 'omnisharp',
-	go 		= 'gopls', -- config below
-	gomod = '',
 	lua 	= 'lua_ls',
 	python 	= 'pyright',
-	rust 	= 'rust_analyzer',
-	typescript = 'vtsls',
-	javascript = 'vtsls',
-	tsx		= 'vtsls',
-	vue		= 'vue_ls', -- config below
+	typescript 	= 'vtsls',
+	javascript 	= 'vtsls',
+	tsx			= 'vtsls',
 	html 	= 'html',
 	css  	= 'cssls',
 	scss  	= 'cssls',
@@ -24,10 +31,6 @@ local lsp_map = {
 	yaml	= 'yamlls',
 	toml	= 'taplo',
 	bash	= 'bashls',
-	glsl 	= 'glsl_analyzer',
-	gdscript = '', -- configured below
-	godot_resource = '',
-	gdshader = 'glsl_analyzer',
 	regex	= '',
 	comment = '',
 	markdown = '',
@@ -91,11 +94,17 @@ vim.lsp.config['rust-analyzer'] = {
 -- parse config
 local languages = {}
 local servers = {}
+local mason = {}
 for lang, server in pairs(lsp_map) do
 	if string.sub(lang, 1, 1) ~= '_' then
 		table.insert(languages, lang)
 	end
 	if #server > 0 then
+		if string.sub(server, 1, 1) == '_' then
+			server = string.sub(server, 2)
+		else
+			table.insert(mason, server)
+		end
 		table.insert(servers, server)
 	end
 end
@@ -112,7 +121,7 @@ local capabilities = require('blink.cmp').get_lsp_capabilities()
 local mason_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 if mason_ok then
 	require("mason").setup({ PATH = "append" })
-	mason_lspconfig.setup({ ensure_installed = servers })
+	mason_lspconfig.setup({ ensure_installed = mason })
 end
 
 -- assign defaults & enable all
