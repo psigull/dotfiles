@@ -149,6 +149,9 @@ if ok then
 	require("notify").setup({
 		background_colour = "#111111",
 		top_down = false,
+		timeout = 2000,
+		render = 'minimal', -- compact
+		stages = 'slide',
 	})
 
 	-- quote, bracket, parenthesis pairs
@@ -197,6 +200,9 @@ if ok then
 	map('n', 'gr', require('telescope.builtin').lsp_references, opts)
 	map('n', 'xd', require('telescope.builtin').diagnostics, opts)
 
+	require("telescope").load_extension("notify")
+	map('n', '<C-n>', ':Telescope notify<CR>', opts)
+
 	-- buffer list
 	add({source='EL-MASTOR/bufferlist.nvim', depends={"nvim-tree/nvim-web-devicons"}})
 	require('bufferlist').setup()
@@ -236,6 +242,10 @@ if ok then
 	add({source='mason-org/mason.nvim'})
 	add({source='mason-org/mason-lspconfig.nvim'})
 	require('lspsetup') -- setup lsp configs
+
+	-- better support for vim lua
+	add({source='folke/lazydev.nvim'})
+	require('lazydev').setup({})
 
 	-- outliner
 	add({source='hedyhli/outline.nvim'})

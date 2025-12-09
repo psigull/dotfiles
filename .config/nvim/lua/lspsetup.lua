@@ -58,7 +58,7 @@ vim.lsp.config['gopls'] = {
 local pfx = vim.fn.stdpath('data')
 local vueloc = pfx .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
 vim.lsp.config['vtsls'] = {
-	filetypes = { 'vue', 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
+	filetypes = { 'vue', 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'tsx' },
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -126,3 +126,12 @@ for _, server_name in ipairs(servers) do
 		default_server, vim.lsp.config[server_name])
 	vim.lsp.enable(server_name)
 end
+
+-- close lsp when no longer in use
+vim.api.nvim_create_autocmd('LspDetach', { callback = function(args)
+	local client = vim.lsp.get_client_by_id(args.data.client_id)
+	if client and vim.tbl_count(client.attached_buffers) <= 1 then
+		client.stop(5000) -- timeout
+		vim.notify('lsp ' .. client.name .. ' stopped')
+	end
+end})
