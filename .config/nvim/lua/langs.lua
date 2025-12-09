@@ -10,7 +10,7 @@ local lsp_map = {
 		gdshader = 'glsl_analyzer',
 		glsl 	 = 'glsl_analyzer',
 		godot_resource = '',
-	--vue		= 'vue_ls',
+	vue		= 'vue_ls',
 	go 		= 'gopls',
 		gomod = '',
 
@@ -37,23 +37,24 @@ local lsp_map = {
 
 
 -- parse config
-local languages = {}
+df.languages = {}
 local servers = {}
 local mason = {}
 for lang, server in pairs(lsp_map) do
 	if string.sub(lang, 1, 1) ~= '_' then
-		table.insert(languages, lang)
+		table.insert(df.languages, lang)
 	end
 	if #server > 0 then
 		if string.sub(server, 1, 1) == '!' then
 			server = string.sub(server, 2)
 		else
-			table.insert(mason, server)
+			mason[server] = true
 		end
-		table.insert(servers, server)
+		servers[server] = true
 	end
 end
 
-df.tslangs = languages
-df.lspservers = servers
-df.masoninstall = mason
+df.lspservers = {}
+df.masoninstall = {}
+for server, _ in pairs(servers) do table.insert(df.lspservers, server) end
+for server, _ in pairs(mason) do table.insert(df.masoninstall, server) end

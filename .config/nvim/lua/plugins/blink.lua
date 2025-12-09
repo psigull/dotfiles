@@ -9,7 +9,7 @@ return {
 				['<Tab>'] = { 'select_and_accept', 'fallback' },
 				['<S-Tab>'] = false,
 			},
-			completion = { documentation = { auto_show = true } },
+			completion = { documentation = { auto_show = false } },
 		})
 	end
 }
