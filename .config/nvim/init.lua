@@ -109,7 +109,7 @@ map('i', '<C-S-z>', '<C-o><C-r>', opts)
 map('i', '<Space>', '<Space><C-g>u', opts)
 
 -- turn off search highlighting
-map('n', '<C-f>', ':noh', opts)
+map({'n','v','i'}, '<C-f>', ':noh<CR>', opts)
 
 -- 'tab' management
 map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', opts)
