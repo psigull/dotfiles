@@ -41,13 +41,6 @@ vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function(
 	vim.fn.winrestview(view)
 end })
 
--- create path on save if nonexistent
-vim.api.nvim_create_autocmd('BufWritePre', { pattern = '*', callback = function(event)
-	if event.match:match("^%w%w+://") then return end
-	local file = vim.loop.fs_realpath(event.match) or event.match
-	vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-end })
-
 -- key mappings
 vim.g.mapleader = " "
 map('n', '<leader><leader>', '<c-^>', opts)
@@ -59,9 +52,9 @@ map('x', 's', 'A', opts)
 map('x', 'a', 'ov', opts) -- TODO: fix delay
 
 -- save
-map('n', '<C-s>', ':w<CR>', opts)
-map('v', '<C-s>', '<C-C>:w<CR>', opts)
-map('i', '<C-s>', '<C-o>:w<CR>', opts)
+map('n', '<C-s>', ':w ++p<CR>', opts)
+map('v', '<C-s>', '<C-C>:w ++p<CR>', opts)
+map('i', '<C-s>', '<C-o>:w ++p<CR>', opts)
 
 -- jump to last change in file
 vim.api.nvim_create_autocmd("BufReadPost", {
