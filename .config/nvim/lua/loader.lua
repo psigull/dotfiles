@@ -11,7 +11,7 @@ local tmpl = {
 	depends = {},
 	hooks = {},
 	checkout = nil,
-	setup = nil,
+	config = nil,
 }
 
 local function load(name)
@@ -25,7 +25,7 @@ local function load(name)
 		checkout = plugin.checkout,
 	})
 
-	if plugin.setup ~= nil then plugin.setup() end
+	if plugin.config ~= nil then plugin.config() end
 end
 
 -- load plugins

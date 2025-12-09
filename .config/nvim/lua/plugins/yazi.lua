@@ -1,7 +1,7 @@
 return {
 	source = 'mikavilpas/yazi.nvim',
 	depends = { 'nvim-lua/plenary.nvim' },
-	setup = function()
+	config = function()
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 

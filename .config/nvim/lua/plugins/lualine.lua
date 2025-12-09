@@ -28,7 +28,7 @@ end
 return {
 	source = 'nvim-lualine/lualine.nvim',
 	depends = { 'nvim-tree/nvim-web-devicons', 'SmiteshP/nvim-navic' },
-	setup = function ()
+	config = function ()
 		vim.opt.showmode = false
 		vim.opt.cmdheight = 0
 		vim.opt.ruler = false

@@ -1,6 +1,6 @@
 return {
 	source = 'ahkohd/buffer-sticks.nvim',
-	setup = function()
+	config = function()
 		local sticks = require('buffer-sticks')
 		sticks.setup({
 			list = { show = { "filename", "space" } },

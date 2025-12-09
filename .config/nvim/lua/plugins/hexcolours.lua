@@ -1,6 +1,6 @@
 return {
 	source = 'catgoose/nvim-colorizer.lua',
-	setup = function()
+	config = function()
 		require("colorizer").setup({})
 	end
 }

@@ -1,6 +1,6 @@
 return {
 	source = 'MagicDuck/grug-far.nvim',
-	setup = function()
+	config = function()
 		require('grug-far').setup({
 			history = { persist = true },
 		})

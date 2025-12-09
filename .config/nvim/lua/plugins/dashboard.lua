@@ -1,6 +1,6 @@
 return {
 	source = 'nvimdev/dashboard-nvim',
-	setup = function()
+	config = function()
 		vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#6c00ee" })
 		vim.api.nvim_set_hl(0, "DashboardFooter", { fg = "#1b3857" })
 

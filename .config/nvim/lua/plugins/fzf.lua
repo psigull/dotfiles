@@ -6,7 +6,7 @@ end
 return {
 	source = 'ibhagwan/fzf-lua',
 	depends = { 'nvim-tree/nvim-web-devicons' },
-	setup = function()
+	config = function()
 		local fzf = require('fzf-lua')
 
 		df.map('n', '<C-`>', fzf.buffers, df.ko)

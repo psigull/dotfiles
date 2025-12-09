@@ -1,6 +1,6 @@
 return {
 	source = 'hat0uma/csvview.nvim',
-	setup = function()
+	config = function()
 		require('csvview').setup()
 	end
 }

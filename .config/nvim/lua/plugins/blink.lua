@@ -2,7 +2,7 @@ return {
 	source = "saghen/blink.cmp",
 	depends = { "rafamadriz/friendly-snippets" },
 	checkout = 'v1.8.0',
-	setup = function()
+	config = function()
 		require('blink.cmp').setup({
 			keymap = {
 				preset = 'super-tab',

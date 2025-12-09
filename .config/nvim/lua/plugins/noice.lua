@@ -1,7 +1,7 @@
 return {
 	source = 'folke/noice.nvim',
 	depends = { 'MunifTanjim/nui.nvim' },
-	setup = function ()
+	config = function ()
 		require("noice").setup({
 			lsp = {
 				override = {

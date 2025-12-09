@@ -1,6 +1,6 @@
 return {
 	source = 'RRethy/vim-illuminate',
-	setup = function()
+	config = function()
 		require('illuminate').configure({
 			providers = { 'lsp', 'treesitter', 'regex' }
 		})
