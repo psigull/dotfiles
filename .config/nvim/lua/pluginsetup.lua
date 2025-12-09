@@ -9,32 +9,7 @@ if ok then
 	local add = minideps.add
 	local now = minideps.now
 
-	-- restore last session
-	vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,globals,localoptions'
-	local sessfile = vim.fn.expand('~/.nvimsession')
-	vim.api.nvim_create_autocmd('VimLeavePre', { callback = function()
-		-- only save if there's something worth saving
-		for buf = 1, vim.fn.bufnr('$') do
-			if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' and vim.bo[buf].filetype ~= 'dashboard' then
-				vim.cmd('mksession! ' .. sessfile)
-				return
-			end
-		end
-	end})
-	vim.api.nvim_create_autocmd('VimEnter', { callback = function()
-		if vim.fn.filereadable(sessfile) == 1 then
-			local bufname = vim.api.nvim_buf_get_name(0)
-			local buf = vim.api.nvim_get_current_buf()
-				pcall(vim.cmd('source ' .. sessfile))
-				vim.fn.delete(sessfile)
-			if vim.api.nvim_buf_is_valid(buf) then
-				vim.api.nvim_set_current_buf(buf)
-			end
-			if bufname == "" then
-				vim.cmd('Dashboard')
-			end
-		end
-	end})
+
 
 	-- dashboard
 	add({source='nvimdev/dashboard-nvim'})
@@ -276,4 +251,32 @@ if ok then
 
 	-- start pipe if launched in godot project dir
 	require('pipe_godot')
+
+
+	-- restore last session
+	vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,globals,localoptions'
+	local sessfile = vim.fn.expand('~/.nvimsession')
+	vim.api.nvim_create_autocmd('VimLeavePre', { callback = function()
+		-- only save if there's something worth saving
+		for buf = 1, vim.fn.bufnr('$') do
+			if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' and vim.bo[buf].filetype ~= 'dashboard' then
+				vim.cmd('mksession! ' .. sessfile)
+				return
+			end
+		end
+	end})
+	vim.api.nvim_create_autocmd('VimEnter', { callback = function()
+		if vim.fn.filereadable(sessfile) == 1 then
+			local bufname = vim.api.nvim_buf_get_name(0)
+			local buf = vim.api.nvim_get_current_buf()
+				pcall(vim.cmd('source ' .. sessfile))
+				vim.fn.delete(sessfile)
+			if vim.api.nvim_buf_is_valid(buf) then
+				vim.api.nvim_set_current_buf(buf)
+			end
+			if bufname == "" then
+				vim.cmd('Dashboard')
+			end
+		end
+	end})
 end
