@@ -100,7 +100,7 @@ for lang, server in pairs(lsp_map) do
 		table.insert(languages, lang)
 	end
 	if #server > 0 then
-		if string.sub(server, 1, 1) == '_' then
+		if string.sub(server, 1, 1) == '!' then
 			server = string.sub(server, 2)
 		else
 			table.insert(mason, server)
