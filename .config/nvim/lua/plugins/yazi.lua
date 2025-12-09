@@ -8,7 +8,7 @@ return {
 		require('yazi').setup({
 			open_for_directories = true,
 
-			custom_actions = {
+			integrations = {
 				grep_in_directory = function(dir)
 					local fzf = require('fzf-lua')
 					fzf.live_grep({ cwd = dir })

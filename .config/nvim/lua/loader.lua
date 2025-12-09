@@ -29,7 +29,6 @@ local function load(name)
 end
 
 -- load plugins
---load'telescope'
 load'fzf'
 load'yazi'
 load'dashboard'
@@ -49,4 +48,5 @@ load'illuminate'
 load'outliner'
 load'inlinediag'
 load'pairs'
+load'grugfar'
 load'lazydev'
