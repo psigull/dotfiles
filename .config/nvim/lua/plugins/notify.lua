@@ -9,8 +9,6 @@ return {
 			stages = 'slide',
 		})
 
-		-- telescope key for history
-		require("telescope").load_extension("notify")
-		df.map('n', '<C-S-n>', ':Telescope notify<CR>', df.ko)
+		df.map('n', '<C-S-n>', ':Notifications<CR>', df.ko)
 	end
 }

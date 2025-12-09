@@ -29,7 +29,8 @@ local function load(name)
 end
 
 -- load plugins
-load'telescope'
+--load'telescope'
+load'fzf'
 load'yazi'
 load'dashboard'
 load'buffersticks'

@@ -10,7 +10,7 @@ return {
 			config = {
 				shortcut = {},
 				packages = { enable = false },
-				project ={ limit = 2 },
+				project ={ limit = 2, action = 'Yazi cwd' },
 				mru = { limit = 8 },
 				footer = {'', '👽 stay weird'},
 				header = {	"      |\\      _,,,---,,_     ",
@@ -43,14 +43,14 @@ return {
 		end})
 
 		-- open on directory
-		df.autocmd('VimEnter', {
-			callback = function ()
-				local arg = vim.fn.argv(0)
-				if arg ~= '' and vim.fn.isdirectory(arg) == 1 then
-					vim.cmd('Dashboard')
-				end
-			end
-		})
+		-- df.autocmd('VimEnter', {
+		-- 	callback = function ()
+		-- 		local arg = vim.fn.argv(0)
+		-- 		if arg ~= '' and vim.fn.isdirectory(arg) == 1 then
+		-- 			vim.cmd('Dashboard')
+		-- 		end
+		-- 	end
+		-- })
 
 		-- new 'tab' hotkey
 		df.map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR><Esc>:Dashboard<CR>', df.ko)

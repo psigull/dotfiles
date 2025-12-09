@@ -78,8 +78,11 @@ df.map({'v','i'}, '<C-w>', '<Esc>:conf bd<CR>', df.koNow)
 df.map('n', '<C-q>', ':conf qa<CR>', df.ko)
 df.map({'v','i'}, '<C-q>', '<Esc>:conf qa<CR>', df.ko)
 
--- turn off search highlighting
-df.map({'n','v','i'}, '<C-f>', ':noh<CR>', df.ko)
+-- david blaine escape key
+df.map(df.mA, '<Esc>', function()
+	vim.cmd 'noh'
+	return '<Esc>'
+end, df.koExpr)
 
 -- select all
 df.map({'n','v','i'}, '<C-a>', '<Esc>ggVG', df.ko)
