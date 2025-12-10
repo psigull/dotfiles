@@ -8,11 +8,11 @@ df.mA = {'n','x','i'}
 vim.g.mapleader = " "
 df.map('n', '<leader><leader>', '<c-^>', df.ko)
 
--- insert keys
-df.map('n', 's', 'a', df.ko) -- *S*uffixed
-df.map('n', 'a', 'i', df.ko) -- AAAt the front
+-- thought process for Starting to type
+df.map('n', 's', 'a', df.ko) -- start typing
+df.map('n', 'S', 'i', df.ko) -- opposite
 df.map('x', 's', 'A', df.ko)
-df.map('x', 'a', 'ov', df.ko) -- TODO: fix delay
+df.map('x', 'S', 'ov', df.koNow)
 
 -- swap paste before/after cursor
 df.map('n', 'p', 'P', df.ko)
