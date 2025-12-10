@@ -5,7 +5,12 @@ local function fzfcwd(fnc)
 end
 
 local function fzfgit(fnc)
+	local file = vim.fn.expand('%:p')
 	local cwd = vim.fn.shellescape(vim.fn.expand('%:p:h'))
+	if vim.fn.getftype(file) == 'link' then
+		local realfile = vim.fn.resolve(file)
+		cwd = vim.fn.fnamemodify(realfile, ':h')
+	end
 	local gitroot = vim.fn.systemlist('git -C ' .. cwd .. ' rev-parse --show-toplevel')[1]
 	if gitroot == '' then return end
 	fnc({cwd = gitroot})
@@ -16,6 +21,10 @@ return {
 	depends = { 'nvim-tree/nvim-web-devicons' },
 	config = function()
 		local fzf = require('fzf-lua')
+		fzf.setup({
+			debug = true,
+			files = { cmd = os.getenv("FZF_DEFAULT_COMMAND") }
+		})
 
 		df.map(df.mA, '<C-`>', fzf.buffers, df.ko)
 		df.map(df.mA, '<C-p>', fzf.resume, df.koNow)
