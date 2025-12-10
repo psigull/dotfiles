@@ -10,8 +10,8 @@ return {
 			config = {
 				shortcut = {},
 				packages = { enable = false },
-				project ={ limit = 2, action = 'Yazi cwd ' },
-				mru = { limit = 8 },
+				project = { enable = false, limit = 2, action = 'Yazi cwd ' },
+				mru = { limit = 10 },
 				footer = {'', '👽 stay weird'},
 				header = {	"      |\\      _,,,---,,_     ",
 							"ZZZzz /,`.-'`'    -.  ;-;;,_ ",
@@ -23,6 +23,8 @@ return {
 		-- dashboard local hotkey for new buffer
 		df.autocmd("FileType", { pattern = "dashboard", callback = function()
 			df.map('n', 'a', ':enew<CR>', { buffer = true })
+			df.map('n', 'q', ':bd<CR>', { buffer = true })
+			df.map('n', '<C-w>', ':bd<CR>', { buffer = true, nowait = true })
 		end})
 
 		-- open on new tab

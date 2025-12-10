@@ -12,8 +12,13 @@ df.autocmd("BufReadPost", {
 	command = "silent! normal! g`\"zv",
 })
 
+-- force update MRU
+df.autocmd('BufReadPost', { pattern = '*', callback = function ()
+	vim.cmd 'wshada'
+	vim.cmd 'rshada!'
+end})
+
 -- disable auto commenting on newline
--- TODO: used to be BufEnter, does this work right?
 df.autocmd("FileType", { pattern = "*", callback = function()
 	vim.opt.formatoptions:remove({ "c", "r", "o" })
 end})
