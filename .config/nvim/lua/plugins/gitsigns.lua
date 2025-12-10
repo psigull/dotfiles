@@ -2,7 +2,24 @@ return {
 	source = 'lewis6991/gitsigns.nvim',
 	config = function ()
 		local gs = require('gitsigns')
-		gs.setup({})
+		gs.setup({
+			signs = {
+				add          = { text = '┃' },
+				change       = { text = '┃' },
+				delete       = { text = '┃' },
+				topdelete    = { text = '┃' },
+				changedelete = { text = '┃' },
+				untracked    = { text = '┃' },
+			},
+			signs_staged = {
+				add          = { text = '┆' },
+				change       = { text = '┆' },
+				delete       = { text = '┆' },
+				topdelete    = { text = '┆' },
+				changedelete = { text = '┆' },
+				untracked    = { text = '┆' },
+			}
+		})
 		df.map('n', '[g', gs.prev_hunk, df.ko)
 		df.map('n', ']g', gs.next_hunk, df.ko)
 		df.map('n', '<leader>gp', gs.preview_hunk_inline, df.ko)
