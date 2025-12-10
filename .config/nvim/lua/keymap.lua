@@ -65,10 +65,11 @@ df.map('i', '<C-s>', '<C-o>:w ++p<CR>', df.ko)
 
 -- buffer management
 df.map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', df.ko)
-df.map({'n','v','i'}, '<C-S-t>', '<Esc>:vsplit<CR>', df.ko)
+df.map({'n','v','i'}, '<C-S-s>', '<Esc>:vsplit<CR>', df.ko)
 df.map({'n','v','i'}, '<C-S-w>', '<Esc>:close<CR>', df.ko)
 df.map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', df.ko)
 df.map({'n','v','i'}, '<C-S-Tab>', '<Esc>:bprev<CR>', df.ko)
+df.map(df.mA, '<C-S-t>', '<Esc><C-^>', df.ko)
 
 -- close tab/buffer
 df.map('n', '<C-w>', ':conf bd<CR>', df.koNow)

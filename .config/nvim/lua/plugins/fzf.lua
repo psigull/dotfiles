@@ -18,5 +18,11 @@ return {
 			if cwd == '' then return end
 			fzf.live_grep({cwd = cwd})
 		end, df.ko)
+
+		df.map(df.mA, '<C-S-f>', function()
+			local cwd = vim.fn.expand('%:p:h')
+			if cwd == '' then return end
+			fzf.files({cwd = cwd})
+		end, df.ko)
 	end
 }
