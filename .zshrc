@@ -1,7 +1,7 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
-export LESS='--mouse --wheel-lines=3'
+export LESS='--wheel-lines=3'
 # git config --global core.pager "less -+X -R"
 
 export PATH="$HOME/.local/bin:$PATH"
