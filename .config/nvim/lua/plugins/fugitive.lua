@@ -16,6 +16,7 @@ return {
 			callback = function ()
 				local bufnr = vim.api.nvim_get_current_buf()
 				df.map('n', 'q', '<cmd>close<CR>', { buffer = bufnr })
+				df.map(df.mA, '<C-w>', '<cmd>:w | close<CR>', { buffer = bufnr })
 			end
 		})
 	end

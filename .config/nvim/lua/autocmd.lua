@@ -18,6 +18,15 @@ df.autocmd("FileType", { pattern = "*", callback = function()
 	vim.opt.formatoptions:remove({ "c", "r", "o" })
 end})
 
+-- close help windows easily
+df.autocmd('FileType', {
+	pattern = 'help',
+	callback = function ()
+		local bufnr = vim.api.nvim_get_current_buf()
+		df.map('n', 'q', '<cmd>close<CR>', { buffer = bufnr })
+	end
+})
+
 -- trim trailing whitespace on save
 df.autocmd('BufWritePre', { pattern = '*', callback = function()
 	local lc = vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
