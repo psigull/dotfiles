@@ -1,10 +1,10 @@
 -- lsp buffer-local keybinds
 local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', '<leader>lh', vim.lsp.buf.declaration, bufopts) -- header
-	vim.keymap.set('n', '<leader>ld', vim.lsp.buf.definition, bufopts) -- definition
-	vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
+	df.map('n', '<leader>lh', vim.lsp.buf.declaration, bufopts) -- header
+	df.map('n', '<leader>ld', vim.lsp.buf.definition, bufopts) -- definition
+	df.map('n', '<leader>lr', vim.lsp.buf.rename, bufopts)
+	df.map('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 
 	-- use lsp folding if supported
 	if client:supports_method('textDocument/foldingRange') then
