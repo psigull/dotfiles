@@ -25,7 +25,7 @@ return {
 		df.map('n', '<leader>gr', fzf.lsp_references, df.ko)
 		df.map('n', '<leader>xd', fzf.diagnostics_workspace, df.ko)
 
-		df.map(df.mA, '<leader>?', function() fzfcwd(fzf.live_grep) end, df.ko)
+		df.map('n', '<leader>?', function() fzfcwd(fzf.live_grep) end, df.ko)
 		df.map(df.mA, '<C-S-f>', function() fzfcwd(fzf.files) end, df.ko)
 		df.map(df.mA, '<C-g>', function() fzfgit(fzf.git_status) end, df.ko)
 	end
