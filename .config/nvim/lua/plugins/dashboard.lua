@@ -11,9 +11,10 @@ return {
 				shortcut = {},
 				packages = { enable = false },
 				project = { enable = false, limit = 2, action = 'Yazi cwd ' },
-				mru = { limit = 10 },
+				mru = { limit = 12 },
 				footer = {'', '👽 stay weird'},
-				header = {	"      |\\      _,,,---,,_     ",
+				header = {	'',
+							"      |\\      _,,,---,,_     ",
 							"ZZZzz /,`.-'`'    -.  ;-;;,_ ",
 							"     |,4-  ) )-,_. ,\\ (  `'-'",
 							"    '---''(_/--'  `-'\\_)     ", }
