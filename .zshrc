@@ -71,6 +71,7 @@ source ~/.fd_excludes # stored separately
 fd_excludes=${fd_excludes//\\/}
 fd_excludes=${fd_excludes//$'\n'/}
 alias fdex="fd -t f -E '{$fd_excludes}'"
+export FZF_DEFAULT_COMMAND="fd -t f -E '{$fd_excludes}' --strip-cwd-prefix"
 
 # exclude csv of file ext from `fd`
 function xfiles() {
