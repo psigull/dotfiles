@@ -25,7 +25,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
-vim.opt.foldlevelstart = 99
+vim.opt.foldlevelstart = 99 -- start unfolded
 vim.opt.signcolumn = 'number'
 
 vim.diagnostic.config({
@@ -40,3 +40,6 @@ vim.diagnostic.config({
 		}
 	}
 })
+
+-- ignore internal nvim & plugin files in MRU
+vim.opt.shada:append({ 'r'..vim.fn.expand('~/.local/share/nvim') })
