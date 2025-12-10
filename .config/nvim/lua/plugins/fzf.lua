@@ -22,7 +22,6 @@ return {
 	config = function()
 		local fzf = require('fzf-lua')
 		fzf.setup({
-			debug = true,
 			files = { cmd = os.getenv("FZF_DEFAULT_COMMAND") }
 		})
 
@@ -37,5 +36,13 @@ return {
 		df.map('n', '<leader>?', function() fzfcwd(fzf.live_grep) end, df.ko)
 		df.map(df.mA, '<C-S-f>', function() fzfcwd(fzf.files) end, df.ko)
 		df.map(df.mA, '<C-g>', function() fzfgit(fzf.git_status) end, df.ko)
+
+		-- make esc terimate fzf
+		df.autocmd('FileType', {
+			pattern = 'fzf',
+			callback = function(data)
+				df.map('t', '<Esc>', '<C-c>', { buffer = data.buf })
+			end
+		})
 	end
 }
