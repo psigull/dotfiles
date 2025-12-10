@@ -14,9 +14,11 @@ df.map('n', 'S', 'i', df.ko) -- opposite
 df.map('x', 's', 'A', df.ko)
 df.map('x', 'S', 'ov', df.koNow)
 
--- swap paste before/after cursor
+-- swap before/after cursor
 df.map('n', 'p', 'P', df.ko)
 df.map('n', 'P', 'p', df.ko)
+df.map('n', 'a', 'i', df.ko)
+df.map('n', 'i', 'a', df.ko)
 
 -- copy/cut/paste
 df.map('n', '<C-c>', 'yy', df.ko)
@@ -89,6 +91,9 @@ end, df.koExpr)
 
 -- select all
 df.map({'n','v','i'}, '<C-a>', '<Esc>ggVG', df.ko)
+
+-- view current file location
+df.map('n', 'L', '<C-g>l', df.ko)
 
 -- create undo points every space
 df.map('i', '<Space>', '<Space><C-g>u', df.ko)
