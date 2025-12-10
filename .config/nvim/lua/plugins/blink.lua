@@ -9,7 +9,17 @@ return {
 				['<Tab>'] = { 'select_and_accept', 'fallback' },
 				['<S-Tab>'] = false,
 			},
-			completion = { documentation = { auto_show = false } },
+			completion = {
+				documentation = { auto_show = false },
+				ghost_text = { enabled = false },
+				list = {
+					selection = {
+						preselect = false,
+						auto_insert = false,
+					}
+				},
+			}
+
 		})
 	end
 }

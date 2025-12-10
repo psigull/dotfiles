@@ -1,8 +1,3 @@
-local function findall()
-
-	require('fzf-lua')
-end
-
 return {
 	source = 'ibhagwan/fzf-lua',
 	depends = { 'nvim-tree/nvim-web-devicons' },
