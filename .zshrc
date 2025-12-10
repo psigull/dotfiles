@@ -12,7 +12,8 @@ export GOPATH="$HOME/.go"
 alias ls="sed 's/^/-I \"/' .hidden 2>/dev/null | sed 's/$/\"/' | tr '\n' ' ' | LC_COLLATE=C xargs ls --color=auto --group-directories-first" # exclude paths in .hidden
 alias sls='/usr/bin/ls'
 alias ll='ls -l'
-alias la='ls -la'
+alias la='ls -a'
+alias lla='ls -la'
 
 alias grep="grep --color=auto"
 alias diff='diff --color=auto'
@@ -21,7 +22,7 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
-alias v='nvim' vi='nvim' vim='nvim'
+alias v='nvim' vi='nvim' vim='nvim' nv='nvim'
 alias ex='yazi'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'

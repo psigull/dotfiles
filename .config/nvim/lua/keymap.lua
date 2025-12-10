@@ -34,6 +34,8 @@ df.map({'n','v'}, '<C-r>', '`[=`]`]$')
 df.map('i', '<C-r>', '<Esc>`[=`]`]$a')
 
 -- delete to void register
+df.map('v', 'x', '"_x', df.ko)
+df.map('n', 'x', '"_dd', df.ko)
 df.map('v', '<BS>', '"_d', df.ko)
 df.map({'n','v'}, '<Del>', '"_x', df.ko)
 df.map({'n','v'}, '<S-Del>', '<Esc>"_dd', df.ko)

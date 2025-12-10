@@ -8,6 +8,7 @@ return {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 				},
+				signature = { auto_open = false },
 			},
 		})
 	end
