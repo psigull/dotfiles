@@ -6,12 +6,12 @@ return {
 			list = { show = { "filename", "space" } },
 			preview = { enabled = false },
 			highlights = {
-				active = 			{ fg = "#a7c1aa", italic = true },
-				active_modified = 	{ fg = "#a7c1aa", italic = true, bold = true },
+				active = 			{ fg = "#a7c1aa" },
+				active_modified = 	{ fg = "#a7c1aa", bold = true, italic = true },
 				alternate = 			{ fg = "#666666" },
-				alternate_modified = 	{ fg = "#666666", bold = true },
+				alternate_modified = 	{ fg = "#666666", bold = true, italic = true },
 				inactive = 			{ fg = "#333333" },
-				inactive_modified = { fg = "#333333", bold = true },
+				inactive_modified = { fg = "#333333", bold = true, italic = true },
 			}
 		})
 

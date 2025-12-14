@@ -22,7 +22,7 @@
 {
 	"position": "top",
 	"height": 34,
-	"spacing": 4, 
+	"spacing": 4,
 
 	"modules-left": [
 		"pulseaudio",
@@ -72,9 +72,9 @@
 		"status-icons": {
 			"paused": "⏸"
 		},
-		"ignored-players": ["firefox"]
+		//"ignored-players": ["firefox"]
 	},
-	
+
 	"hyprland/window": {
 		"max-length": 50,
 		"format": " {}",

@@ -30,8 +30,8 @@ df.map('v', '<C-x>', 'd', df.ko)
 df.map('i', '<C-x>', '<Esc>dda', df.ko)
 
 -- reindent and place cursor at the end
-df.map({'n','v'}, '<C-v>', 'p', df.ko)
-df.map('i', '<C-v>', "<C-o>P", df.ko)
+df.map({'n','v'}, '<C-v>', 'P`]', df.ko)
+df.map('i', '<C-v>', "<Esc>P`]a", df.ko)
 df.map({'n','v'}, '<C-r>', '`[=`]`]$')
 df.map('i', '<C-r>', '<Esc>`[=`]`]$a')
 
@@ -65,7 +65,7 @@ df.map('i', '<C-S-z>', '<C-o><C-r>', df.ko)
 -- save
 df.map('n', '<C-s>', ':w ++p<CR>', df.ko)
 df.map('v', '<C-s>', '<C-C>:w ++p<CR>', df.ko)
-df.map('i', '<C-s>', '<C-o>:w ++p<CR>', df.ko)
+df.map('i', '<C-s>', '<Esc>:w ++p<CR>', df.ko)
 
 -- buffer management
 df.map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', df.ko)
@@ -112,7 +112,7 @@ vim.cmd('nmap <C-LeftMouse> <LeftMouse>gx')
 
 -- open terminal to active buffer cwd
 df.map({'n','v','i'}, '<F2>', function()
-	vim.fn.system(string.format('alacritty --working-directory %s', vim.fn.expand('%:p:h')))
+	vim.fn.jobstart(string.format('foot --working-directory %s', vim.fn.expand('%:p:h')), { detach = true })
 end, df.ko)
 
 -- down arrow creates new line if there isn't one

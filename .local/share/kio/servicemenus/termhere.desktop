@@ -6,6 +6,6 @@ Actions=openMyTermHere
 X-KDE-Priority=TopLevel
 
 [Desktop Action openMyTermHere]
-Name=Open Alacritty Here
+Name=Open ZSH Here
 Icon=utilities-terminal
-Exec=alacritty --working-directory %f
+Exec=foot --working-directory %f

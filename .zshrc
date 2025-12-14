@@ -22,11 +22,20 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
-alias v='nvim' vi='nvim' vim='nvim' nv='nvim'
-alias ex='yazi'
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+alias v='nvim'
+alias vn='nvim -i NONE'
 alias pn='pnpm'
 alias cpr='rsync -ah --partial --info=progress2'
-alias todo='grep -rni TODO'
+alias rg='rg -uu --no-heading --glob "!.git"'
+alias todo='rg -i TODO'
 
 alias glo="git log --oneline"
 alias gs="git status"
@@ -172,7 +181,7 @@ function precmd() {
 	vcs_info
 }
 
-PROMPT='%F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}>%f  '
+PROMPT=' %F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}>%f  '
 
 
 # settings
