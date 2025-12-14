@@ -25,7 +25,7 @@ return {
 			files = { cmd = os.getenv("FZF_DEFAULT_COMMAND") }
 		})
 
-		df.map(df.mA, '<C-`>', fzf.buffers, df.ko)
+		df.map(df.mA, '<leader>b', fzf.buffers, df.ko)
 		df.map(df.mA, '<C-p>', fzf.resume, df.koNow)
 		df.map(df.mA, '<C-f>', fzf.oldfiles, df.ko)
 

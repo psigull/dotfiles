@@ -30,8 +30,8 @@ df.map('v', '<C-x>', 'd', df.ko)
 df.map('i', '<C-x>', '<Esc>dda', df.ko)
 
 -- reindent and place cursor at the end
-df.map({'n','v'}, '<C-v>', 'P`]', df.ko)
-df.map('i', '<C-v>', "<Esc>P`]a", df.ko)
+df.map({'n','v'}, '<C-v>', 'P`]l', df.ko)
+df.map('i', '<C-v>', "<Esc>p`]a", df.ko)
 df.map({'n','v'}, '<C-r>', '`[=`]`]$')
 df.map('i', '<C-r>', '<Esc>`[=`]`]$a')
 
