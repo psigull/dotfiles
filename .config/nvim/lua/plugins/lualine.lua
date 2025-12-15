@@ -27,7 +27,7 @@ end
 
 return {
 	source = 'nvim-lualine/lualine.nvim',
-	depends = { 'nvim-tree/nvim-web-devicons', 'SmiteshP/nvim-navic' },
+	depends = { 'nvim-tree/nvim-web-devicons' },
 	config = function ()
 		vim.opt.showmode = false
 		vim.opt.cmdheight = 0
@@ -37,18 +37,12 @@ return {
 		-- our bar is on the top so we dont need it! :)
 		patcher()
 
-		-- scope breadcrumbs, needs lsp
-		local navic = require("nvim-navic")
-		navic.setup({
-			lsp = { auto_attach = true },
-		})
-
 		require('lualine').setup({
 			sections = {},
 			winbar = {
 				lualine_a = { "mode", recording },
 				lualine_b = { "branch", "diagnostics" },
-				lualine_c = { "filename", "navic" },
+				lualine_c = { "filename" },
 				lualine_x = { "encoding", "fileformat", "filetype" },
 				lualine_y = { "progress" },
 				lualine_z = { "location" }

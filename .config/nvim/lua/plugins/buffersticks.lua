@@ -3,30 +3,21 @@ return {
 	config = function()
 		local sticks = require('buffer-sticks')
 		sticks.setup({
-			list = { show = { "filename", "space" } },
-			preview = { enabled = false },
 			highlights = {
-				active = 			{ fg = "#a7c1aa" },
-				active_modified = 	{ fg = "#a7c1aa", bold = true, italic = true },
-				alternate = 			{ fg = "#666666" },
-				alternate_modified = 	{ fg = "#666666", bold = true, italic = true },
-				inactive = 			{ fg = "#333333" },
-				inactive_modified = { fg = "#333333", bold = true, italic = true },
+				active = { fg = "#FFFFB8" },
+                alternate = { fg = "#AA759F" },
+                inactive = { link = "Comment" },
+                active_modified = { fg = "#9AFFFF" },
+                alternate_modified = { fg = "#6A9FB5" },
+                inactive_modified = { fg = "#6A9FB5" },
+                label = { fg = "#D8D8D8" },
+                filter_selected = { fg = "#90A959" },
+                filter_title = { fg = "#D8D8D8" },
+                list_selected = { fg = '#90A959' },
 			}
 		})
 
-		-- show in list mode by default (full names)
-		sticks.show()
-		require('buffer-sticks.state').list_mode = true
-
-		-- hide sticks in dashboards
-		df.autocmd("FileType", { pattern = "dashboard", callback = function()
-			require('buffer-sticks').hide()
-		end})
-		df.autocmd("BufLeave", { callback = function()
-			if vim.bo.filetype == "dashboard" then require('buffer-sticks').show() end
-		end})
-
-		df.map({'n','v','i'}, '<C-h>', function() require('buffer-sticks').toggle() end, df.ko)
+		sticks.show() -- show by default
+		df.map({'n','v','i'}, '<C-`>', function() require('buffer-sticks').jump() end, df.ko)
 	end
 }
