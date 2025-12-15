@@ -24,6 +24,7 @@ vim.opt.shortmess:append('A') -- hide swap file warnings
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.diffopt:append("hiddenoff")
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
 vim.opt.foldlevelstart = 99 -- start unfolded
 vim.opt.signcolumn = 'number'

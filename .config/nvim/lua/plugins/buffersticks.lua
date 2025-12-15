@@ -13,7 +13,7 @@ return {
                 label = { fg = "#D8D8D8" },
                 filter_selected = { fg = "#90A959" },
                 filter_title = { fg = "#D8D8D8" },
-                list_selected = { fg = '#90A959' },
+                list_selected = { fg = '#FFFFB8' },
 			}
 		})
 
