@@ -9,6 +9,7 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 				},
 				signature = { auto_open = false },
+				progress = { enabled = false },
 			},
 		})
 	end
