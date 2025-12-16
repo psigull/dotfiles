@@ -9,7 +9,7 @@ local vue_plugin = {
 return {
 	filetypes = { 'vue', 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
 	settings = {
-		vtsls = {
+		['vtsls'] = {
 			tsserver = {
 				globalPlugins = {
 					vue_plugin,

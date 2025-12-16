@@ -16,16 +16,8 @@ df.autocmd('LspAttach', { callback = function(args)
 	end
 end})
 
--- assign defaults and enable all
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-local default_server = {
-	capabilities = capabilities,
-	settings = {},
-}
-
+-- enable all
 for _, server_name in ipairs(df.lspservers) do
-	vim.lsp.config[server_name] = vim.tbl_deep_extend('force',
-		default_server, vim.lsp.config[server_name])
 	vim.lsp.enable(server_name)
 end
 
