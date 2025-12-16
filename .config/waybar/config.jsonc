@@ -79,8 +79,7 @@
 		"max-length": 50,
 		"format": " {}",
 		"rewrite": {
-			"(.*) - Code - OSS": "$1",
-			"(.*) — Mozilla Firefox(?: Private Browsing)?": "$1",
+			"(.*) (?:— .*)— Mozilla Firefox(?: Private Browsing)?": "$1",
 		},
 		"icon": true,
 		"icon-size": 16,
