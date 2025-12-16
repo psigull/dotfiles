@@ -1,11 +1,12 @@
 -- restore last session
-vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,globals,localoptions'
+vim.opt.sessionoptions = 'buffers,folds,tabpages,globals,localoptions'
 
 local sessfile = vim.fn.expand('~/.nvimsession')
 df.autocmd('VimLeavePre', { callback = function()
 	-- only save if there's something worth saving
 	for buf = 1, vim.fn.bufnr('$') do
 		if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' and vim.bo[buf].filetype ~= 'dashboard' then
+			vim.cmd('silent! argd *')
 			vim.cmd('mksession! ' .. sessfile)
 			return
 		end
