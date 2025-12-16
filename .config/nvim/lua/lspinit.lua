@@ -1,5 +1,8 @@
 -- lsp buffer-local keybinds
-local on_attach = function(client, bufnr)
+df.autocmd('LspAttach', { callback = function(args)
+	local client = vim.lsp.get_client_by_id(args.data.client_id)
+	local bufnr = args.buf
+
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	df.map('n', '<leader>lh', vim.lsp.buf.declaration, bufopts) -- header
 	df.map('n', '<leader>ld', vim.lsp.buf.definition, bufopts) -- definition
@@ -7,16 +10,15 @@ local on_attach = function(client, bufnr)
 	df.map('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 
 	-- use lsp folding if supported
-	if client:supports_method('textDocument/foldingRange') then
+	if client and client:supports_method('textDocument/foldingRange') then
 		local win = vim.api.nvim_get_current_win()
 		vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
 	end
-end
+end})
 
 -- assign defaults and enable all
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local default_server = {
-	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {},
 }

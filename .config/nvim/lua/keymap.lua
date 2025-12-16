@@ -106,6 +106,10 @@ df.map('i', '<End>', '<C-o>$', df.ko)
 -- go down a line on enter
 df.map('n', '<CR>', 'j', df.ko)
 
+-- diag keys
+df.map("n", "[d", vim.diagnostic.goto_prev, df.ko)
+df.map("n", "]d", vim.diagnostic.goto_next, df.ko)
+
 -- url click helper
 vim.cmd('nmap <C-LeftMouse> <LeftMouse>gx')
 
