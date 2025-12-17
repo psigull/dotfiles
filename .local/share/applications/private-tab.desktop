@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=Private Tab
+Exec=/usr/bin/flatpak run app.zen_browser.zen -private-window
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;

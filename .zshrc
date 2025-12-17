@@ -59,7 +59,7 @@ alias calc='noglob calc'
 alias ca='calc'
 
 alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
-alias manb="BROWSER=firefox man --html" # open manual entry in browser
+alias manb="BROWSER=zen.sh man --html" # open manual entry in browser
 
 alias amdtop='amdgpu_top'
 alias fixwaybar='touch -m .config/waybar/config.jsonc'
@@ -88,8 +88,8 @@ function xfiles() {
 	fd -t f | grep -vEi ".+\.$str"
 }
 
-function closefirefox() {
-	hyprctl dispatch focuswindow class:firefox
+function closebrowser() {
+	hyprctl dispatch focuswindow class:app.zen_browser.zen
 	sleep 0.1
 
 	if ! pidof -q 'ydotoold'; then
@@ -97,11 +97,11 @@ function closefirefox() {
 		sleep 1
 	fi
 
-	ydotool key 29:1 16:1 16:0 29:0
+	ydotool key 29:1 42:1 56:1 16:1 16:0 56:0 42:0 29:0
 	sleep 2
 }
-alias shutdown='closefirefox && systemctl poweroff'
-alias reboot='closefirefox && systemctl reboot'
+alias shutdown='closebrowser && systemctl poweroff'
+alias reboot='closebrowser && systemctl reboot'
 alias hibernate='systemctl hibernate'
 
 

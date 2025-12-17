@@ -11,13 +11,13 @@
 	"spacing": 4,
 
 	"modules-center": [
-		"custom/cava",
+		"custom/cava"
 	],
 
 	"custom/cava": {
 		"format": " {} ",
-		"exec": "~/.local/bin/cava.sh",
-	},
+		"exec": "~/.local/bin/cava.sh"
+	}
 },
 {
 	"position": "top",
@@ -29,7 +29,7 @@
 		"hyprland/window"
 	],
 	"modules-center": [
-		"mpris",
+		"mpris"
 	],
 	"modules-right": [
 		"custom/usage",
@@ -71,15 +71,14 @@
 		},
 		"status-icons": {
 			"paused": "⏸"
-		},
-		//"ignored-players": ["firefox"]
+		}
 	},
 
 	"hyprland/window": {
 		"max-length": 50,
 		"format": " {}",
 		"rewrite": {
-			"(.*) (?:— .*)— Mozilla Firefox(?: Private Browsing)?": "$1",
+			"(.*) — Zen Browser(?: Private Browsing)?": "$1"
 		},
 		"icon": true,
 		"icon-size": 16,
@@ -95,7 +94,7 @@
 	},
 
 	"tray": {
-		"spacing": 10,
+		"spacing": 10
 	},
 
 	"network": {
@@ -103,7 +102,7 @@
 		"format-ethernet": "",
 		"tooltip-format": "{ifname}:{essid} {ipaddr}/{cidr} via {gwaddr}",
 		"format-linked": "",
-		"format-disconnected": "⚠",
+		"format-disconnected": "⚠"
 	},
 
 	"privacy": {
@@ -127,8 +126,8 @@
 			{
 				"type": "audio-in",
 				"name": "cava"
-			},
-		],
+			}
+		]
 	},
 
 	"custom/micmute": {
@@ -169,6 +168,6 @@
 
 	"clock": {
 		"format": "<b>{:%H:%M}</b>",
-		"format-alt": "<b>{:%a %b %m/%d}</b>",
-	},
+		"format-alt": "<b>{:%a %b %m/%d}</b>"
+	}
 }]

@@ -1,8 +1,0 @@
-[Desktop Entry]                                                                              
-Version=1.0
-Name=Private Tab
-Exec=/usr/lib/firefox/firefox -private-window
-Terminal=false
-Icon=firefox
-Type=Application
-Categories=Network;WebBrowser;
