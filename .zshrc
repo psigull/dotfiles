@@ -181,7 +181,7 @@ function precmd() {
 	vcs_info
 }
 
-PROMPT=' %F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}>%f  '
+PROMPT=' %F{8}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%F{green}λ%f  '
 
 
 # settings
