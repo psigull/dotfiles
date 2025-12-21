@@ -6,3 +6,6 @@ if [[ $ENABLED ]]; then
 else
 	hyprctl keyword monitor DP-2, $mon2info
 fi
+
+source ~/.zshrc
+fixwaybar

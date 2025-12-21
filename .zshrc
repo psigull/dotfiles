@@ -144,8 +144,8 @@ function fmatch() {
 # diff two folders
 # TODO: recursively diff sha hashes
 function lsdiff() {
-	lsA=$(ls -r1 $1)
-	lsB=$(ls -r1 $2)
+	lsA=$(cd $1 | fd -H . | sort)
+	lsB=$(cd $2 | fd -H . | sort)
 	diff <(echo "$lsA") <(echo "$lsB")
 }
 
