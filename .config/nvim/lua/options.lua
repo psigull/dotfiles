@@ -12,8 +12,10 @@ vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2"
 vim.opt.fillchars = { eob = ' ' }
 
+vim.opt.expandtab = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 vim.opt.virtualedit:append('onemore') -- cursor pos on mouse click
 vim.opt.whichwrap:append('<,>,[,]') -- arrow key line wrapping

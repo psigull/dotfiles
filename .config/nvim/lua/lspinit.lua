@@ -7,6 +7,7 @@ df.autocmd('LspAttach', { callback = function(args)
 	df.map('n', '<leader>lh', vim.lsp.buf.declaration, bufopts) -- header
 	df.map('n', '<leader>ld', vim.lsp.buf.definition, bufopts) -- definition
 	df.map('n', '<leader>lr', vim.lsp.buf.rename, bufopts)
+	df.map('n', '<leader>la', vim.lsp.buf.code_action, bufopts)
 	df.map('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 
 	-- use lsp folding if supported
