@@ -22,14 +22,7 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-
+alias y='yazi'
 alias v='nvim'
 alias vn='nvim -i NONE'
 alias pn='pnpm'
@@ -155,6 +148,7 @@ if [[ ! -o interactive ]]; then
 	return
 fi
 
+export KEYTIMEOUT=1
 setopt prompt_subst transient_rprompt
 
 autoload -Uz vcs_info

@@ -7,7 +7,7 @@ CURRENT_WALL=$(hyprctl hyprpaper listloaded)
 WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" | shuf -n 1)
 
 # apply new wallpaper
-hyprctl hyprpaper reload ,"$WALLPAPER"
+hyprctl hyprpaper wallpaper ,"$WALLPAPER"
 
 # copy for hyprlock & initial wallpaper
-ln -sf "$WALLPAPER" "$WALLPAPER_DIR/.wp" 
+ln -sf "$WALLPAPER" "$WALLPAPER_DIR/.wp"
