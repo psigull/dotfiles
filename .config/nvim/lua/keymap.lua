@@ -68,7 +68,7 @@ df.map('v', '<C-s>', '<C-C>:w ++p<CR>', df.ko)
 df.map('i', '<C-s>', '<Esc>:w ++p<CR>', df.ko)
 
 -- buffer management
-df.map({'n','v','i'}, '<C-t>', '<Esc>:enew<CR>', df.ko)
+df.map({'n','v','i'}, '<C-n>', '<Esc>:enew<CR>', df.ko)
 df.map({'n','v','i'}, '<C-S-s>', '<Esc>:vsplit<CR>', df.ko)
 df.map({'n','v','i'}, '<C-S-w>', '<Esc>:close<CR>', df.ko)
 df.map({'n','v','i'}, '<C-Tab>', '<Esc>:bnext<CR>', df.ko)
