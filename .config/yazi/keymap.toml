@@ -4,12 +4,6 @@ run  = "close"
 desc = "Close"
 
 [[mgr.prepend_keymap]]
-on   = "`"
-for  = "unix"
-run  = 'shell "$SHELL" --block'
-desc = "Open $SHELL here"
-
-[[mgr.prepend_keymap]]
 on = "R"
 run = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
