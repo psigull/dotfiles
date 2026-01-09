@@ -37,7 +37,7 @@ data_format = ascii
 ascii_max_range = 8
 
 channels = stereo
-reverse = 0
+reverse = 1
 
 [smoothing]
 noise_reduction = 16
@@ -45,8 +45,8 @@ noise_reduction = 16
 " > $config_file
 
 # read stdout from cava
-c1="#33ffff"
-c2="#fc33ff"
+c2="#33ffff"
+c1="#fc33ff"
 cava -p $config_file | while read -r line; do
     v=$(echo $line | sed $dict)
     c=$(python ~/.local/bin/colramp.py "$v" "$c1" "$c2" "$c1")
