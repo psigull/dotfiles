@@ -22,7 +22,14 @@ alias ip='ip --color=auto'
 alias srm='/usr/bin/rm'
 alias rm='trash'
 
-alias y='yazi'
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 alias v='nvim'
 alias vn='nvim -i NONE'
 alias pn='pnpm'
