@@ -40,7 +40,7 @@ channels = stereo
 reverse = 1
 
 [smoothing]
-noise_reduction = 16
+noise_reduction = 13
 
 " > $config_file
 
