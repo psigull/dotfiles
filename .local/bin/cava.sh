@@ -15,9 +15,12 @@ do
     i=$((i=i+1))
 done
 
-# write cava config
+# write cava config -- adjust cutoffs to ear taste
 config_file="/tmp/polybar_cava_config"
 echo "
+[input]
+sample_rate = 48000
+
 [general]
 bars = 256
 
@@ -40,7 +43,14 @@ channels = stereo
 reverse = 1
 
 [smoothing]
-noise_reduction = 13
+integral = 0
+gravity = 0
+noise_reduction = 0
+
+[eq]
+1 = 1.33
+2 = 1
+3 = 1
 
 " > $config_file
 
