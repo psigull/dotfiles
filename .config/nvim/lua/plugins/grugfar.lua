@@ -4,7 +4,7 @@ return {
 		require('grug-far').setup({
 			history = { persist = true },
 		})
-		df.map({'n','v'}, '<leader>fr', function()
+		df.map({'n','v'}, '<leader>far', function()
 			require('grug-far').open({ transient = true, prefills = { paths = vim.fn.expand('%:p:h') } })
 		end, df.ko)
 	end

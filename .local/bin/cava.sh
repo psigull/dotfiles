@@ -45,10 +45,11 @@ noise_reduction = 16
 " > $config_file
 
 # read stdout from cava
-c2="#33ffff"
-c1="#fc33ff"
+c2="#eefffd"
+cm="#16161d"
+c1="#ffffff"
 cava -p $config_file | while read -r line; do
     v=$(echo $line | sed $dict)
-    c=$(python ~/.local/bin/colramp.py "$v" "$c1" "$c2" "$c1")
+    c=$(python ~/.local/bin/colramp3.py "$v" "$c1" "$cm" "$c2" "$cm" "$c2" "$cm" "$c1")
     echo $c
 done
