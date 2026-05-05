@@ -8,19 +8,19 @@ df.mA = {'n','x','i'}
 vim.g.mapleader = " "
 df.map('n', '<leader><leader>', '<c-^>', df.ko)
 
--- thought process for Starting to type
-df.map('n', 's', 'a', df.ko) -- start typing
-df.map('n', 'S', 'i', df.ko) -- opposite
+-- swap before/after cursor
+-- a = [A]t the start
+-- s = [S]uffixed ¯\_(ツ)_/¯
+df.map('n', 'a', 'i', df.ko)
+df.map('n', 's', 'a', df.ko)
 df.map('x', 's', 'A', df.ko)
+df.map('x', 'a', 'ov', df.koNow)
+
+df.map('n', 'i', 'a', df.ko) -- consistency
+df.map('n', 'S', 'i', df.ko) -- opposites
 df.map('x', 'S', 'ov', df.koNow)
 
--- swap before/after cursor
-df.map('n', 'p', 'P', df.ko)
-df.map('n', 'P', 'p', df.ko)
-df.map('n', 'a', 'i', df.ko)
-df.map('n', 'i', 'a', df.ko)
-
--- copy/cut/paste
+-- consistent copy/cut/paste
 df.map('n', '<C-c>', 'yy', df.ko)
 df.map('v', '<C-c>', 'y', df.ko)
 df.map('i', '<C-c>', '<Esc>yya', df.ko)
@@ -29,11 +29,9 @@ df.map('n', '<C-x>', 'dd', df.ko)
 df.map('v', '<C-x>', 'd', df.ko)
 df.map('i', '<C-x>', '<Esc>dda', df.ko)
 
--- reindent and place cursor at the end
-df.map({'n','v'}, '<C-v>', 'P`]l', df.ko)
-df.map('i', '<C-v>', "<Esc>p`]a", df.ko)
-df.map({'n','v'}, '<C-r>', '`[=`]`]$')
-df.map('i', '<C-r>', '<Esc>`[=`]`]$a')
+df.map('n', '<C-v>', 'p`]', df.ko)
+df.map('v', '<C-v>', 'p`]', df.ko)
+df.map('i', '<C-v>', '<C-r>+', df.ko)
 
 -- delete to void register
 df.map('v', 'x', '"_x', df.ko)
@@ -128,3 +126,8 @@ df.map('i', '<S-Tab>', function()
 	if line:match("^%s*$") then return '<C-o>S'
 	else return '<Tab>' end
 end, df.koExpr)
+
+-- remove disruptive matchit and treesitter defaults
+vim.g.no_plugin_maps = true
+vim.keymap.del('x', 'an')
+vim.keymap.del('o', 'an')
