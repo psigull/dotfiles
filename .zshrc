@@ -155,6 +155,8 @@ if [[ ! -o interactive ]]; then
 	return
 fi
 
+autoload -Uz zmv
+
 export KEYTIMEOUT=1
 setopt prompt_subst transient_rprompt
 
