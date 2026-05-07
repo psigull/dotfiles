@@ -1,10 +1,3 @@
 df={}
-require('options')
-require('keymap')
-require('autocmd')
-require('theme')
-require('langs')
-require('loader')
-require('lspinit')
-require('session')
-require('pipes')
+require('core')
+require('extra')
