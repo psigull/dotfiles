@@ -30,7 +30,7 @@ df.map('v', '<C-x>', 'd', df.ko)
 df.map('i', '<C-x>', '<Esc>dda', df.ko)
 
 df.map('n', '<C-v>', 'p`]', df.ko)
-df.map('v', '<C-v>', 'p`]', df.ko)
+df.map('v', '<C-v>', 'pgvy`]', df.ko)
 df.map('i', '<C-v>', '<C-r>+', df.ko)
 
 -- delete to void register
