@@ -5,8 +5,10 @@ ratio = [1,3,2]
 id  = "git"
 url = "*"
 run = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
 id  = "git"
 url = "*/"
 run = "git"
+group = "git"
