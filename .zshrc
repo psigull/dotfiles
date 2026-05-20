@@ -2,10 +2,14 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
 export LESS='--wheel-lines=3'
-# git config --global core.pager "less -+X -R"
+git config --global core.pager "less -+X -R"
 
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 
 # helpers and aliases
