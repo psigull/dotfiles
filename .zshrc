@@ -7,11 +7,6 @@ git config --global core.pager "less -+X -R"
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-
 # helpers and aliases
 alias ls="sed 's/^/-I \"/' .hidden 2>/dev/null | sed 's/$/\"/' | tr '\n' ' ' | LC_COLLATE=C xargs ls --color=auto --group-directories-first" # exclude paths in .hidden
 alias sls='/usr/bin/ls'
@@ -19,12 +14,17 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 
-alias grep="grep --color=auto"
+alias grep="grep --color=auto "
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
 alias srm='/usr/bin/rm'
 alias rm='trash'
+
+alias sgrep='/usr/bin/grep'
+function grep() {
+	 sgrep $@ | sgrep -v grep
+}
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

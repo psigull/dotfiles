@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "balance_power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference

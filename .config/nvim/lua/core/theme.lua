@@ -32,8 +32,9 @@ local Color7 = '#E0E0E0'
 local Color8 = '#B1C8FA'
 local Color9 = '#3E4246'
 
-local bg = '#111111' -- terminal bg
-highlight('Normal', bg, Color10, nil)
+local bg = '#181819' -- terminal bg
+local fg = '#CDCFD2'
+highlight('Normal', bg, fg, nil)
 highlight('NonText', bg, Color1, nil)
 highlight('SignColumn', bg, nil, nil)
 
