@@ -37,11 +37,11 @@ zram_total_k=$((zram_total * 1024 * 1024))
 mem_phys=$((mem_used * 100 / mem_total))
 
 # 2. mem_pure ( (Zram - Used) / Total )
-mem_pure=$(( (zram_used_k - m_used_k) / m_total_k ))
+mem_pure=$(( -100 * (zram_used_k - m_used_k) / m_total_k ))
 
 # 3. zram_pct (Zram Used / Zram Total)
 if [ "$zram_total" -gt 0 ]; then
-    zram_pct=$((zram_used * 100 / zram_total / 100))
+    zram_pct=$((100 * zram_used_k / zram_total_k))
 else
     zram_pct=0
 fi
@@ -76,5 +76,5 @@ usg="$usg_cpu/$usg_gpu"
 mem="$mem_phys/$mem_gpu $mem_pure/$zram_pct/$swap_pct"
 tmp="$tmp_cpu/$tmp_gpu"
 
-#echo "DEBUG: m_used_k=$m_used_k, zram_used_k=$zram_used_k, m_total_k=$m_total_k, raw_pure=$raw_pure"
+#echo "DEBUG: m_used_k=$m_used_k, zram_used_k=$zram_used_k, zram_total_k=$zram_total_k, m_total_k=$m_total_k, zram_pct=$zram_pct"
 echo " $usg   $mem   $tmp"
