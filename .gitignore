@@ -1,2 +1,5 @@
 .config/yazi/flavors/
 .config/yazi/plugins/
+.config/qutebrowser/bookmarks/
+.config/qutebrowser/autoconfig.yml
+.config/qutebrowser/quickmarks

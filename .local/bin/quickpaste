@@ -1,11 +1,9 @@
 #!/bin/sh
 
+newclip="$1"
 backup=$(wl-paste -n 2>/dev/null)
 
-rofi -show emoji -modi emoji \
-	-emoji-mode 'wl-copy' -emoji-format '{emoji}' \
-	-theme-str 'listview { columns: 8; }'
-
+echo -n "$newclip" | wl-copy
 sleep 0.05
 
 if ! pidof -q 'ydotoold'; then

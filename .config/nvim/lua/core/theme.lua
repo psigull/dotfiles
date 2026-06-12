@@ -1,104 +1,102 @@
--- the colour scheme of theseus
--- originally by https://github.com/nodlag/godot-theme-vscode
--- converted with https://github.com/arcticlimer/djanho
+-- 🪐 colour scheme of theseus
 
-vim.cmd[[highlight clear]]
-local highlight = function(group, bg, fg, attr)
-    fg = fg and 'guifg=' .. fg or ''
-    bg = bg and 'guibg=' .. bg or ''
-    attr = attr and 'gui=' .. attr or ''
+vim.cmd([[highlight clear]])
+if vim.fn.exists("syntax_on") then
+    vim.cmd([[syntax reset]])
+end
+vim.g.colors_name = "theseus"
 
-    vim.api.nvim_command('highlight ' .. group .. ' '.. fg .. ' ' .. bg .. ' '.. attr)
+-- palette
+local bg       = '#181819' -- primary terminal background
+local fg       = '#CDCFD2' -- primary text foreground
+local panel    = '#222427' -- floating menus, popups, and tabline background
+local panel_sel = '#2e3b41' -- active item background highlights
+local muted    = '#76787D' -- gray text for comments, hints, and line numbers
+local cursor   = '#3E4246' -- current line / selection block background
+
+-- accent colours
+local pink     = '#EE7987' -- keywords, conditionals, types
+local green    = '#82FBC6' -- secondary types, special tokens
+local teal     = '#B7FDE2' -- vonstants
+local blue     = '#89E2FC' -- functions
+local ice_blue = '#B1C8FA' -- operators
+local yellow   = '#F9ECA8' -- strings
+local pastel_g = '#A7C1AA' -- specialized line elements
+local gray_alt = '#E0E0E0' -- identifiers
+
+-- git / diff colours
+local diff_add = '#405e21'
+local diff_del = '#5e3737'
+local diff_chg = '#44506a'
+
+-- helper function for native highlighting
+local hl = function(group, options)
+    vim.api.nvim_set_hl(0, group, options)
 end
 
-local link = function(target, group)
-    vim.api.nvim_command('highlight! link ' .. target .. ' '.. group)
+-- editor ui surfaces
+hl('Normal',       { fg = fg, bg = bg })
+hl('NonText',      { fg = muted, bg = bg })
+hl('SignColumn',   { bg = bg })
+hl('ColorColumn',  { bg = cursor })
+hl('CursorLine',   { bg = cursor })
+hl('Visual',       { bg = cursor })
+hl('LineNr',       { fg = pastel_g })
+
+-- floating windows and popups
+hl('Pmenu',        { fg = fg, bg = panel })
+hl('PmenuSel',     { fg = cursor, bg = fg })
+hl('PmenuThumb',   { fg = fg, bg = panel })
+hl('WildMenu',     { fg = fg, bg = panel })
+
+-- tabs and statuslines
+hl('StatusLine',   { fg = cursor, bg = gray_alt })
+hl('TabLine',      { fg = muted, bg = panel_sel })
+hl('TabLineFill',  { fg = muted, bg = panel_sel })
+hl('TabLineSel',   { fg = cursor, bg = gray_alt })
+
+-- diffs
+hl('DiffAdd',      { bg = diff_add })
+hl('DiffDelete',   { bg = diff_del })
+hl('DiffChange',   { bg = diff_chg })
+
+-- syntax highlighting
+hl('Comment',      { fg = muted })
+hl('Constant',     { fg = teal })
+hl('String',       { fg = yellow })
+hl('Identifier',   { fg = gray_alt })
+hl('Function',     { fg = blue })
+hl('Keyword',      { fg = pink })
+hl('Conditional',  { fg = pink })
+hl('Repeat',       { fg = pink })
+hl('Operator',     { fg = ice_blue })
+hl('Type',         { fg = green, italic = true })
+hl('Error',        { fg = pink })
+
+-- treesitter
+local links = {
+    ['TSComment']       = 'Comment',
+    ['TSConditional']   = 'Conditional',
+    ['TSConstant']      = 'Constant',
+    ['TSField']         = 'Constant',
+    ['TSFloat']         = 'Number',
+    ['TSFuncMacro']     = 'Macro',
+    ['TSFunction']      = 'Function',
+    ['TSKeyword']       = 'Keyword',
+    ['TSLabel']         = 'Type',
+    ['TSNamespace']     = 'TSType',
+    ['TSNumber']        = 'Number',
+    ['TSOperator']      = 'Operator',
+    ['TSParameter']     = 'Constant',
+    ['TSProperty']      = 'TSField',
+    ['TSRepeat']        = 'Repeat',
+    ['TSString']        = 'String',
+    ['TSType']          = 'Type',
+    ['Whitespace']      = 'Comment',
+    ['Macro']           = 'Function',
+    ['CursorLineNr']    = 'Identifier',
+}
+
+for syntax_group, target_group in pairs(links) do
+    vim.api.nvim_set_hl(0, syntax_group, { link = target_group })
 end
-
-local Color0 = '#EE7987'
-local Color1 = '#76787D'
-local Color10 = '#CDCFD2'
-local Color11 = '#222427'
-local Color12 = '#2e3b41'
-local Color13 = '#623e45'
-local Color14 = '#A7C1AA'
-local Color15 = '#2C2E32'
-local Color2 = '#B7FDE2'
-local Color3 = '#89E2FC'
-local Color4 = '#82FBC6'
-local Color5 = '#cc8fe3'
-local Color6 = '#F9ECA8'
-local Color7 = '#E0E0E0'
-local Color8 = '#B1C8FA'
-local Color9 = '#3E4246'
-
-local bg = '#181819' -- terminal bg
-local fg = '#CDCFD2'
-highlight('Normal', bg, fg, nil)
-highlight('NonText', bg, Color1, nil)
-highlight('SignColumn', bg, nil, nil)
-
-highlight('DiffAdd', '#405e21', nil, nil)
-highlight('DiffDelete', '#5e3737', nil, nil)
-highlight('DiffChange', '#44506a', nil, nil)
-
--- highlight('SignColumn', Color11, nil, nil)
--- highlight('Normal', Color11, Color10, nil)
--- highlight('DiffAdd', Color12, nil, nil)
--- highlight('DiffDelete', Color13, nil, nil)
-highlight('ColorColumn', Color9, nil, nil)
-highlight('Comment', nil, Color1, nil)
-highlight('Conditional', nil, Color5, nil)
-highlight('Constant', nil, Color2, nil)
-highlight('CursorLine', Color9, nil, nil)
-highlight('Error', nil, Color0, nil)
-highlight('Function', nil, Color3, nil)
-highlight('Identifier', nil, Color7, nil)
-highlight('Keyword', nil, Color0, nil)
-highlight('LineNr', nil, Color14, nil)
-highlight('Operator', nil, Color8, nil)
-highlight('Pmenu', Color11, Color10, nil)
-highlight('PmenuSel', Color10, Color9, nil)
-highlight('PmenuThumb', Color11, Color10, nil)
-highlight('Repeat', nil, Color5, nil)
-highlight('StatusLine', Color7, Color9, nil)
-highlight('String', nil, Color6, nil)
-highlight('TSPunctDelimiter', nil, Color10, nil)
-highlight('TabLine', Color15, Color1, nil)
-highlight('TabLineFill', Color15, Color1, nil)
-highlight('TabLineSel', Color7, Color9, nil)
-highlight('Type', nil, Color0, nil)
-highlight('Type', nil, Color4, 'italic')
-highlight('Visual', Color9, nil, nil)
-highlight('WildMenu', Color11, Color10, nil)
-
--- link('NonText', 'Comment')
-link('Conditional', 'Operator')
-link('CursorLineNr', 'Identifier')
-link('Macro', 'Function')
-link('Operator', 'Keyword')
-link('Repeat', 'Conditional')
-link('TSComment', 'Comment')
-link('TSConditional', 'Conditional')
-link('TSConstBuiltin', 'TSVariableBuiltin')
-link('TSConstant', 'Constant')
-link('TSField', 'Constant')
-link('TSFloat', 'Number')
-link('TSFuncMacro', 'Macro')
-link('TSFunction', 'Function')
-link('TSKeyword', 'Keyword')
-link('TSLabel', 'Type')
-link('TSNamespace', 'TSType')
-link('TSNumber', 'Number')
-link('TSOperator', 'Operator')
-link('TSParameter', 'Constant')
-link('TSParameterReference', 'TSParameter')
-link('TSProperty', 'TSField')
-link('TSPunctBracket', 'MyTag')
-link('TSPunctSpecial', 'TSPunctDelimiter')
-link('TSRepeat', 'Repeat')
-link('TSString', 'String')
-link('TSTag', 'MyTag')
-link('TSTagDelimiter', 'Type')
-link('TSType', 'Type')
-link('Whitespace', 'Comment')
