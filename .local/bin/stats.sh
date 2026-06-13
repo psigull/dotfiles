@@ -24,7 +24,7 @@ if command -v zramctl >/dev/null 2>&1; then
     zram_comp=$(echo "$zram_info" | awk '{print $6}' | sed 's/[^0-9]//g')
 
     # standardize to KB
-    zram_cap_k=$((zram_disk * 1024 * 1024))
+    zram_cap_k=$((zram_disk * 1024))
     zram_data_k=$((zram_data * 1024))
     zram_comp_k=$((zram_comp * 1024))
 fi
@@ -85,7 +85,7 @@ usg_cpu=$((100 - $(vmstat 1 2 | tail -1 | awk '{print $15}' || echo "0")))
 
 # Output
 usg="$usg_cpu/$usg_gpu"
-mem="$mem_phys/$mem_gpu $mem_pure/$zram_pct/$swap_pct"
+mem="$mem_phys—$mem_pure/$zram_pct/$swap_pct—$mem_gpu"
 tmp="$tmp_cpu/$tmp_gpu"
 
 echo " $usg   $mem   $tmp"

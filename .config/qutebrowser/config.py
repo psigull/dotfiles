@@ -30,7 +30,7 @@ c.content.blocking.adblock.lists = [
     'https://easylist.to/easylist/easylist.txt',
     'https://easylist.to/easylist/easyprivacy.txt',
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt'
+    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt',
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt',
     'https://filters.adtidy.org/extension/chromium/filters/4.txt',
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances-cookies.txt'
@@ -96,7 +96,6 @@ config.bind('Shift-B', 'cmd-set-text -s :bookmark-load -t')
 config.bind('h', 'cmd-set-text -s :history')
 config.bind('Shift-h', 'cmd-set-text -s :history -t')
 
-
 # tabs
 config.bind('o', 'cmd-set-text -s :open')
 config.bind('e', 'cmd-set-text -s :open {url:pretty}')
@@ -147,22 +146,23 @@ config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
 thm_bg = '#181819'       # deep terminal bg
 thm_panel = '#222427'    # menu / tab bar bg
 thm_fg = '#CDCFD2'       # crisp primary foreground text
-thm_muted = '#76787D'    # dark gray for inactive text / comments
-thm_accent = '#EE7987'   # sharp accent pink/red
-thm_green = '#82FBC6'    # selection accent green
+thm_muted = '#76787D'    # inactive text / comments
+thm_accent = '#eE7987'   # sharp accent
+thm_select = '#82FBC6'   # selection accent
+thm_purp = '#1b162a'     # yes
 
 # * statusbar *
 c.colors.statusbar.normal.bg = thm_bg
 c.colors.statusbar.normal.fg = thm_fg
 
-c.colors.statusbar.insert.bg = thm_accent
-c.colors.statusbar.insert.fg = thm_bg
+c.colors.statusbar.insert.bg = thm_purp
+c.colors.statusbar.insert.fg = thm_fg
 
 c.colors.statusbar.command.bg = thm_panel
 c.colors.statusbar.command.fg = thm_fg
 
 # styling for https url text
-c.colors.statusbar.url.success.https.fg = thm_green
+c.colors.statusbar.url.success.https.fg = thm_select
 
 # * command bar fuzzy completion *
 c.colors.completion.odd.bg = thm_panel
@@ -195,10 +195,10 @@ c.colors.tabs.selected.even.fg = thm_fg
 
 # indicator line on tab edge showing page loading status
 c.colors.tabs.indicator.start = thm_accent
-c.colors.tabs.indicator.stop = thm_green
+c.colors.tabs.indicator.stop = thm_select
 c.colors.tabs.indicator.error = thm_accent
 
 # hint / link key flags
 c.colors.hints.bg = thm_accent
 c.colors.hints.fg = thm_bg
-c.colors.hints.match.fg = thm_green
+c.colors.hints.match.fg = thm_select
