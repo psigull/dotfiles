@@ -39,20 +39,22 @@ c.content.blocking.adblock.lists = [
 # search engines
 c.url.searchengines = {
     'DEFAULT': 'https://google.com/search?q={}',
-    'goog': 'https://google.com/search?q={}',
+
+    'google': 'https://google.com/search?q={}',
+    'youtube': 'https://youtube.com/results?search_query={}',
     'brave': 'https://search.brave.com/search?q={}',
     'ddg': 'https://duckduckgo.com/?q={}',
 
-    'arch': 'https://wiki.archlinux.org/index.php?search={}',
+    'archwiki': 'https://wiki.archlinux.org/index.php?search={}',
     'pkg': 'https://archlinux.org/packages/?q={}',
     'aur': 'https://aur.archlinux.org/packages/?K={}',
 
     'pcgw': 'https://www.pcgamingwiki.com/w/index.php?search={}',
-    'proton': 'https://www.protondb.com/search?q={}',
+    'protondb': 'https://www.protondb.com/search?q={}',
 
-    'wiki': 'https://en.wikipedia.org/wiki/Special:Search?search={}',
-    'godot': 'https://docs.godotengine.org/en/stable/search.html?q={}',
-    'rust': 'https://docs.rs/releases/search?query={}',
+    'wikipedia': 'https://en.wikipedia.org/wiki/Special:Search?search={}',
+    'godot-docs': 'https://docs.godotengine.org/en/stable/search.html?q={}',
+    'rust-docs': 'https://docs.rs/releases/search?query={}',
     'crates': 'https://crates.io/search?q={}',
     'godev': 'https://pkg.go.dev/search?q={}'
 }
@@ -62,16 +64,15 @@ c.auto_save.session = True
 c.url.start_pages = ['about:blank']
 c.content.autoplay = False
 c.scrolling.smooth = True
+c.input.insert_mode.auto_enter = False # we control our insert mode with deliberate intention
 
 
 # ** keybinds **
 
-# clear defaults
-c.bindings.commands = {
-    'normal': {},
-    'insert': {},
-    'command': {}
-}
+# unbind defaults so we aren't floating in space like otousan
+# no hitting random keys by accident
+c.bindings.default['normal'] = {}
+c.hints.chars = 'asdfghjkl'
 
 # essential
 config.bind(':', 'cmd-set-text :') # opens command mode
@@ -81,7 +82,7 @@ config.bind('<Escape>', 'mode-leave', mode='command')   # close command bar safe
 # page navigation
 config.bind('[', 'back')
 config.bind(']', 'forward')
-config.bind('R', 'reload')
+config.bind('<Ctrl-R>', 'reload')
 
 # scrolling
 config.bind('<Up>', 'scroll up')
@@ -91,14 +92,13 @@ config.bind('<Right>', 'scroll right')
 
 # bookmarks & history
 config.bind('Shift-M', 'bookmark-add')
-config.bind('b', 'cmd-set-text -s :bookmark-load')
-config.bind('Shift-B', 'cmd-set-text -s :bookmark-load -t')
-config.bind('h', 'cmd-set-text -s :history')
-config.bind('Shift-h', 'cmd-set-text -s :history -t')
+config.bind('<Ctrl-b>', 'cmd-set-text -s :bookmark-load')
+config.bind('<ctrl-Shift-B>', 'cmd-set-text -s :bookmark-load -t')
+config.bind('<ctrl-h>', 'cmd-set-text -s :history')
+config.bind('<ctrl-Shift-h>', 'cmd-set-text -s :history -t')
 
 # tabs
-config.bind('o', 'cmd-set-text -s :open')
-config.bind('e', 'cmd-set-text -s :open {url:pretty}')
+config.bind('<Ctrl-o>', 'cmd-set-text -s :open')
 config.bind('<Ctrl-e>', 'cmd-set-text -s :open {url:pretty}')
 config.bind('<Ctrl-t>', 'cmd-set-text -s :open -t')
 config.bind('<Ctrl-Shift-p>', 'cmd-set-text -s :open -p')
@@ -110,7 +110,6 @@ config.bind('<Ctrl-`>', 'config-cycle tabs.show always never')
 config.bind('<Ctrl-Tab>', 'tab-next')
 config.bind('<Ctrl-Shift-Tab>', 'tab-prev')
 
-config.bind('x', 'tab-close')
 config.bind('<Ctrl-w>', 'tab-close')
 config.bind('<Ctrl-z>', 'undo')
 
@@ -129,10 +128,10 @@ config.bind('<Ctrl-c>', 'fake-key <Ctrl-c>', mode='normal')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
 
 # hinting
-config.bind('f', 'hint')
-config.bind('Shift-F', 'hint all tab')
+config.bind('<Ctrl-f>', 'hint')
+config.bind('<Ctrl-Shift-F>', 'hint all tab')
 
-# insert mode
+# insert mode -- these are the only alpha-keys not gated by a modifier.
 config.bind('a', 'mode-enter insert')
 config.bind('s', 'mode-enter insert')
 
