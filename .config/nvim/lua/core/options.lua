@@ -33,6 +33,7 @@ vim.opt.diffopt:append("hiddenoff")
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
 vim.opt.foldlevelstart = 99 -- start unfolded
 vim.opt.signcolumn = 'number'
+vim.opt.scrolloff = 8 -- no bouncing
 
 vim.diagnostic.config({
 	virtual_text = false,
