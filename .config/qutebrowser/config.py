@@ -1,7 +1,8 @@
 config.load_autoconfig(False)
 
 # rendering
-c.qt.force_software_rendering = 'chromium'
+#c.qt.force_software_rendering = 'chromium'
+c.qt.args = ['enable-gpu-rasterization', 'enable-zero-copy']
 c.qt.chromium.process_model = 'process-per-site'
 c.qt.chromium.low_end_device_mode = 'always'
 
@@ -13,8 +14,10 @@ c.messages.timeout = 2000
 # tab bar (toggleable)
 c.tabs.show = 'never'
 c.tabs.position = 'left'
-c.tabs.width = '20%'
+c.tabs.width = '15%'
 c.tabs.favicons.show = 'always'
+
+## TODO: need thing a aaaaaaaaa next find next, copy in insert mode too, clear insert mode bindings?
 
 # dark mode
 c.colors.webpage.darkmode.enabled = True
@@ -64,7 +67,9 @@ c.auto_save.session = True
 c.url.start_pages = ['about:blank']
 c.content.autoplay = False
 c.scrolling.smooth = True
-c.input.insert_mode.auto_enter = False # we control our insert mode with deliberate intention
+#c.input.insert_mode.auto_enter = False
+c.input.media_keys = False
+c.content.prefers_reduced_motion = True
 
 
 # ** keybinds **
@@ -80,8 +85,8 @@ config.bind('<Escape>', 'mode-leave', mode='insert')    # escape insert mode bac
 config.bind('<Escape>', 'mode-leave', mode='command')   # close command bar safely
 
 # page navigation
-config.bind('[', 'back')
-config.bind(']', 'forward')
+config.bind('<Ctrl-[>', 'back')
+config.bind('<Ctrl-]>', 'forward')
 config.bind('<Ctrl-R>', 'reload')
 
 # scrolling
@@ -91,7 +96,7 @@ config.bind('<Left>', 'scroll left')
 config.bind('<Right>', 'scroll right')
 
 # bookmarks & history
-config.bind('Shift-M', 'bookmark-add')
+config.bind('<Ctrl-Shift-D>', 'bookmark-add')
 config.bind('<Ctrl-b>', 'cmd-set-text -s :bookmark-load')
 config.bind('<ctrl-Shift-B>', 'cmd-set-text -s :bookmark-load -t')
 config.bind('<ctrl-h>', 'cmd-set-text -s :history')
@@ -114,7 +119,7 @@ config.bind('<Ctrl-w>', 'tab-close')
 config.bind('<Ctrl-z>', 'undo')
 
 # windows
-config.bind('<Ctrl-Shift-S>', 'window-clone')
+config.bind('<Ctrl-Shift-S>', 'tab-detach')
 config.bind('<Ctrl-Shift-W>', 'close')
 config.bind('<Ctrl-Shift-Z>', 'undo -w')
 
@@ -124,20 +129,20 @@ config.bind('<Ctrl-d>', 'search {primary}')
 config.bind('/', 'cmd-set-text /')
 
 # clipboard
-config.bind('<Ctrl-c>', 'fake-key <Ctrl-c>', mode='normal')
+config.bind('<Ctrl-c>', 'yank selection', mode='normal')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
 
 # hinting
-config.bind('<Ctrl-f>', 'hint')
-config.bind('<Ctrl-Shift-F>', 'hint all tab')
+config.bind('<Ctrl-n>', 'hint')
+config.bind('<Ctrl-Shift-n>', 'hint all tab')
 
 # insert mode -- these are the only alpha-keys not gated by a modifier.
 config.bind('a', 'mode-enter insert')
 config.bind('s', 'mode-enter insert')
 
 # video playback
-config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
-
+config.bind('<Ctrl-M>', 'spawn -d mpv {url}')
+config.bind('<Ctrl-Shift-M>', 'hint links spawn -d mpv {hint-url}')
 
 # ** theme **
 

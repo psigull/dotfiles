@@ -5,6 +5,9 @@ vim.opt.wrap = true
 vim.opt.mouse = 'a'
 vim.opt.termguicolors = true
 
+vim.opt.swapfile = false
+vim.opt.undofile = true
+
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.linebreak = true
