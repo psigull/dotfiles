@@ -20,7 +20,9 @@ end})
 
 -- disable auto commenting on newline
 df.autocmd("FileType", { pattern = "*", callback = function()
-	vim.opt.formatoptions:remove({ "c", "r", "o" })
+	vim.schedule(function()
+		vim.opt.formatoptions:remove({ "c", "r", "o" })
+	end)
 end})
 
 -- close help windows easily

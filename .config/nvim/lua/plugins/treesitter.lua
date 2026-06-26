@@ -1,14 +1,8 @@
 return {
-	source = 'nvim-treesitter/nvim-treesitter',
-	hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+    source = 'nvim-treesitter/nvim-treesitter',
+    checkout = 'main',
 	config = function()
-		vim.opt.foldmethod = 'expr'
-		vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
-		require('nvim-treesitter.configs').setup({
-			ensure_installed = df.tslangs,
-			highlight = { enable = true },
-			indent = { enable = true },
-		})
-	end
+		--require('nvim-treesitter').install(df.tslangs)
+		-- TODO: implement custom loader or arborist
+    end
 }

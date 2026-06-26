@@ -32,18 +32,21 @@ vim.opt.smartcase = true
 vim.opt.diffopt:append("hiddenoff")
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
 vim.opt.foldlevelstart = 99 -- start unfolded
-vim.opt.signcolumn = 'number'
+vim.opt.signcolumn = 'yes' -- number = folded w/ signs, yes = persistent space.
+vim.opt.statuscolumn = " %s%l "
 vim.opt.scrolloff = 8 -- no bouncing
 
 vim.diagnostic.config({
 	virtual_text = false,
-	underline = false,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = '',
-			[vim.diagnostic.severity.WARN] = '',
-			[vim.diagnostic.severity.INFO] = '',
-			[vim.diagnostic.severity.HINT] = '',
+			[vim.diagnostic.severity.ERROR] = '✗',
+			[vim.diagnostic.severity.WARN] = '»',
+			[vim.diagnostic.severity.INFO] = '·',
+			[vim.diagnostic.severity.HINT] = '›',
 		}
 	}
 })

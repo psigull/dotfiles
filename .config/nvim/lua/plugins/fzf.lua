@@ -26,11 +26,12 @@ return {
 		})
 
 		df.map('n', '<leader>b', fzf.buffers, df.ko)
+		df.map(df.mA, '<C-`>', fzf.buffers, df.ko)
 		df.map(df.mA, '<C-p>', fzf.resume, df.koNow)
 		df.map(df.mA, '<C-f>', fzf.oldfiles, df.ko)
 
 		df.map('n', '<leader>/', fzf.blines, df.ko)
-		df.map('n', '<leader>gr', fzf.lsp_references, df.ko)
+		df.map('n', '<leader>fr', fzf.lsp_references, df.ko)
 		df.map('n', '<leader>xd', fzf.diagnostics_workspace, df.ko)
 
 		df.map('n', '<leader>?', function() fzfcwd(fzf.live_grep) end, df.ko)

@@ -9,6 +9,19 @@ df.autocmd('LspAttach', { callback = function(args)
 	df.map('n', '<leader>lr', vim.lsp.buf.rename, bufopts)
 	df.map('n', '<leader>la', vim.lsp.buf.code_action, bufopts)
 	df.map('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
+	df.map("n", "<leader>le", vim.diagnostic.open_float, bufopts)
+
+
+	-- strip out semantic tokens. treesitter handles syntax highlighting;
+	-- letting the LSP calculate tokens over RPC wastes immense RAM/CPU.
+	if client then
+		client.server_capabilities.semanticTokensProvider = nil
+	end
+
+	-- Native Inlay Hints for those sweet type annotations without the plugin overhead
+	if client and client:supports_method('textDocument/inlayHint') then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
 
 	-- use lsp folding if supported
 	if client and client:supports_method('textDocument/foldingRange') then
@@ -29,4 +42,13 @@ df.autocmd('LspDetach', { callback = function(args)
 		client.stop(5000) -- timeout
 		vim.notify('lsp ' .. client.name .. ' stopped')
 	end
+end})
+
+-- enable treesitter highlighting if it exists
+df.autocmd("FileType", { callback = function()
+    pcall(vim.api.nvim_buf_line_count, 0)
+    pcall(vim.treesitter.start)
+
+	vim.wo.foldmethod = "expr"
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 end})

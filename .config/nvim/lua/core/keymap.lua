@@ -90,7 +90,7 @@ end, df.koExpr)
 df.map({'n','v','i'}, '<C-a>', '<Esc>ggVG', df.ko)
 
 -- view current file location
-df.map('n', 'L', '<C-g>l', df.ko)
+df.map('n', 'L', function() vim.cmd [[echo expand('%:p')]] end, df.ko)
 
 -- create undo points every space
 df.map('i', '<Space>', '<Space><C-g>u', df.ko)

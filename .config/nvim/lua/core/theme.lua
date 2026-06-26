@@ -50,7 +50,7 @@ hl('PmenuThumb',   { fg = fg, bg = panel })
 hl('WildMenu',     { fg = fg, bg = panel })
 
 -- tabs and statuslines
-hl('StatusLine',   { fg = cursor, bg = gray_alt })
+hl('StatusLine',   { fg = muted, bg = bg })
 hl('TabLine',      { fg = muted, bg = panel_sel })
 hl('TabLineFill',  { fg = muted, bg = panel_sel })
 hl('TabLineSel',   { fg = cursor, bg = gray_alt })
