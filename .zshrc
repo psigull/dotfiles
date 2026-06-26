@@ -7,6 +7,12 @@ git config --global core.pager "less -+X -R"
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
+alias cargo="nice -n 19 taskset -c 0-7 cargo"
+alias make="nice -n 19 taskset -c 0-7 make"
+alias makepkg="nice -n 19 taskset -c 0-7 makepkg"
+export MAKEFLAGS="-j8"
+export CARGO_BUILD_JOBS=8
+
 # helpers and aliases
 alias ls="sed 's/^/-I \"/' .hidden 2>/dev/null | sed 's/$/\"/' | tr '\n' ' ' | LC_COLLATE=C xargs ls --color=auto --group-directories-first" # exclude paths in .hidden
 alias sls='/usr/bin/ls'

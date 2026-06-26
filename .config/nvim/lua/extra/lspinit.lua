@@ -40,7 +40,7 @@ df.autocmd('LspDetach', { callback = function(args)
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	if client and vim.tbl_count(client.attached_buffers) <= 1 then
 		client.stop(5000) -- timeout
-		vim.notify('lsp ' .. client.name .. ' stopped')
+		--vim.notify('lsp ' .. client.name .. ' stopped')
 	end
 end})
 

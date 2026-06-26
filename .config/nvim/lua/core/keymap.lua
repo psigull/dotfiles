@@ -36,9 +36,9 @@ df.map('i', '<C-v>', '<C-r>+', df.ko)
 -- delete to void register
 df.map('v', 'x', '"_x', df.ko)
 df.map('n', 'x', '"_dd', df.ko)
-df.map('v', '<BS>', '"_d', df.ko)
-df.map({'n','v'}, '<Del>', '"_x', df.ko)
-df.map({'n','v'}, '<S-Del>', '<Esc>"_dd', df.ko)
+df.map({'n','v'}, '<BS>', '"_ddi', df.ko)
+df.map({'n','v'}, '<Del>', '"_ddi', df.ko)
+df.map({'n','v'}, '<S-Del>', '<Esc>"_ddi', df.ko)
 df.map('i', '<S-Del>', '<C-o>"_dd', df.ko)
 
 -- keep selection on < > indent shifts
@@ -47,9 +47,9 @@ df.map('v', '>', '>gv', df.ko)
 
 -- macro helpers
 df.map('n', '<C-d>', '*', df.ko)
-df.map('x', '<C-d>', 'y/\\V<C-R>"<CR>', df.ko)
+df.map('x', '<C-d>', '"*y/\\V<C-R>"<CR>', df.ko)
 df.map('n', '<C-S-d>', '*Ncgn', df.ko)
-df.map('x', '<C-S-d>', 'y/\\V<C-R>"<CR>Ncgn', df.ko)
+df.map('x', '<C-S-d>', '"*y/\\V<C-R>"<CR>Ncgn', df.ko)
 
 -- undo/redo
 df.map('n', '<C-z>', 'u', df.ko)
@@ -82,8 +82,9 @@ df.map({'v','i'}, '<C-q>', '<Esc>:conf qa<CR>', df.ko)
 
 -- david blaine escape key
 df.map(df.mA, '<Esc>', function()
-	vim.cmd 'noh'
-	return '<Esc>'
+    vim.cmd('noh')
+    if vim.fn.mode() == 'i' then return '<Esc>' end
+    return ''
 end, df.koExpr)
 
 -- select all

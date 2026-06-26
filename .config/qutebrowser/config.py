@@ -1,10 +1,9 @@
+# pyright: reportUndefinedVariable=false
 config.load_autoconfig(False)
 
 # rendering
-#c.qt.force_software_rendering = 'chromium'
 c.qt.args = ['enable-gpu-rasterization', 'enable-zero-copy']
 c.qt.chromium.process_model = 'process-per-site'
-c.qt.chromium.low_end_device_mode = 'always'
 
 # statusbar
 c.statusbar.show = 'in-mode'
@@ -16,8 +15,6 @@ c.tabs.show = 'never'
 c.tabs.position = 'left'
 c.tabs.width = '15%'
 c.tabs.favicons.show = 'always'
-
-## TODO: need thing a aaaaaaaaa next find next, copy in insert mode too, clear insert mode bindings?
 
 # dark mode
 c.colors.webpage.darkmode.enabled = True
@@ -67,9 +64,10 @@ c.auto_save.session = True
 c.url.start_pages = ['about:blank']
 c.content.autoplay = False
 c.scrolling.smooth = True
-#c.input.insert_mode.auto_enter = False
 c.input.media_keys = False
-c.content.prefers_reduced_motion = True
+c.input.insert_mode.auto_enter = True
+c.input.insert_mode.auto_leave = True
+c.input.mode_override = None
 
 
 # ** keybinds **
@@ -90,17 +88,16 @@ config.bind('<Ctrl-]>', 'forward')
 config.bind('<Ctrl-R>', 'reload')
 
 # scrolling
-config.bind('<Up>', 'scroll up')
-config.bind('<Down>', 'scroll down')
-config.bind('<Left>', 'scroll left')
-config.bind('<Right>', 'scroll right')
+config.bind('<Up>', 'scroll up', mode='normal')
+config.bind('<Down>', 'scroll down', mode='normal')
+config.bind('<Left>', 'scroll left', mode='normal')
+config.bind('<Right>', 'scroll right', mode='normal')
 
 # bookmarks & history
 config.bind('<Ctrl-Shift-D>', 'bookmark-add')
 config.bind('<Ctrl-b>', 'cmd-set-text -s :bookmark-load')
-config.bind('<ctrl-Shift-B>', 'cmd-set-text -s :bookmark-load -t')
-config.bind('<ctrl-h>', 'cmd-set-text -s :history')
-config.bind('<ctrl-Shift-h>', 'cmd-set-text -s :history -t')
+config.bind('<Ctrl-Shift-B>', 'cmd-set-text -s :bookmark-load -t')
+config.bind('<Ctrl-h>', 'cmd-set-text -s :history -t')
 
 # tabs
 config.bind('<Ctrl-o>', 'cmd-set-text -s :open')
@@ -108,7 +105,7 @@ config.bind('<Ctrl-e>', 'cmd-set-text -s :open {url:pretty}')
 config.bind('<Ctrl-t>', 'cmd-set-text -s :open -t')
 config.bind('<Ctrl-Shift-p>', 'cmd-set-text -s :open -p')
 
-config.bind('<Space><Space>', 'tab-focus last')
+config.bind('<Space><Space>', 'tab-focus last', mode='normal')
 config.bind('<Ctrl-f>', 'cmd-set-text -s :tab-select')
 config.bind('<Ctrl-`>', 'config-cycle tabs.show always never')
 
@@ -116,36 +113,38 @@ config.bind('<Ctrl-Tab>', 'tab-next')
 config.bind('<Ctrl-Shift-Tab>', 'tab-prev')
 
 config.bind('<Ctrl-w>', 'tab-close')
-config.bind('<Ctrl-z>', 'undo')
+config.bind('<Ctrl-z>', 'undo', mode='normal')
 
 # windows
-config.bind('<Ctrl-Shift-S>', 'tab-detach')
-config.bind('<Ctrl-Shift-W>', 'close')
-config.bind('<Ctrl-Shift-Z>', 'undo -w')
+config.bind('<Ctrl-Shift-S>', 'tab-give', mode='normal')
+config.bind('<Ctrl-Shift-Z>', 'undo -w', mode='normal')
 
 # selection / search
 config.bind('<Ctrl-a>', 'fake-key <Ctrl-a>')
 config.bind('<Ctrl-d>', 'search {primary}')
-config.bind('/', 'cmd-set-text /')
+config.bind('/', 'cmd-set-text /', mode='normal')
+config.bind('n', 'search-next', mode='normal')
+config.bind('N', 'search-prev', mode='normal')
 
 # clipboard
 config.bind('<Ctrl-c>', 'yank selection', mode='normal')
+config.bind('<Ctrl-c>', 'fake-key <Ctrl-c>', mode='insert')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
 
 # hinting
-config.bind('<Ctrl-n>', 'hint')
-config.bind('<Ctrl-Shift-n>', 'hint all tab')
+config.bind('<Ctrl-n>', 'hint', mode='normal')
+config.bind('<Ctrl-Shift-n>', 'hint all tab', mode='normal')
 
 # insert mode -- these are the only alpha-keys not gated by a modifier.
-config.bind('a', 'mode-enter insert')
-config.bind('s', 'mode-enter insert')
+config.bind('a', 'mode-enter insert', mode='normal')
+config.bind('s', 'mode-enter insert', mode='normal')
 
 # video playback
-config.bind('<Ctrl-M>', 'spawn -d mpv {url}')
-config.bind('<Ctrl-Shift-M>', 'hint links spawn -d mpv {hint-url}')
+config.bind('<Ctrl-M>', 'spawn -d mpv {url}', mode='normal')
+config.bind('<Ctrl-Shift-M>', 'hint links spawn -d mpv {hint-url}', mode='normal')
+
 
 # ** theme **
-
 # 🪐 colour scheme of theseus
 thm_bg = '#181819'       # deep terminal bg
 thm_panel = '#222427'    # menu / tab bar bg

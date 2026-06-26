@@ -10,12 +10,9 @@ local lsp_map = {
 	python 	= 'pyright',
 
 	-- highlighting only
-	-- verify treesitter names
-	gomod	= '',
 	c_sharp = '',
 	typescript 	= '',
 	javascript 	= '',
-	tsx		= '',
 }
 
 

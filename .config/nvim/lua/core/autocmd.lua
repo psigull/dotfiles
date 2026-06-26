@@ -43,3 +43,22 @@ df.autocmd('BufWritePre', { pattern = '*', callback = function()
 	vim.cmd [[keepjumps keeppatterns silent! :%s/\($\n\s*\)\+\%$//e]] -- eof
 	vim.fn.winrestview(view)
 end})
+
+-- prevent duplicate 'new' buffer creation on :sav
+vim.api.nvim_create_user_command('Sav', function(opts)
+    local old_buf = vim.api.nvim_get_current_buf()
+    vim.cmd('sav ' .. opts.args)
+    if vim.api.nvim_get_current_buf() ~= old_buf then
+        vim.api.nvim_buf_delete(old_buf, { force = true })
+    end
+end, { nargs = 1, complete = 'file' })
+
+-- mkdir -p on save
+df.autocmd("BufWritePre", {
+    callback = function(args)
+        local dir = vim.fn.fnamemodify(args.match, ":p:h")
+        if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, "p")
+        end
+    end
+})

@@ -5,3 +5,4 @@
 .config/qutebrowser/autoconfig.yml
 .config/qutebrowser/quickmarks
 .local/share/applications/
+.local/bin/stitch
