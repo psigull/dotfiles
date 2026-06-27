@@ -36,9 +36,9 @@ df.map('i', '<C-v>', '<C-r>+', df.ko)
 -- delete to void register
 df.map('v', 'x', '"_x', df.ko)
 df.map('n', 'x', '"_dd', df.ko)
-df.map({'n','v'}, '<BS>', '"_ddi', df.ko)
-df.map({'n','v'}, '<Del>', '"_ddi', df.ko)
-df.map({'n','v'}, '<S-Del>', '<Esc>"_ddi', df.ko)
+df.map({'n','v'}, '<BS>', '"_dda', df.ko)
+df.map({'n','v'}, '<Del>', '"_dda', df.ko)
+df.map({'n','v'}, '<S-Del>', '<Esc>"_dda', df.ko)
 df.map('i', '<S-Del>', '<C-o>"_dd', df.ko)
 
 -- keep selection on < > indent shifts

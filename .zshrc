@@ -2,7 +2,15 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
 export LESS='--wheel-lines=3'
+
+git config --global init.defaultBranch "main"
+git config --global filter.lfs.process "git-lfs filter-process"
+git config --global filter.lfs.required "true"
+git config --global filter.lfs.clean "git-lfs clean -- %f"
+git config --global filter.lfs.smudge "git-lfs smudge -- %f"
 git config --global core.pager "less -+X -R"
+git config --global core.excludesFile "~/.gitignore_global"
+git config --global --add safe.directory "/home/vela/*"
 
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
@@ -208,6 +216,8 @@ setopt extendedglob nomatch noglobdots
 setopt notify nobeep
 unsetopt autocd
 unsetopt prompt_sp
+
+unset pasteinit pastefinish
 
 eval $(dircolors -b)
 

@@ -1,0 +1,23 @@
+[common]
+executable_name = "/usr/bin/steam"
+dbus_name = "com.steampowered.*"
+
+[x11]
+
+[network]
+
+[notify]
+
+[systray]
+
+[pulse_audio]
+
+[direct_rendering]
+enable_aco = true
+
+[joystick]
+
+[gamemode]
+
+[home_share]
+home_paths = [ ".local/share/Steam", ".steam", ".local/share/Steam/compatibilitytools.d" ]

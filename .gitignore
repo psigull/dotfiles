@@ -1,8 +1,9 @@
 .config/yazi/flavors/
 .config/yazi/plugins/
 .config/qutebrowser/bookmarks/
-.config/qutebrowser/greasemonkey/
+.config/qutebrowser/greasemonkey/_*
 .config/qutebrowser/autoconfig.yml
 .config/qutebrowser/quickmarks
 .local/share/applications/
 .local/bin/stitch
+.local/share/bubblejail/**/home/
