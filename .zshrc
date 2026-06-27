@@ -15,6 +15,9 @@ git config --global --add safe.directory "/home/vela/*"
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
+# greyscale, stem darkening for thin fonts
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40 cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
+
 alias cargo="nice -n 19 taskset -c 0-7 cargo"
 alias make="nice -n 19 taskset -c 0-7 make"
 alias makepkg="nice -n 19 taskset -c 0-7 makepkg"

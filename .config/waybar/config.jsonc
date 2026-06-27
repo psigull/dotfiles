@@ -50,7 +50,7 @@
 		"scroll-step": 5,
 		"reverse-mouse-scrolling": true,
 		"format": "{icon} {volume}%",
-		"format-muted": "",
+		"format-muted": "󰖁",
 		"format-source": "",
 		"format-icons": {
 			"default": ["", "", ""]
@@ -99,9 +99,9 @@
 
 	"network": {
 		"format-wifi": "",
-		"format-ethernet": "",
+		"format-ethernet": "󰈀",
 		"tooltip-format": "{ifname}:{essid} {ipaddr}/{cidr} via {gwaddr}",
-		"format-linked": "",
+		"format-linked": "󰌷",
 		"format-disconnected": "⚠"
 	},
 

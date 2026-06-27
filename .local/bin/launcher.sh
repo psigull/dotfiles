@@ -50,7 +50,7 @@ if [ -n "$chosen" ] && [[ "$desktop_apps" == *"$chosen"* ]]; then
     cmd=$(grep -m1 "^Exec=" "$file" | cut -d'=' -f2- | sed 's/ %[fFuUdDnNickvm]//g' | xargs)
     needs_term=$(grep "^Terminal=" "$file" | cut -d'=' -f2)
     if [ "$needs_term" = "true" ]; then
-        hyprctl dispatch exec "foot sh -c '$cmd'"
+        hyprctl dispatch exec "footclient sh -c '$cmd'"
         save_recent "$chosen"
     else
         hyprctl dispatch exec "$cmd"
@@ -58,6 +58,6 @@ if [ -n "$chosen" ] && [[ "$desktop_apps" == *"$chosen"* ]]; then
     fi
 else
     # fallback for raw commands
-    hyprctl dispatch exec "foot --hold sh -c '$query'"
+    hyprctl dispatch exec "footclient --hold sh -c '$query'"
     # don't save these to recents as they're meant for one-offs
 fi

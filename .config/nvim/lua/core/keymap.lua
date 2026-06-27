@@ -36,9 +36,10 @@ df.map('i', '<C-v>', '<C-r>+', df.ko)
 -- delete to void register
 df.map('v', 'x', '"_x', df.ko)
 df.map('n', 'x', '"_dd', df.ko)
-df.map({'n','v'}, '<BS>', '"_dda', df.ko)
-df.map({'n','v'}, '<Del>', '"_dda', df.ko)
-df.map({'n','v'}, '<S-Del>', '<Esc>"_dda', df.ko)
+df.map('n', '<BS>', '"_dd', df.ko)
+df.map('n', '<Del>', '"_dd', df.ko)
+df.map('v', '<BS>', '"_dha', df.ko)
+df.map('v', '<Del>', '"_dha', df.ko)
 df.map('i', '<S-Del>', '<C-o>"_dd', df.ko)
 
 -- keep selection on < > indent shifts
@@ -114,7 +115,7 @@ vim.cmd('nmap <C-LeftMouse> <LeftMouse>gx')
 
 -- open terminal to active buffer cwd
 df.map({'n','v','i'}, '<F2>', function()
-	vim.fn.jobstart(string.format('foot --working-directory %s', vim.fn.expand('%:p:h')), { detach = true })
+	vim.fn.jobstart(string.format('footclient --working-directory %s', vim.fn.expand('%:p:h')), { detach = true })
 end, df.ko)
 
 -- down arrow creates new line if there isn't one

@@ -5,4 +5,4 @@ split=("${(s/:/)input}")
 fn="${split[1]}"
 ln="${split[2]}"
 
-foot -e nvim "+$ln" "$fn"
+footclient -e nvim "+$ln" "$fn"

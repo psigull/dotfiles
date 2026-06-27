@@ -1,6 +1,5 @@
 * {
-	font-family: GraphBars, FontAwesome, Fira Code, sans-serif;
-	font-size: 13px;
+	font-family: GraphBars, WiredPropo;
 
 	/* workaround for cjk characters */
 	/* https://github.com/Alexays/Waybar/issues/2026 */

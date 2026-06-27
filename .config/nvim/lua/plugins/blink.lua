@@ -8,6 +8,7 @@ return {
 				preset = 'super-tab',
 				['<Tab>'] = { 'select_and_accept', 'fallback' },
 				['<S-Tab>'] = false,
+				["<C-space>"] = { "show", "show_documentation", "hide" },
 			},
 			completion = {
 				documentation = { auto_show = false },

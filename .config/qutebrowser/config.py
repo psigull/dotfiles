@@ -2,11 +2,24 @@
 config.load_autoconfig(False)
 
 # rendering
-c.qt.args = ['enable-gpu-rasterization', 'enable-zero-copy']
-c.qt.chromium.process_model = 'process-per-site'
+#c.content.user_stylesheets = ["~/.config/qutebrowser/styles.css"]
+c.qt.args = [
+    'enable-gpu-rasterization', # hw accel pages
+    'enable-zero-copy', # cpu doesn't need to know what the page renders like
+    'disable-background-timer-throttling', # prevents background JS from matching foreground priority
+    'enable-features=ResourceLoadScheduler', # throttles request batches in background tabs
+    'enable-accelerated-video-decode', # Offloads video to GPU instead of software
+    'ignore-gpu-blocklist',            # Forces GPU features even if Qt reports minor driver mismatches
+    'enable-features=DailyRefresh,ResourceSaverDailyRefresh', # disable background tabs
+    'enable-features=PageLifecycle', # make sure background tabs dont continuously paint
+    'enable-oop-rasterization', # pushes ajax/dom layouts to separate async gpu thread
+    'enable-skia-graphite', # vulkan rendering
+    'enable-quic', # udp > tcp
+    'autoplay-policy=no-user-gesture-required', # force disable autoplay
+]
 
 # statusbar
-c.statusbar.show = 'in-mode'
+c.statusbar.show = 'always'
 c.statusbar.widgets = ['keypress', 'search_match', 'url', 'scroll', 'progress']
 c.messages.timeout = 2000
 
@@ -16,8 +29,14 @@ c.tabs.position = 'left'
 c.tabs.width = '15%'
 c.tabs.favicons.show = 'always'
 
-# dark mode
+# appearance
 c.colors.webpage.darkmode.enabled = True
+c.fonts.default_family = 'Wired Propo'
+c.fonts.web.family.standard = 'Wired Propo'
+c.fonts.web.family.fixed = 'Wired Mono'
+c.fonts.web.family.sans_serif = 'Wired Propo'
+c.fonts.web.family.serif = 'Wired Propo'
+c.fonts.default_size = '11px'
 
 # privacy
 c.content.tls.certificate_errors = 'ask'
@@ -60,14 +79,23 @@ c.url.searchengines = {
 }
 
 # misc
+c.session.lazy_restore = True
 c.auto_save.session = True
 c.url.start_pages = ['about:blank']
-c.content.autoplay = False
 c.scrolling.smooth = True
 c.input.media_keys = False
+
+c.content.autoplay = False
+c.content.prefers_reduced_motion = True
+
+c.input.mode_override = None
 c.input.insert_mode.auto_enter = True
 c.input.insert_mode.auto_leave = True
-c.input.mode_override = None
+
+# file picker
+c.fileselect.handler = "external"
+c.fileselect.single_file.command = ['yazipicker.sh']
+c.fileselect.multiple_files.command = ['yazipicker.sh']
 
 
 # ** keybinds **
