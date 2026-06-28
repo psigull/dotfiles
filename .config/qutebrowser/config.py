@@ -2,20 +2,28 @@
 config.load_autoconfig(False)
 
 # rendering
-#c.content.user_stylesheets = ["~/.config/qutebrowser/styles.css"]
 c.qt.args = [
+    'enable-skia-graphite', # vulkan rendering
     'enable-gpu-rasterization', # hw accel pages
     'enable-zero-copy', # cpu doesn't need to know what the page renders like
-    'disable-background-timer-throttling', # prevents background JS from matching foreground priority
+    'disable-low-res-tiling',   # prevents painting blurry placeholders
+    'enable-accelerated-2d-canvas', # offload 2d elements
+    'enable-accelerated-video-decode', # hw video
+    'ignore-gpu-blocklist',            # force gpu
+    'force-color-profile=srgb',
+
+    'disable-animations',
+    'renderer-process-limit=4',
+    'num-raster-threads=4',
+    'disable-background-networking',
+    'disable-background-timer-throttling=false', # prevents background js
+    'enable-quic', # udp > tcp
+
+    # possibly redundant
     'enable-features=ResourceLoadScheduler', # throttles request batches in background tabs
-    'enable-accelerated-video-decode', # Offloads video to GPU instead of software
-    'ignore-gpu-blocklist',            # Forces GPU features even if Qt reports minor driver mismatches
-    'enable-features=DailyRefresh,ResourceSaverDailyRefresh', # disable background tabs
     'enable-features=PageLifecycle', # make sure background tabs dont continuously paint
     'enable-oop-rasterization', # pushes ajax/dom layouts to separate async gpu thread
-    'enable-skia-graphite', # vulkan rendering
-    'enable-quic', # udp > tcp
-    'autoplay-policy=no-user-gesture-required', # force disable autoplay
+    'autoplay-policy=user-gesture-required' # force autoplay disabled
 ]
 
 # statusbar
@@ -46,7 +54,7 @@ c.content.cookies.accept = 'no-3rdparty'
 c.content.headers.do_not_track = True
 
 # adblocking
-c.content.blocking.method = 'adblock'
+c.content.blocking.method = 'both'
 c.content.blocking.adblock.lists = [
     'https://easylist.to/easylist/easylist.txt',
     'https://easylist.to/easylist/easyprivacy.txt',
@@ -100,7 +108,6 @@ c.fileselect.multiple_files.command = ['yazipicker.sh']
 
 
 # ** keybinds **
-
 # unbind defaults so we aren't floating in space like otousan
 # no hitting random keys by accident
 c.bindings.default['normal'] = {}
