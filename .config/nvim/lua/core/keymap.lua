@@ -115,7 +115,7 @@ vim.cmd('nmap <C-LeftMouse> <LeftMouse>gx')
 
 -- open terminal to active buffer cwd
 df.map({'n','v','i'}, '<F2>', function()
-	vim.fn.jobstart(string.format('footclient --working-directory %s', vim.fn.expand('%:p:h')), { detach = true })
+	vim.fn.jobstart(string.format('foot --working-directory %s', vim.fn.expand('%:p:h')), { detach = true })
 end, df.ko)
 
 -- down arrow creates new line if there isn't one
