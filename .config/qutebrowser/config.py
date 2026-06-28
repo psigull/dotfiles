@@ -28,8 +28,10 @@ c.tabs.show = 'never'
 c.tabs.position = 'left'
 c.tabs.width = '15%'
 c.tabs.favicons.show = 'always'
+c.tabs.mousewheel_switching = False
 
 # appearance
+c.completion.height = '25%'
 c.colors.webpage.darkmode.enabled = True
 c.fonts.default_family = 'Wired Propo'
 c.fonts.web.family.standard = 'Wired Propo'
@@ -79,7 +81,6 @@ c.url.searchengines = {
 }
 
 # misc
-c.session.lazy_restore = True
 c.auto_save.session = True
 c.url.start_pages = ['about:blank']
 c.scrolling.smooth = True
