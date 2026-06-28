@@ -17,11 +17,27 @@ save_recent() {
 }
 
 if [[ ! -f "$CACHE_FILE" ]]; then
-    grep -hE "^Name=" /usr/share/applications/*.desktop ~/.local/share/applications/*.desktop 2>/dev/null \
-        | cut -d'=' -f2 | sort -u > "$CACHE_FILE"
+	declare -A unique_apps
+
+	for dir in "/usr/share/applications" "$HOME/.local/share/applications"; do
+		[[ -d "$dir" ]] || continue
+		for file in "$dir"/*.desktop; do
+			[[ -f "$file" ]] || continue
+			base=$(basename "$file")
+			unique_apps["$base"]="$file"
+		done
+	done
+
+	for file in "${unique_apps[@]}"; do
+		grep -q "^NoDisplay=true" "$file" && continue
+		grep -m1 "^Name=" "$file"
+	done | cut -d'=' -f2- | sort -u > "$CACHE_FILE"
 fi
 
-selection=$(cat "$RECENTS_FILE" "$CACHE_FILE" 2>/dev/null | awk '!visited[$0]++' | fzf --reverse --prompt="RUN > " --print-query)
+# make sure stale recents are filtered out
+selection=$( { grep -F -x -f "$CACHE_FILE" "$RECENTS_FILE" 2>/dev/null; cat "$CACHE_FILE"; } \
+    | awk '!visited[$0]++' \
+    | fzf --reverse --prompt="RUN > " --print-query)
 
 if [ -z "$selection" ]; then
     exit 0
@@ -40,11 +56,11 @@ desktop_apps=$(cat "$CACHE_FILE")
 if [ -n "$chosen" ] && [[ "$desktop_apps" == *"$chosen"* ]]; then
     # added -F -x to grep here to ensure 'btop++' looks for exactly 'Name=btop++'
     # instead of accidentally matching 'btop' or using '+' as a regex quantifier
-    file=$(grep -l -F -x "Name=$chosen" /usr/share/applications/*.desktop ~/.local/share/applications/*.desktop 2>/dev/null | head -n 1)
+    file=$(grep -l -F -x "Name=$chosen" ~/.local/share/applications/*.desktop /usr/share/applications/*.desktop 2>/dev/null | head -n 1)
 
     if [ -z "$file" ]; then
         # fallback just in case exact match failed due to trailing spaces in desktop files
-        file=$(grep -l -F "Name=$chosen" /usr/share/applications/*.desktop ~/.local/share/applications/*.desktop 2>/dev/null | head -n 1)
+        file=$(grep -l -F "Name=$chosen" ~/.local/share/applications/*.desktop /usr/share/applications/*.desktop 2>/dev/null | head -n 1)
     fi
 
     cmd=$(grep -m1 "^Exec=" "$file" | cut -d'=' -f2- | sed 's/ %[fFuUdDnNickvm]//g' | xargs)
