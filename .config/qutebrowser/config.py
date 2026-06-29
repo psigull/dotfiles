@@ -241,3 +241,11 @@ c.colors.tabs.indicator.error = thm_accent
 c.colors.hints.bg = thm_accent
 c.colors.hints.fg = thm_bg
 c.colors.hints.match.fg = thm_select
+
+# * right click menu ui *
+c.colors.contextmenu.menu.bg = '#111111'
+c.colors.contextmenu.menu.fg = '#cccccc'
+c.colors.contextmenu.selected.bg = '#444444'
+c.colors.contextmenu.selected.fg = '#ffffff'
+c.colors.contextmenu.disabled.bg = '#111111'
+c.colors.contextmenu.disabled.fg = '#555555'
