@@ -164,7 +164,7 @@ config.bind('n', 'search-next', mode='normal')
 config.bind('N', 'search-prev', mode='normal')
 
 # clipboard
-config.bind('<Ctrl-c>', 'fake-key <Ctrl-c>')
+config.bind('<Ctrl-c>', 'yank selection')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
 
 # hinting
