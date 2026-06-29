@@ -1,3 +1,4 @@
+stty intr ^x
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
@@ -80,7 +81,7 @@ alias calc='noglob calc'
 alias ca='calc'
 
 alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
-alias manb="BROWSER=zen.sh man --html" # open manual entry in browser
+alias manb="BROWSER=qutebrowser man --html" # open manual entry in browser
 
 alias amdtop='amdgpu_top'
 alias fixwaybar='touch -m .config/waybar/config.jsonc'
@@ -110,7 +111,7 @@ function xfiles() {
 }
 
 function closebrowser() {
-	hyprctl dispatch focuswindow class:app.zen_browser.zen
+	hyprctl dispatch focuswindow class:org.qutebrowser.qutebrowser
 	sleep 0.1
 
 	if ! pidof -q 'ydotoold'; then

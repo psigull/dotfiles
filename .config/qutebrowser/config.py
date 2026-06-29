@@ -117,6 +117,7 @@ c.hints.chars = 'asdfghjkl'
 config.bind(':', 'cmd-set-text :') # opens command mode
 config.bind('<Escape>', 'mode-leave', mode='insert')    # escape insert mode back to normal
 config.bind('<Escape>', 'mode-leave', mode='command')   # close command bar safely
+config.bind('<Ctrl-Shift-Alt-Q>', 'quit')
 
 # page navigation
 config.bind('<Ctrl-[>', 'back')
@@ -133,7 +134,7 @@ config.bind('<Right>', 'scroll right', mode='normal')
 config.bind('<Ctrl-Shift-D>', 'bookmark-add')
 config.bind('<Ctrl-b>', 'cmd-set-text -s :bookmark-load')
 config.bind('<Ctrl-Shift-B>', 'cmd-set-text -s :bookmark-load -t')
-config.bind('<Ctrl-h>', 'cmd-set-text -s :history -t')
+config.bind('<Ctrl-h>', 'history -t')
 
 # tabs
 config.bind('<Ctrl-o>', 'cmd-set-text -s :open')
