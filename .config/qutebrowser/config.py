@@ -3,29 +3,12 @@ config.load_autoconfig(False)
 
 # rendering
 c.qt.args = [
-    'ignore-gpu-blocklist',            # force gpu
-    'enable-accelerated-video-decode', # hw video
-
-    'enable-zero-copy', # cpu doesn't need to know what the page renders like
-    'enable-oop-rasterization', # pushes ajax/dom layouts to separate async gpu thread
-    'enable-gpu-rasterization', # hw accel pages
-    'disable-low-res-tiling',   # prevents painting blurry placeholders
-
-    'enable-accelerated-2d-canvas', # offload 2d elements
-    'force-color-profile=srgb',
-
     'disable-animations',
-    'enable-quic', # udp > tcp
     'renderer-process-limit=6', # kMaxRendererProcessCount=82, oof
-    'num-raster-threads=6', # should auto to n_cpu_cores
-
     'disable-background-networking',
-    'disable-background-timer-throttling=false', # prevents background js
-    'autoplay-policy=user-gesture-required', # force autoplay disabled
+    'autoplay-policy=user-gesture-required',
     'disable-rgba-font-rendering',
-
-    # vaapi, background restrictions, and middle mouse scrolling
-    'enable-features=VaapiVideoDecoder,ResourceLoadScheduler,PageLifecycle,MiddleClickAutoscroll',
+    'enable-features=MiddleClickAutoscroll',
 ]
 
 # statusbar
