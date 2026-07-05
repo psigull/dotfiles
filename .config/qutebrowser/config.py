@@ -3,27 +3,29 @@ config.load_autoconfig(False)
 
 # rendering
 c.qt.args = [
-    'enable-skia-graphite', # vulkan rendering
-    'enable-gpu-rasterization', # hw accel pages
-    'enable-zero-copy', # cpu doesn't need to know what the page renders like
-    'disable-low-res-tiling',   # prevents painting blurry placeholders
-    'enable-accelerated-2d-canvas', # offload 2d elements
-    'enable-accelerated-video-decode', # hw video
     'ignore-gpu-blocklist',            # force gpu
+    'enable-accelerated-video-decode', # hw video
+
+    'enable-zero-copy', # cpu doesn't need to know what the page renders like
+    'enable-oop-rasterization', # pushes ajax/dom layouts to separate async gpu thread
+    'enable-gpu-rasterization', # hw accel pages
+    'disable-low-res-tiling',   # prevents painting blurry placeholders
+
+    'enable-accelerated-2d-canvas', # offload 2d elements
     'force-color-profile=srgb',
 
     'disable-animations',
-    'renderer-process-limit=4',
-    'num-raster-threads=4',
+    'enable-quic', # udp > tcp
+    'renderer-process-limit=6', # kMaxRendererProcessCount=82, oof
+    'num-raster-threads=6', # should auto to n_cpu_cores
+
     'disable-background-networking',
     'disable-background-timer-throttling=false', # prevents background js
-    'enable-quic', # udp > tcp
+    'autoplay-policy=user-gesture-required', # force autoplay disabled
+    'disable-rgba-font-rendering',
 
-    # possibly redundant
-    'enable-features=ResourceLoadScheduler', # throttles request batches in background tabs
-    'enable-features=PageLifecycle', # make sure background tabs dont continuously paint
-    'enable-oop-rasterization', # pushes ajax/dom layouts to separate async gpu thread
-    'autoplay-policy=user-gesture-required' # force autoplay disabled
+    # vaapi, background restrictions, and middle mouse scrolling
+    'enable-features=VaapiVideoDecoder,ResourceLoadScheduler,PageLifecycle,MiddleClickAutoscroll',
 ]
 
 # statusbar
@@ -46,7 +48,7 @@ c.fonts.web.family.standard = 'Wired Propo'
 c.fonts.web.family.fixed = 'Wired Mono'
 c.fonts.web.family.sans_serif = 'Wired Propo'
 c.fonts.web.family.serif = 'Wired Propo'
-c.fonts.default_size = '11px'
+c.fonts.default_size = '12px'
 
 # privacy
 c.content.tls.certificate_errors = 'ask'
@@ -93,6 +95,7 @@ c.auto_save.session = True
 c.url.start_pages = ['about:blank']
 c.scrolling.smooth = True
 c.input.media_keys = False
+c.content.javascript.clipboard = 'access'
 
 c.content.autoplay = False
 c.content.prefers_reduced_motion = True
@@ -102,7 +105,7 @@ c.input.insert_mode.auto_enter = True
 c.input.insert_mode.auto_leave = True
 
 # file picker
-c.fileselect.handler = "external"
+c.fileselect.handler = 'external'
 c.fileselect.single_file.command = ['yazipicker.sh']
 c.fileselect.multiple_files.command = ['yazipicker.sh']
 
@@ -166,6 +169,7 @@ config.bind('N', 'search-prev', mode='normal')
 # clipboard
 config.bind('<Ctrl-c>', 'yank selection')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
+config.bind('<Ctrl-shift-x>', 'jseval -q var link = document.querySelector("a:hover"); if(link) { navigator.clipboard.writeText(link.href); }')
 
 # hinting
 config.bind('<Ctrl-n>', 'hint', mode='normal')

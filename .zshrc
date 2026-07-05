@@ -55,7 +55,7 @@ function y() {
 alias vim='nvim'
 alias vimnone='nvim -i NONE'
 alias pnp='pnpm'
-alias cpr='rsync -ah --partial --info=progress2'
+alias cpr="rsync -ah --exclude={'target/','venv/'} --filter=':- .gitignore' --partial --info=progress2"
 alias rg='rg -uu --no-heading --glob "!.git"'
 alias todo='rg -i TODO'
 
