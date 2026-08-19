@@ -4,6 +4,8 @@ dbus_name = "com.steampowered.*"
 
 [x11]
 
+[wayland]
+
 [network]
 
 [notify]
@@ -20,4 +22,4 @@ enable_aco = true
 [gamemode]
 
 [home_share]
-home_paths = [ ".local/share/Steam", ".steam", ".local/share/Steam/compatibilitytools.d" ]
+home_paths = [ ".local/share/Steam", ".steam", ".local/share/Steam/compatibilitytools.d", "games/proton" ]

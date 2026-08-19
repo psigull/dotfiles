@@ -133,3 +133,8 @@ end, df.koExpr)
 vim.g.no_plugin_maps = true
 vim.keymap.del('x', 'an')
 vim.keymap.del('o', 'an')
+
+-- remove middle mouse paste (why is this the default now suddenly??)
+for _, m in ipairs({"<MiddleMouse>", "<2-MiddleMouse>", "<3-MiddleMouse>", "<4-MiddleMouse>"}) do
+  vim.keymap.set({"n", "v", "i", "c"}, m, "<Nop>")
+end

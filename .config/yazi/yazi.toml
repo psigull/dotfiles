@@ -12,3 +12,13 @@ id  = "git"
 url = "*/"
 run = "git"
 group = "git"
+
+[opener]
+engrampa = [
+    { run = 'engrampa "$@"', orphan = true, desc = "Open with Engrampa" },
+]
+
+[open]
+prepend_rules = [
+    { mime = "application/zip", use = "engrampa" },
+]

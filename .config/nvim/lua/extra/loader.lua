@@ -1,7 +1,8 @@
--- plugin loader with mini.deps
 -- because ofc i have to reinvent the wheel
 local ok, minideps = pcall(require, 'mini.deps')
 if not ok then return end
+
+minideps.setup()
 
 df.now = minideps.now
 df.later = minideps.later

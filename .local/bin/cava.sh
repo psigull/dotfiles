@@ -4,7 +4,7 @@
 pkill -fi polybar_cava
 
 c2="#eefffd"
-cm="#16161d"
+cm="#eefffd"
 c1="#ffffff"
 
 config_file="/tmp/polybar_cava_config"
@@ -16,10 +16,8 @@ sample_rate = 48000
 bars = 256
 framerate = 60
 sleep_timer = 15
-lower_cutoff_freq = 50
-higher_cutoff_freq = 18000
-autosens = 1
-sensitivity = 200
+autosens = 0
+sensitivity = 1200
 
 [output]
 method = raw
@@ -35,9 +33,9 @@ gravity = 0
 noise_reduction = 0
 
 [eq]
-1 = 1.33
-2 = 1
-3 = 1
+1 = 1
+2 = 9
+3 = 6
 EOF
 
 cava -p "$config_file" | awk -v c1="$c1" -v cm="$cm" -v c2="$c2" '

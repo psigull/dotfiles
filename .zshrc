@@ -13,7 +13,9 @@ git config --global core.pager "less -+X -R"
 git config --global core.excludesFile "~/.gitignore_global"
 git config --global --add safe.directory "/home/vela/*"
 
-export PATH="$HOME/.local/bin:$PATH"
+export SCCACHE_BASE_DIR="$HOME"
+alias bevdev='cargo run --features bevy/dynamic_linking'
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 export GOPATH="$HOME/.go"
 
 # greyscale, stem darkening for thin fonts
@@ -75,7 +77,7 @@ alias grevall="git reset --hard HEAD"
 alias greb="git rebase -i "
 
 function calc() {
-	echo $* | bc -l
+	echo $(($*)) | bc -l
 }
 alias calc='noglob calc'
 alias ca='calc'
@@ -84,7 +86,7 @@ alias running='ps xfo tty=,pid=,cmd= --sort=tty' # list running user processes
 alias manb="BROWSER=qutebrowser man --html" # open manual entry in browser
 
 alias amdtop='amdgpu_top'
-alias fixwaybar='touch -m .config/waybar/config.jsonc'
+alias fixwaybar='touch -m ~/.config/waybar/config.jsonc'
 alias emptytrash='trash-empty -f'
 
 alias umu='PROTONPATH=GE-Proton WINEPREFIX=$PWD/00_pfx umu-run '

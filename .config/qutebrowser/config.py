@@ -3,13 +3,32 @@ config.load_autoconfig(False)
 
 # rendering
 c.qt.args = [
+    'enable-gpu-rasterization',
+    'ignore-gpu-blocklist',
+    'enable-accelerated-video-decode',
+    'enable-zero-copy',
+    'enable-oop-rasterization',
+    'enable-accelerated-2d-canvas',
+    #'disable-low-res-tiling',
+    'num-raster-threads=4', # mouse feels smoother, `cursor:no_hardware_cursors=true` in hyprland due to proton mouse capture crash on amdgpu
+    #'force-color-profile=srgb',
+
+    'enable-quic',
     'disable-animations',
     'renderer-process-limit=6', # kMaxRendererProcessCount=82, oof
     'disable-background-networking',
+    #'disable-background-timer-throttling=false',
     'autoplay-policy=user-gesture-required',
-    'disable-rgba-font-rendering',
-    'enable-features=MiddleClickAutoscroll',
+    #'disable-rgba-font-rendering',
+    'force-dark-mode',
+    #'enable-features=VaapiVideoDecoder,ResourceLoadScheduler,PageLifecycle,MiddleClickAutoscroll',
+
+    'use-vulkan=native',
+    'enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,CanvasOopRasterization,VaapiVideoDecoder,ResourceLoadScheduler,PageLifecycle,MiddleClickAutoscroll,WebUIDarkMode,IntensiveWakeUpThrottling,BatterySaverModeAvailable,BatterySaverMode,HighEfficiencyModeAvailable,HighEfficiencyMode:time_before_discard/5m',
+   #'enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,CanvasOopRasterization,VaapiVideoDecoder,ResourceLoadScheduler,PageLifecycle,MiddleClickAutoscroll,WebUIDarkMode',
 ]
+#c.qt.chromium.process_model = 'process-per-site'
+
 
 # statusbar
 c.statusbar.show = 'always'
@@ -26,34 +45,37 @@ c.tabs.mousewheel_switching = False
 # appearance
 c.completion.height = '25%'
 c.colors.webpage.darkmode.enabled = True
-c.fonts.default_family = 'Wired Propo'
+c.fonts.default_family = 'Wired Propo' # custom system-wide font based on ibm plex
 c.fonts.web.family.standard = 'Wired Propo'
 c.fonts.web.family.fixed = 'Wired Mono'
 c.fonts.web.family.sans_serif = 'Wired Propo'
 c.fonts.web.family.serif = 'Wired Propo'
-c.fonts.default_size = '12px'
+c.fonts.default_size = '13px'
 
 # privacy
 c.content.tls.certificate_errors = 'ask'
 c.content.cookies.accept = 'no-3rdparty'
 c.content.headers.do_not_track = True
+c.content.headers.referer = 'same-domain'
 
 # adblocking
-c.content.blocking.method = 'both'
+c.content.blocking.method = 'adblock'
 c.content.blocking.adblock.lists = [
     'https://easylist.to/easylist/easylist.txt',
     'https://easylist.to/easylist/easyprivacy.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt',
+    #'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt',
+    #'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt',
+    #'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt',
     'https://filters.adtidy.org/extension/chromium/filters/4.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances-cookies.txt'
+    'https://filters.adtidy.org/extension/chromium/filters/14.txt',
+    #'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances-cookies.txt'
 ]
 
 # search engines
 c.url.searchengines = {
-    'DEFAULT': 'https://google.com/search?q={}',
+    'DEFAULT': 'https://www.qwant.com/?q={}',
 
+    'qwant': 'https://www.qwant.com/?q={}',
     'google': 'https://google.com/search?q={}',
     'youtube': 'https://youtube.com/results?search_query={}',
     'brave': 'https://search.brave.com/search?q={}',
@@ -75,6 +97,7 @@ c.url.searchengines = {
 
 # misc
 c.auto_save.session = True
+c.session.lazy_restore = True
 c.url.start_pages = ['about:blank']
 c.scrolling.smooth = True
 c.input.media_keys = False
@@ -89,7 +112,7 @@ c.input.insert_mode.auto_leave = True
 
 # file picker
 c.fileselect.handler = 'external'
-c.fileselect.single_file.command = ['yazipicker.sh']
+c.fileselect.single_file.command = ['yazipicker.sh'] # yup 🪐
 c.fileselect.multiple_files.command = ['yazipicker.sh']
 
 
@@ -152,7 +175,7 @@ config.bind('N', 'search-prev', mode='normal')
 # clipboard
 config.bind('<Ctrl-c>', 'yank selection')
 config.bind('<Ctrl-shift-c>', 'yank', mode='normal')
-config.bind('<Ctrl-shift-x>', 'jseval -q var link = document.querySelector("a:hover"); if(link) { navigator.clipboard.writeText(link.href); }')
+config.bind('<Ctrl-shift-x>', 'jseval -q var link = document.querySelector("a:hover"); if(link) { navigator.clipboard.writeText(link.href); }') # right click -> copy link bug w/ wayland clip
 
 # hinting
 config.bind('<Ctrl-n>', 'hint', mode='normal')
@@ -161,6 +184,7 @@ config.bind('<Ctrl-Shift-n>', 'hint all tab', mode='normal')
 # insert mode -- these are the only alpha-keys not gated by a modifier.
 config.bind('a', 'mode-enter insert', mode='normal')
 config.bind('s', 'mode-enter insert', mode='normal')
+# however, still sometimes floating in space when click doesn't insert as i expect it to
 
 # video playback
 config.bind('<Ctrl-M>', 'spawn -d mpv {url}', mode='normal')
@@ -168,7 +192,7 @@ config.bind('<Ctrl-Shift-M>', 'hint links spawn -d mpv {hint-url}', mode='normal
 
 
 # ** theme **
-# 🪐 colour scheme of theseus
+# 🪐 colour scheme of theseus [...truncated but i assure you it's very cool...]
 thm_bg = '#181819'       # deep terminal bg
 thm_panel = '#222427'    # menu / tab bar bg
 thm_fg = '#CDCFD2'       # crisp primary foreground text
